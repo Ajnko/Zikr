@@ -7,25 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224C501C889FB7CD7AC081D6 /* Pods_ZikrTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */; };
 		CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3966182BFCD56200C861C9 /* AppDelegate.swift */; };
 		CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */; };
-		CC39661D2BFCD56200C861C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661C2BFCD56200C861C9 /* ViewController.swift */; };
-		CC3966202BFCD56200C861C9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CC39661F2BFCD56200C861C9 /* Base */; };
+		CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661C2BFCD56200C861C9 /* LogInViewController.swift */; };
 		CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC3966212BFCD56200C861C9 /* ZikrTask.xcdatamodeld */; };
 		CC3966252BFCD56300C861C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC3966242BFCD56300C861C9 /* Assets.xcassets */; };
 		CC3966282BFCD56300C861C9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CC3966272BFCD56300C861C9 /* Base */; };
+		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
+		CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */; };
+		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
+		CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C52BFD01CC00921654 /* UIColor.swift */; };
+		CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C72BFD01CC00921654 /* UILabel.swift */; };
+		CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C82BFD01CC00921654 /* UITextField.swift */; };
+		CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5CD2BFD053C00921654 /* Shadows.swift */; };
+		CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5F22BFD395200921654 /* MainViewController.swift */; };
+		CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZikrTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.release.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.release.xcconfig"; sourceTree = "<group>"; };
 		CC3966152BFCD56200C861C9 /* ZikrTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZikrTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC3966182BFCD56200C861C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CC39661C2BFCD56200C861C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CC39661F2BFCD56200C861C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CC39661C2BFCD56200C861C9 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		CC3966222BFCD56200C861C9 /* ZikrTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZikrTask.xcdatamodel; sourceTree = "<group>"; };
 		CC3966242BFCD56300C861C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC3966272BFCD56300C861C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC3966292BFCD56300C861C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountViewController.swift; sourceTree = "<group>"; };
+		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
+		CCF6A5C52BFD01CC00921654 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		CCF6A5C72BFD01CC00921654 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		CCF6A5C82BFD01CC00921654 /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		CCF6A5CD2BFD053C00921654 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
+		CCF6A5F22BFD395200921654 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		E08F1B70C3D7ADF291199CC5 /* Pods-ZikrTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.debug.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224C501C889FB7CD7AC081D6 /* Pods_ZikrTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54EE2A3EBA3392DD41A218D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7BE302489919E1C2AB0AAED7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E08F1B70C3D7ADF291199CC5 /* Pods-ZikrTask.debug.xcconfig */,
+				C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CC39660C2BFCD56200C861C9 = {
 			isa = PBXGroup;
 			children = (
 				CC3966172BFCD56200C861C9 /* ZikrTask */,
 				CC3966162BFCD56200C861C9 /* Products */,
+				7BE302489919E1C2AB0AAED7 /* Pods */,
+				54EE2A3EBA3392DD41A218D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +98,96 @@
 		CC3966172BFCD56200C861C9 /* ZikrTask */ = {
 			isa = PBXGroup;
 			children = (
-				CC3966182BFCD56200C861C9 /* AppDelegate.swift */,
-				CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */,
-				CC39661C2BFCD56200C861C9 /* ViewController.swift */,
-				CC39661E2BFCD56200C861C9 /* Main.storyboard */,
+				CCF6A5C32BFD010B00921654 /* Extension */,
+				CCF6A5C22BFD010700921654 /* App */,
+				CCF6A5C12BFD010100921654 /* Model */,
+				CCF6A5C02BFD00FC00921654 /* View */,
+				CCF6A5BF2BFD00F700921654 /* ViewModel */,
 				CC3966242BFCD56300C861C9 /* Assets.xcassets */,
-				CC3966262BFCD56300C861C9 /* LaunchScreen.storyboard */,
 				CC3966292BFCD56300C861C9 /* Info.plist */,
 				CC3966212BFCD56200C861C9 /* ZikrTask.xcdatamodeld */,
 			);
 			path = ZikrTask;
+			sourceTree = "<group>";
+		};
+		CCF6A5BF2BFD00F700921654 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CCF6A5C02BFD00FC00921654 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CC39661C2BFCD56200C861C9 /* LogInViewController.swift */,
+				CCF6A5F22BFD395200921654 /* MainViewController.swift */,
+				CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */,
+				CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */,
+				CCF6A5F42BFD444F00921654 /* Cell */,
+				CCF6A5C42BFD011D00921654 /* Storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CCF6A5C12BFD010100921654 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CCF6A5C22BFD010700921654 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CC3966182BFCD56200C861C9 /* AppDelegate.swift */,
+				CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CCF6A5C32BFD010B00921654 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CCF6A5CD2BFD053C00921654 /* Shadows.swift */,
+				CCF6A5C92BFD01CC00921654 /* Base */,
+				CCF6A5C62BFD01CC00921654 /* Colors */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CCF6A5C42BFD011D00921654 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				CC3966262BFCD56300C861C9 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		CCF6A5C62BFD01CC00921654 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				CCF6A5C52BFD01CC00921654 /* UIColor.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		CCF6A5C92BFD01CC00921654 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CCF6A5C72BFD01CC00921654 /* UILabel.swift */,
+				CCF6A5C82BFD01CC00921654 /* UITextField.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		CCF6A5F42BFD444F00921654 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */,
+				CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +197,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC39662C2BFCD56300C861C9 /* Build configuration list for PBXNativeTarget "ZikrTask" */;
 			buildPhases = (
+				6540181BAC5B8B753234C94B /* [CP] Check Pods Manifest.lock */,
 				CC3966112BFCD56200C861C9 /* Sources */,
 				CC3966122BFCD56200C861C9 /* Frameworks */,
 				CC3966132BFCD56200C861C9 /* Resources */,
+				42D9599EB63FF90378A65255 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,35 +252,77 @@
 			files = (
 				CC3966252BFCD56300C861C9 /* Assets.xcassets in Resources */,
 				CC3966282BFCD56300C861C9 /* Base in Resources */,
-				CC3966202BFCD56200C861C9 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		42D9599EB63FF90378A65255 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZikrTask/Pods-ZikrTask-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZikrTask/Pods-ZikrTask-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZikrTask/Pods-ZikrTask-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6540181BAC5B8B753234C94B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZikrTask-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CC3966112BFCD56200C861C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */,
 				CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */,
-				CC39661D2BFCD56200C861C9 /* ViewController.swift in Sources */,
+				CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */,
+				CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */,
+				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
+				CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
+				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
+				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
+				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
+				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,
+				CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CC39661E2BFCD56200C861C9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CC39661F2BFCD56200C861C9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CC3966262BFCD56300C861C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -207,7 +371,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -270,7 +434,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -291,6 +455,7 @@
 		};
 		CC39662D2BFCD56300C861C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E08F1B70C3D7ADF291199CC5 /* Pods-ZikrTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,7 +466,7 @@
 				INFOPLIST_FILE = ZikrTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -319,6 +484,7 @@
 		};
 		CC39662E2BFCD56300C861C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -329,7 +495,7 @@
 				INFOPLIST_FILE = ZikrTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

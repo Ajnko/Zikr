@@ -1,0 +1,6 @@
+framework module Pods_ZikrTask {
+  umbrella header "Pods-ZikrTask-umbrella.h"
+
+  export *
+  module * { export * }
+}

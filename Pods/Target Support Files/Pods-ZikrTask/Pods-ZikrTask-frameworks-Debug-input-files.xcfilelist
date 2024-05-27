@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-ZikrTask/Pods-ZikrTask-frameworks.sh
+${BUILT_PRODUCTS_DIR}/EMTNeumorphicView/EMTNeumorphicView.framework
+${BUILT_PRODUCTS_DIR}/NeumorphismTab/NeumorphismTab.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

@@ -1,0 +1,24 @@
+PODS:
+  - EMTNeumorphicView (1.0.4)
+  - NeumorphismTab (0.9.6)
+  - SnapKit (5.6.0)
+
+DEPENDENCIES:
+  - EMTNeumorphicView
+  - NeumorphismTab
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - EMTNeumorphicView
+    - NeumorphismTab
+    - SnapKit
+
+SPEC CHECKSUMS:
+  EMTNeumorphicView: cb5e92953e43b1872ab47fefd451a9ce0c16fc77
+  NeumorphismTab: 4706107161bcee092a0c66093f1ab0221de52220
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+
+PODFILE CHECKSUM: a49ffc2c13b6ebafd49cc574b9a25370d82abffb
+
+COCOAPODS: 1.11.3
