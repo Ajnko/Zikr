@@ -20,13 +20,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lZh-do-7KB">
-                                <rect key="frame" x="76" y="108" width="241" height="128"/>
+                                <rect key="frame" x="76" y="108" width="241" height="177"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lZh-do-7KB" secondAttribute="bottom" constant="582" id="0p7-05-Kir"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lZh-do-7KB" secondAttribute="bottom" constant="533" id="0p7-05-Kir"/>
                             <constraint firstItem="lZh-do-7KB" firstAttribute="centerX" secondItem="pz9-rf-NWJ" secondAttribute="centerX" id="8Ar-Pr-KCf"/>
                             <constraint firstItem="lZh-do-7KB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="D2P-Oh-ZOh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pz9-rf-NWJ" secondAttribute="bottom" constant="-34" id="GIq-bI-9jA"/>

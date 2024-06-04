@@ -17,6 +17,7 @@
 		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
 		CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */; };
 		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
+		CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */; };
 		CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C52BFD01CC00921654 /* UIColor.swift */; };
 		CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C72BFD01CC00921654 /* UILabel.swift */; };
 		CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C82BFD01CC00921654 /* UITextField.swift */; };
@@ -39,6 +40,7 @@
 		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountViewController.swift; sourceTree = "<group>"; };
 		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
+		CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CCF6A5C52BFD01CC00921654 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CCF6A5C72BFD01CC00921654 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		CCF6A5C82BFD01CC00921654 /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				CCF6A5F22BFD395200921654 /* MainViewController.swift */,
 				CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */,
 				CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */,
+				CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */,
 				CCF6A5F42BFD444F00921654 /* Cell */,
 				CCF6A5C42BFD011D00921654 /* Storyboard */,
 			);
@@ -314,6 +317,7 @@
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
+				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
 				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
 				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,
 				CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */,

@@ -31,6 +31,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return image
     }()
     
+    let containerView: UIView = {
+        let view = UIView()
+        view.tintColor = .white
+        view.layer.cornerRadius = 25
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        view.layer.shadowRadius = 4
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     let blurView: UIVisualEffectView = {
        let blurview = UIVisualEffectView()
         return blurview
@@ -52,11 +64,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         numberOfLines: 0
     )
     
+    let loginTextFieldBlurView: UIVisualEffectView = {
+       let view = UIVisualEffectView()
+        return view
+    }()
+    
     let loginTextField = CustomTextField(
         placeholder: "email",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
-        backgroundColor: .lightMode,
+        backgroundColor: .clear,
         cornerRadius: 10
     )
     
@@ -67,11 +84,27 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         numberOfLines: 0
     )
     
+    let passwordContainerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 25
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        view.layer.shadowRadius = 4
+        view.backgroundColor = .clear
+        return view
+    }()
+
+    let passwordTextFieldBlurView: UIVisualEffectView = {
+       let view = UIVisualEffectView()
+        return view
+    }()
+    
     let passwordTextField = CustomTextField(
         placeholder: "password",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
-        backgroundColor: .lightMode,
+        backgroundColor: .clear,
         cornerRadius: 10
     )
     
@@ -127,6 +160,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.top.equalTo(titleImageView.snp.bottom).offset(15)
         }
         
+        
         view.addSubview(blurView)
         blurView.effect = blurEffect
         blurView.clipsToBounds = true
@@ -144,14 +178,26 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.left.equalTo(blurView.snp.left).offset(15)
         }
         
-        blurView.contentView.addSubview(loginTextField)
-        loginTextField.snp.makeConstraints { make in
+        blurView.contentView.addSubview(containerView)
+        containerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginLabel.snp.bottom).offset(10)
             make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
             make.height.equalTo(blurView.snp.height).multipliedBy(0.13)
         }
-        loginTextField.addShadow(shadowColor: .black)
+        
+        containerView.addSubview(loginTextFieldBlurView)
+        loginTextFieldBlurView.effect = blurEffect
+        loginTextFieldBlurView.clipsToBounds = true
+        loginTextFieldBlurView.layer.cornerRadius = 10
+        loginTextFieldBlurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        loginTextFieldBlurView.contentView.addSubview(loginTextField)
+        loginTextField.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
         loginTextField.settinPaddingView(paddingView: paddingView)
         
@@ -161,14 +207,25 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.left.equalTo(loginLabel.snp.left)
         }
         
-        blurView.contentView.addSubview(passwordTextField)
-        passwordTextField.snp.makeConstraints { make in
+        blurView.contentView.addSubview(passwordContainerView)
+        passwordContainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordLabel.snp.bottom).offset(10)
-            make.width.equalTo(loginTextField.snp.width)
-            make.height.equalTo(loginTextField.snp.height)
+            make.width.equalTo(containerView.snp.width)
+            make.height.equalTo(containerView.snp.height)
         }
-        passwordTextField.addShadow()
+        
+        passwordContainerView.addSubview(passwordTextFieldBlurView)
+        passwordTextFieldBlurView.effect = blurEffect
+        passwordTextFieldBlurView.clipsToBounds = true
+        passwordTextFieldBlurView.layer.cornerRadius = 10
+        passwordTextFieldBlurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        passwordTextFieldBlurView.contentView.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         let leftview: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
         passwordTextField.settinPaddingView(paddingView: leftview)
         
@@ -176,7 +233,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.top.equalTo(passwordContainerView.snp.bottom).offset(40)
             make.width.equalTo(loginTextField.snp.width)
             make.height.equalTo(loginTextField.snp.height)
         }
