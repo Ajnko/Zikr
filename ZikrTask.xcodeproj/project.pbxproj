@@ -14,9 +14,12 @@
 		CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC3966212BFCD56200C861C9 /* ZikrTask.xcdatamodeld */; };
 		CC3966252BFCD56300C861C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC3966242BFCD56300C861C9 /* Assets.xcassets */; };
 		CC3966282BFCD56300C861C9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CC3966272BFCD56300C861C9 /* Base */; };
+		CC50C6672C2830EC00180E42 /* pianoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC50C6662C2830EC00180E42 /* pianoSound.mp3 */; };
+		CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */; };
 		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
 		CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */; };
 		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
+		CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */; };
 		CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */; };
 		CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C52BFD01CC00921654 /* UIColor.swift */; };
 		CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C72BFD01CC00921654 /* UILabel.swift */; };
@@ -37,9 +40,12 @@
 		CC3966242BFCD56300C861C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC3966272BFCD56300C861C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC3966292BFCD56300C861C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC50C6662C2830EC00180E42 /* pianoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pianoSound.mp3; sourceTree = "<group>"; };
+		CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountViewController.swift; sourceTree = "<group>"; };
 		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
+		CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CCF6A5C52BFD01CC00921654 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CCF6A5C72BFD01CC00921654 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 				CCF6A5C02BFD00FC00921654 /* View */,
 				CCF6A5BF2BFD00F700921654 /* ViewModel */,
 				CC3966242BFCD56300C861C9 /* Assets.xcassets */,
+				CC50C6662C2830EC00180E42 /* pianoSound.mp3 */,
 				CC3966292BFCD56300C861C9 /* Info.plist */,
 				CC3966212BFCD56200C861C9 /* ZikrTask.xcdatamodeld */,
 			);
@@ -123,10 +130,12 @@
 			isa = PBXGroup;
 			children = (
 				CC39661C2BFCD56200C861C9 /* LogInViewController.swift */,
+				CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */,
 				CCF6A5F22BFD395200921654 /* MainViewController.swift */,
 				CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */,
 				CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */,
 				CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */,
+				CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */,
 				CCF6A5F42BFD444F00921654 /* Cell */,
 				CCF6A5C42BFD011D00921654 /* Storyboard */,
 			);
@@ -253,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC50C6672C2830EC00180E42 /* pianoSound.mp3 in Resources */,
 				CC3966252BFCD56300C861C9 /* Assets.xcassets in Resources */,
 				CC3966282BFCD56300C861C9 /* Base in Resources */,
 			);
@@ -311,12 +321,14 @@
 				CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */,
 				CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */,
 				CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */,
+				CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
+				CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */,
 				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
 				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
 				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,

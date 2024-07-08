@@ -121,9 +121,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    let createAccountButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("Create an Account", for: .normal)
+        button.setTitleColor(.darkMode, for: .normal)
+        button.backgroundColor = .clear
+        button.titleLabel?.font =  .boldSystemFont(ofSize: 16)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = #colorLiteral(red: 0.8452333808, green: 0.8105810285, blue: 0.7374964356, alpha: 1)
         self.navigationController?.navigationBar.tintColor = .darkMode
         
         setupUI()
@@ -237,6 +245,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.width.equalTo(loginTextField.snp.width)
             make.height.equalTo(loginTextField.snp.height)
         }
+        
+        blurView.contentView.addSubview(createAccountButton)
+        createAccountButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+        createAccountButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(nextButton.snp.bottom).offset(15)
+            make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
+            make.height.equalTo(blurView.snp.height).multipliedBy(0.1)
+        }
     }
     
     @objc func doneButtonTapped() {
@@ -246,6 +263,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     @objc func nextButtonTapped() {
         let vc = MainViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func createButtonTapped() {
+        let vc = CreateAccountViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

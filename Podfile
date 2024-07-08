@@ -10,5 +10,7 @@ target 'ZikrTask' do
 	pod'SnapKit'
 	pod'NeumorphismTab'
   	pod'EMTNeumorphicView'	
+	pod'ScrollCounter'
+	pod'Alamofire'
 
 end

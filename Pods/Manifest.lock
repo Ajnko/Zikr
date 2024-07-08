@@ -1,24 +1,32 @@
 PODS:
+  - Alamofire (5.7.1)
   - EMTNeumorphicView (1.0.4)
   - NeumorphismTab (0.9.6)
+  - ScrollCounter (0.0.2)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - Alamofire
   - EMTNeumorphicView
   - NeumorphismTab
+  - ScrollCounter
   - SnapKit
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - EMTNeumorphicView
     - NeumorphismTab
+    - ScrollCounter
     - SnapKit
 
 SPEC CHECKSUMS:
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   EMTNeumorphicView: cb5e92953e43b1872ab47fefd451a9ce0c16fc77
   NeumorphismTab: 4706107161bcee092a0c66093f1ab0221de52220
+  ScrollCounter: 22ba58449addef7ed242cdf2e4b46aa9dbbe3a49
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: a49ffc2c13b6ebafd49cc574b9a25370d82abffb
+PODFILE CHECKSUM: 440de2bee02dd186af04d857fbbde37b7bfb4571
 
 COCOAPODS: 1.11.3

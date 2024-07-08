@@ -7,11 +7,14 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
+import AudioToolbox.AudioServices
 
 class ZikrCountViewController: UIViewController {
     
     let blurEffect = UIBlurEffect(style: .extraLight)
     let effect = UIBlurEffect(style: .light)
+    let darkEffect = UIBlurEffect(style: .dark)
     
     let backgroundImage: UIImageView = {
        let image = UIImageView()
@@ -137,7 +140,82 @@ class ZikrCountViewController: UIViewController {
         return progress
     }()
     
+    let zikrCountButton: UIButton = {
+       let button = UIButton()
+        button.backgroundColor = .clear
+        return button
+    }()
     
+    let zikrCountLabel = CustomLabel(
+        text: "0",
+        textColor: .black,
+        fontSize: .boldSystemFont(ofSize: 60),
+        numberOfLines: 0
+    )
+    
+    let zikrAduioContainerView: UIView = {
+        let view = UIView()
+//        view.tintColor = .white
+        view.layer.cornerRadius = 16
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowRadius = 3
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    let zikrAudioBlurView: UIVisualEffectView = {
+        let blurview = UIVisualEffectView()
+         blurview.clipsToBounds = true
+         blurview.layer.cornerRadius = 16
+         return blurview
+    }()
+    
+    let speedButton: UIButton = {
+       let button = UIButton()
+        button.backgroundColor = .clear
+        button.setTitle("1x", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 13)
+        return button
+    }()
+    
+    let audioSlider: UISlider = {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 1
+        slider.value = 0.5
+        return slider
+    }()
+    
+    let repeatButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.circlepath"), for: .normal)
+        button.tintColor = .black
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    let tableViewBlurView: UIVisualEffectView = {
+        let blurview = UIVisualEffectView()
+        blurview.clipsToBounds = true
+        blurview.layer.cornerRadius = 16
+        return blurview
+    }()
+    
+    let tableView: UITableView = {
+       let tableview = UITableView()
+        tableview.clipsToBounds = true
+        tableview.layer.cornerRadius = 15
+        tableview.isScrollEnabled = false
+        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableview
+    }()
+        
+    var count: Int = 0
+    var player = AVAudioPlayer()
+    var isOn: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +225,22 @@ class ZikrCountViewController: UIViewController {
         setupUI()
         setZikrTextView()
         setZikrCounterView()
+        setAudioBlurView()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideTableView))
+//        tableViewBlurView.addGestureRecognizer(tapGesture)
+        
+        // Customize thumb image
+        let thumbImage = UIImage(systemName: "circle.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        audioSlider.setThumbImage(thumbImage, for: .normal)
+        audioSlider.setThumbImage(thumbImage, for: .highlighted)
+        
+        // Customize tint color
+        audioSlider.minimumTrackTintColor = .darkMode
+        audioSlider.maximumTrackTintColor = UIColor.white
     }
     
     func setupUI() {
@@ -180,7 +274,7 @@ class ZikrCountViewController: UIViewController {
         zikrTextContainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(progressLabel.snp.bottom).offset(10)
-            make.width.equalTo(view.snp.width).multipliedBy(0.85)
+            make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.height.equalTo(view.snp.height).multipliedBy(0.4)
         }
         
@@ -190,11 +284,26 @@ class ZikrCountViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
+        view.addSubview(zikrAduioContainerView)
+        zikrAduioContainerView.alpha = 0
+        zikrAduioContainerView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(zikrTextContainerView.snp.bottom).offset(7)
+            make.width.equalTo(zikrTextContainerView.snp.width)
+            make.height.equalTo(view.snp.height).multipliedBy(0.07)
+        }
+        
+        zikrAduioContainerView.addSubview(zikrAudioBlurView)
+        zikrAudioBlurView.effect = effect
+        zikrAudioBlurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         view.addSubview(zikrCounterContainerView)
         zikrCounterContainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.snp.bottom).offset(-35)
-            make.width.equalTo(view.snp.width).multipliedBy(0.85)
+            make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.height.equalTo(view.snp.height).multipliedBy(0.3)
         }
         
@@ -202,6 +311,19 @@ class ZikrCountViewController: UIViewController {
         zikrCounterBLurView.effect = effect
         zikrCounterBLurView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(tableViewBlurView)
+        tableViewBlurView.effect = darkEffect
+        tableViewBlurView.frame = view.bounds
+        tableViewBlurView.alpha = 0
+        
+        tableViewBlurView.contentView.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.centerX.equalTo(tableViewBlurView.snp.centerX)
+            make.centerY.equalTo(tableViewBlurView.snp.centerY)
+            make.width.equalTo(tableViewBlurView.snp.width).multipliedBy(0.6)
+            make.height.equalTo(tableViewBlurView.snp.height).multipliedBy(0.18)
         }
         
     }
@@ -216,6 +338,7 @@ class ZikrCountViewController: UIViewController {
         }
         
         zikrTextBlurView.contentView.addSubview(alertButton)
+        alertButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         alertButton.snp.makeConstraints { make in
             make.top.equalTo(infoButton.snp.top)
             make.left.equalTo(zikrTextBlurView.snp.left).offset(8)
@@ -238,11 +361,39 @@ class ZikrCountViewController: UIViewController {
         }
         
         zikrTextBlurView.contentView.addSubview(playButton)
+        playButton.addTarget(self, action: #selector(showAudioPlayer), for: .touchUpInside)
         playButton.snp.makeConstraints { make in
             make.top.equalTo(zikrScrollView.snp.bottom).offset(5)
             make.right.equalTo(infoButton.snp.right)
             make.width.equalTo(infoButton.snp.width)
             make.height.equalTo(infoButton.snp.height)
+        }
+    }
+    
+    func setAudioBlurView() {
+        
+        zikrAudioBlurView.contentView.addSubview(audioSlider)
+        audioSlider.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(zikrAudioBlurView.snp.width).multipliedBy(0.6)
+            make.height.equalTo(zikrAudioBlurView.snp.height).multipliedBy(0.1)
+        }
+        
+        zikrAudioBlurView.contentView.addSubview(speedButton)
+        speedButton.addTarget(self, action: #selector(showPlayBackSpeedOptions), for: .touchUpInside)
+        speedButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(zikrAudioBlurView.snp.left).offset(10)
+            make.width.equalTo(zikrAudioBlurView.snp.width).multipliedBy(0.1)
+            make.height.equalTo(zikrAudioBlurView.snp.height).multipliedBy(0.6)
+        }
+        
+        zikrAudioBlurView.contentView.addSubview(repeatButton)
+        repeatButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalTo(zikrAudioBlurView.snp.right).offset(-10)
+            make.width.equalTo(speedButton.snp.width)
+            make.height.equalTo(speedButton.snp.height)
         }
     }
     
@@ -253,13 +404,28 @@ class ZikrCountViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(zikrCounterBLurView.snp.top).offset(8)
             make.width.equalTo(zikrCounterBLurView.snp.width).multipliedBy(0.9)
-            make.height.equalTo(zikrCounterBLurView.snp.height).multipliedBy(0.03)
+            make.height.equalTo(zikrCounterBLurView.snp.height).multipliedBy(0.02)
         }
         
         zikrProgressBlurView.contentView.addSubview(zikrProgressView)
         zikrProgressView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        zikrCounterBLurView.contentView.addSubview(zikrCountButton)
+        zikrCountButton.addTarget(self, action: #selector(zikrCountButtonTapped), for: .touchUpInside)
+        zikrCountButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(zikrProgressBlurView.snp.bottom).offset(8)
+            make.width.equalTo(zikrCounterBLurView.snp.width).multipliedBy(0.99)
+            make.height.equalTo(zikrCounterBLurView.snp.height).multipliedBy(0.9)
+        }
+        
+        zikrCounterBLurView.contentView.addSubview(zikrCountLabel)
+        zikrCountLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
     }
     
     @objc func backButtonTapped() {
@@ -271,6 +437,127 @@ class ZikrCountViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func zikrCountButtonTapped() {
+        count += 1
+        
+        animateLabel()
+        
+    }
+   
+    func animateLabel() {
+        // Scale and fade-in effect
+        zikrCountLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        zikrCountLabel.alpha = 0.0
+        zikrCountLabel.text = "\(count)"
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.zikrCountLabel.transform = .identity
+            self.zikrCountLabel.alpha = 1.0
+        }, completion: nil)
+    }
+    
+    @objc func showAlert() {
+        // Create an alert controller
+        let alertController = UIAlertController(title: "Choose", message: nil, preferredStyle: .alert)
+        
+        // Add the "Add Person" action
+        let addPersonAction = UIAlertAction(title: "Add Person", style: .default) { [self] _ in
+            showAddUserView()
+            print("Add Person selected")
+        }
+        alertController.addAction(addPersonAction)
+        
+        // Add the "Kunlik zikr miqdor" action
+        let dailyZikrAction = UIAlertAction(title: "Kunlik zikr miqdor", style: .default) { _ in
+            // Handle the "Kunlik zikr miqdor" action
+            print("Kunlik zikr miqdor selected")
+        }
+        alertController.addAction(dailyZikrAction)
+        
+        // Add a cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            // Handle the cancel action
+            print("Cancel selected")
+        }
+        alertController.addAction(cancelAction)
+        
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func showAudioPlayer() {
+        UIView.animate(withDuration: 0.3) {
+            self.zikrAduioContainerView.alpha = 1
+        }
+    }
+    
+    @objc func showPlayBackSpeedOptions() {
+        let alertController = UIAlertController(title: "Playback speed", message: nil, preferredStyle: .actionSheet)
+        
+        let speeds: [Float] = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+        for speed in speeds {
+            let title = speed == 1.0 ? "Normal" : "\(speed)"
+            let action = UIAlertAction(title: title, style: .default) { action in
+                self.setPlaybackSpeed(speed)
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    func setPlaybackSpeed(_ speed: Float) {
+        speedButton.setTitle("\(speed)x", for: .normal)
+        print("Selected playback speed: \(speed)")
+    }
+    
+    func showAddUserView() {
+        let vc = AddUserViewController()
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        if let sheet = navVC.sheetPresentationController {
+            sheet.preferredCornerRadius = 40
+            sheet.detents = [.custom(resolver: { context in
+                0.85 * context.maximumDetentValue
+              })]
+            sheet.largestUndimmedDetentIdentifier = .large
+            sheet.prefersGrabberVisible = true
+            sheet.accessibilityRespondsToUserInteraction = true
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+        }
+        navigationController?.present(navVC, animated: true)
+        print("tap")
+        
+    }
+    
 
+}
 
+extension ZikrCountViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Add user"
+        } else if indexPath.row == 1 {
+            cell.textLabel?.text = "Daily dhikr count"
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        showAddUserView()
+//        hideTableView()
+    }
 }
