@@ -20,6 +20,9 @@
 		CC53420A2C3C460300112114 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342092C3C460300112114 /* UserViewModel.swift */; };
 		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
 		CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */; };
+		CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */; };
+		CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */; };
+		CC9F76172C3D6988009323C3 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76162C3D6988009323C3 /* GroupModel.swift */; };
 		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
 		CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */; };
 		CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */; };
@@ -48,6 +51,9 @@
 		CC5342092C3C460300112114 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountViewController.swift; sourceTree = "<group>"; };
+		CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListViewController.swift; sourceTree = "<group>"; };
+		CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListTableViewCell.swift; sourceTree = "<group>"; };
+		CC9F76162C3D6988009323C3 /* GroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				CC39661C2BFCD56200C861C9 /* LogInViewController.swift */,
 				CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */,
 				CCF6A5F22BFD395200921654 /* MainViewController.swift */,
+				CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */,
 				CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */,
 				CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */,
 				CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */,
@@ -151,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				CC5342072C3C459B00112114 /* UserModel.swift */,
+				CC9F76162C3D6988009323C3 /* GroupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +212,7 @@
 			children = (
 				CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */,
 				CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */,
+				CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -331,8 +340,11 @@
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */,
 				CC53420A2C3C460300112114 /* UserViewModel.swift in Sources */,
+				CC9F76172C3D6988009323C3 /* GroupModel.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
+				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
+				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,

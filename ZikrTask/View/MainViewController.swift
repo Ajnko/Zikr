@@ -58,6 +58,8 @@ class MainViewController: UIViewController {
     let groupZikrData = ["Item 1", "Item 2", "Item 3", "Item 1", "Item 1", "Item 1", "Item 1"]
     let myZikrData = ["My Item 1", "My Item 2", "My Item 3", "My Item 1", "My Item 1", "My Item 1", "My Item 1", "My Item 1"]
     
+    var zikrEntries: [ZikrEntry] = []
+    
     
     weak var sectionSegmentOfFetch: UISegmentedControl!
     weak var sectionCollectionView: UICollectionView!
@@ -71,6 +73,8 @@ class MainViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        loadZikrEntries()
         
         //call methods
         addItemsToView()
@@ -180,12 +184,39 @@ class MainViewController: UIViewController {
 //        }
     }
     
+    // MARK: - Handling Bottom Sheet Input
+
+    func addNewZikrEntry(groupName: String, zikrName: String, zikrCount: Int) {
+        let newEntry = ZikrEntry(groupName: groupName, zikrName: zikrName, zikrCount: zikrCount)
+        zikrEntries.append(newEntry)
+        collectionView.reloadData()
+        saveZikrEntries()
+    }
+
+    // MARK: - Persisting Data
+
+    func saveZikrEntries() {
+        if let data = try? JSONEncoder().encode(zikrEntries) {
+            UserDefaults.standard.set(data, forKey: "zikrEntries")
+        }
+    }
+
+    func loadZikrEntries() {
+        if let data = UserDefaults.standard.data(forKey: "zikrEntries"),
+           let entries = try? JSONDecoder().decode([ZikrEntry].self, from: data) {
+            zikrEntries = entries
+        }
+    }
+    
+    //MARK: - Segment Controller
+    
     @objc func segmentedControl(_ sender:UISegmentedControl) {
         collectionView.reloadData()
     }
     
     @objc func addButtonTapped() {
         let vc = AddGroupViewController()
+        vc.mainViewController = self
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
@@ -202,13 +233,18 @@ class MainViewController: UIViewController {
         print("tap")
         
     }
+    
+    @objc func showMembersList() {
+        let vc = MembersListViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch segmentControler.selectedSegmentIndex {
             
-        case 0 : return groupZikrData.count
+        case 0 : return zikrEntries.count
         case 1 : return myZikrData.count
         default:
             return 5
@@ -226,6 +262,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             cell.layer.shadowOffset = CGSize(width: 0, height: 3)
             cell.layer.shadowRadius = 5
             cell.layer.cornerRadius = 15
+            let entry = zikrEntries[indexPath.item]
+            cell.groupNameLabel.text = entry.groupName
+            cell.groupZikrNameLabel.text = entry.zikrName
+            cell.zikrCountLabel.text = "Count: 0/\(entry.zikrCount)"
+            cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalCollectionViewCell.identifier, for: indexPath) as! PersonalCollectionViewCell

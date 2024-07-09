@@ -212,6 +212,8 @@ class AddGroupViewController: UIViewController {
         return button
     }()
     
+    var mainViewController: MainViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
@@ -414,6 +416,7 @@ class AddGroupViewController: UIViewController {
         
         //save button
         blurView.contentView.addSubview(saveButton)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         saveButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.snp.bottom).offset(-30)
@@ -454,6 +457,18 @@ class AddGroupViewController: UIViewController {
         zikrNameTextField.resignFirstResponder()
         zikrInfoTextField.resignFirstResponder()
         zikrCountTextField.resignFirstResponder()
+    }
+    
+    @objc func saveButtonTapped() {
+        guard let groupName = groupNameTextField.text, !groupName.isEmpty,
+              let zikrName = zikrNameTextField.text, !zikrName.isEmpty,
+              let zikrCountText = zikrCountTextField.text, let zikrCount = Int(zikrCountText) else {
+            // Show error message
+            return
+        }
+        
+        mainViewController?.addNewZikrEntry(groupName: groupName, zikrName: zikrName, zikrCount: zikrCount)
+        self.dismiss(animated: true, completion: nil)
     }
 
 

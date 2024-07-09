@@ -50,7 +50,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let groupName = CustomLabel(
+    let groupNameLabel = CustomLabel(
         text: "Group Name",
         textColor: .textColor,
         fontSize: .systemFont(ofSize: 15),
@@ -62,7 +62,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         fontSize: .systemFont(ofSize: 15),
         numberOfLines: 0
     )
-    let progressLabel = CustomLabel(
+    let zikrCountLabel = CustomLabel(
         text: "30.000 / 70.000",
         textColor: .white,
         fontSize: .systemFont(ofSize: 10),
@@ -80,11 +80,12 @@ class GroupCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let groupIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.3")
-        imageView.tintColor = .white
-        return imageView
+    let groupMembersButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(systemName: "person.3.fill"), for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        return button
     }()
     
     let groupLabel = CustomLabel(
@@ -145,28 +146,29 @@ class GroupCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(16)
         }
         
-        blurView.contentView.addSubview(groupName)
-        groupName.snp.makeConstraints { make in
+        blurView.contentView.addSubview(groupNameLabel)
+        groupNameLabel.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(30)
             make.left.equalTo(containerView.snp.right).offset(10)
         }
         
         blurView.contentView.addSubview(groupZikrNameLabel)
         groupZikrNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(groupName.snp.bottom).offset(10)
-            make.left.equalTo(groupName.snp.left)
+            make.top.equalTo(groupNameLabel.snp.bottom).offset(10)
+            make.left.equalTo(groupNameLabel.snp.left)
         }
         
         blurView.contentView.addSubview(groupContainerView)
         groupContainerView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top)
             make.right.equalTo(self.snp.right).inset(15)
-            make.width.equalTo(self.snp.width).multipliedBy(0.12)
+            make.width.equalTo(self.snp.width).multipliedBy(0.2)
             make.height.equalTo(self.snp.height).multipliedBy(0.297)
         }
         
-        groupContainerView.addSubview(groupIcon)
-        groupIcon.snp.makeConstraints { make in
+        groupContainerView.addSubview(groupMembersButton)
+        groupMembersButton.addShadow()
+        groupMembersButton.snp.makeConstraints { make in
             make.centerY.equalTo(groupContainerView.snp.centerY)
             make.right.equalTo(groupContainerView.snp.centerX).inset(-10)
             make.width.equalTo(groupContainerView.snp.width).multipliedBy(0.37)
@@ -176,19 +178,19 @@ class GroupCollectionViewCell: UICollectionViewCell {
         groupContainerView.addSubview(groupLabel)
         groupLabel.snp.makeConstraints { make in
             make.centerY.equalTo(groupContainerView.snp.centerY)
-            make.left.equalTo(groupIcon.snp.right).inset(-4)
+            make.left.equalTo(groupMembersButton.snp.right).inset(-4)
         }
         
         blurView.contentView.addSubview(textContainerView)
         textContainerView.snp.makeConstraints { make in
             make.centerY.equalTo(groupZikrNameLabel.snp.centerY)
             make.right.equalTo(groupContainerView.snp.right)
-            make.width.equalTo(self.snp.width).multipliedBy(0.24)
+            make.width.equalTo(self.snp.width).multipliedBy(0.29)
             make.height.equalTo(self.snp.height).multipliedBy(0.199)
         }
         
-        textContainerView.addSubview(progressLabel)
-        progressLabel.snp.makeConstraints { make in
+        textContainerView.addSubview(zikrCountLabel)
+        zikrCountLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
         
@@ -208,4 +210,5 @@ class GroupCollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
     }
+    
 }

@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import AVFoundation
+import AudioToolbox
 import AudioToolbox.AudioServices
 
 class ZikrCountViewController: UIViewController {
@@ -134,7 +135,6 @@ class ZikrCountViewController: UIViewController {
         let progress = UIProgressView(progressViewStyle: .default)
         progress.clipsToBounds = true
         progress.layer.cornerRadius = 5
-        progress.progress = 0.6
         progress.trackTintColor = .clear
         progress.progressTintColor = .darkMode
         return progress
@@ -147,11 +147,19 @@ class ZikrCountViewController: UIViewController {
     }()
     
     let zikrCountLabel = CustomLabel(
-        text: "0",
+        text: "",
         textColor: .black,
         fontSize: .boldSystemFont(ofSize: 60),
         numberOfLines: 0
     )
+    
+    let changeZikrCountButton: UIButton = {
+       let button = UIButton()
+        button.backgroundColor = .clear
+        button.setTitleColor(.textColor, for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 10)
+        return button
+    }()
     
     let zikrAduioContainerView: UIView = {
         let view = UIView()
@@ -201,6 +209,8 @@ class ZikrCountViewController: UIViewController {
     var player = AVAudioPlayer()
     var isOn: Bool = true
     
+    var maxCount: Int = 33
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Zikr"
@@ -220,6 +230,10 @@ class ZikrCountViewController: UIViewController {
         // Customize tint color
         audioSlider.minimumTrackTintColor = .darkMode
         audioSlider.maximumTrackTintColor = UIColor.white
+        
+        progressView.progress = 0.0
+        changeZikrCountButton.setTitle("\(maxCount)", for: .normal)
+        zikrCountLabel.text = "\(count)"
     }
     
     func setupUI() {
@@ -378,11 +392,20 @@ class ZikrCountViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
+        zikrCounterBLurView.contentView.addSubview(changeZikrCountButton)
+        changeZikrCountButton.addTarget(self, action: #selector(changeZikrCountButtonTapped), for: .touchUpInside)
+        changeZikrCountButton.snp.makeConstraints { make in
+            make.top.equalTo(zikrProgressBlurView.snp.bottom).offset(2)
+            make.right.equalTo(zikrCounterBLurView.snp.right).offset(-20)
+            make.width.equalTo(zikrCounterBLurView.snp.width).multipliedBy(0.1)
+            make.height.equalTo(zikrCounterBLurView.snp.height).multipliedBy(0.06)
+        }
+        
         zikrCounterBLurView.contentView.addSubview(zikrCountButton)
         zikrCountButton.addTarget(self, action: #selector(zikrCountButtonTapped), for: .touchUpInside)
         zikrCountButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(zikrProgressBlurView.snp.bottom).offset(8)
+            make.top.equalTo(changeZikrCountButton.snp.bottom).offset(2)
             make.width.equalTo(zikrCounterBLurView.snp.width).multipliedBy(0.99)
             make.height.equalTo(zikrCounterBLurView.snp.height).multipliedBy(0.9)
         }
@@ -403,11 +426,27 @@ class ZikrCountViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK: - Zikr Count Button Tapped
+    
     @objc func zikrCountButtonTapped() {
         count += 1
         
-        animateLabel()
-        
+        if count >= maxCount {
+            
+            zikrProgressView.progress = 1.0
+            zikrCountLabel.text = "\(count)"
+            // Device vibrates
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+            
+            // Reset count and progress
+            count = 0
+            zikrProgressView.progress = 0.0
+        } else {
+            // Update progress view and label
+            let progress = Float(count) / Float(maxCount)
+            zikrProgressView.progress = progress
+            zikrCountLabel.text = "\(count)"
+        }
     }
    
     func animateLabel() {
@@ -422,6 +461,32 @@ class ZikrCountViewController: UIViewController {
         }, completion: nil)
     }
     
+    //MARK: - Change Zikr count Button Tapped
+    
+    @objc func changeZikrCountButtonTapped() {
+        // Show alert with text field
+        let alertController = UIAlertController(title: "Set Maximum Count", message: nil, preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter maximum count"
+            textField.keyboardType = .numberPad
+        }
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { _ in
+            if let textField = alertController.textFields?.first,
+               let text = textField.text,
+               let newMaxCount = Int(text) {
+                self.maxCount = newMaxCount
+                self.changeZikrCountButton.setTitle("\(newMaxCount)", for: .normal)
+                self.zikrProgressView.progress = 0.0
+                self.count = 0
+                self.zikrCountLabel.text = "\(self.count)"
+            }
+        }
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Alert Button Tapped
+    
     @objc func showAlert() {
         // Create an alert controller
         let alertController = UIAlertController(title: "Choose", message: nil, preferredStyle: .alert)
@@ -434,8 +499,9 @@ class ZikrCountViewController: UIViewController {
         alertController.addAction(addPersonAction)
         
         // Add the "Kunlik zikr miqdor" action
-        let dailyZikrAction = UIAlertAction(title: "Kunlik zikr miqdor", style: .default) { _ in
+        let dailyZikrAction = UIAlertAction(title: "Kunlik zikr miqdor", style: .default) { [self] _ in
             // Handle the "Kunlik zikr miqdor" action
+            changeZikrCountButtonTapped()
             print("Kunlik zikr miqdor selected")
         }
         alertController.addAction(dailyZikrAction)
@@ -500,30 +566,4 @@ class ZikrCountViewController: UIViewController {
     }
     
 
-}
-
-extension ZikrCountViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        if indexPath.row == 0 {
-            cell.textLabel?.text = "Add user"
-        } else if indexPath.row == 1 {
-            cell.textLabel?.text = "Daily dhikr count"
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        showAddUserView()
-//        hideTableView()
-    }
 }
