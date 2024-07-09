@@ -223,7 +223,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    
+    var viewModel = UserViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -241,8 +241,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.inputAccessoryView = toolbar
         mailTextField.inputAccessoryView = toolbar
         phoneNumberTextField.inputAccessoryView = toolbar
-        phoneNumberTextField.delegate = self
-        phoneNumberTextField.keyboardType = .numberPad
+        
+        setupPhoneNumberTextField()
         
     }
     
@@ -451,7 +451,47 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func createButtonTapped() {
+        guard let name = userNameLabel.text, !name.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let mail = mailTextField.text, !mail.isEmpty,
+              let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
+            showAlert(title: "Validation Error", message: "Please fill all necessary fields correctly.")
+            return
+        }
         
+        let phoneNumberRegex = "^[+-]?\\d+$"
+        let phoneNumberPredicate = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)
+        guard phoneNumberPredicate.evaluate(with: phoneNumber) else {
+            showAlert(title: "Validation Error", message: "Please enter a valid phone number.")
+            return
+        }
+        
+        let surname = userSurNameTextField.text
+        
+        viewModel.user = User(name: name, surname: surname, password: password, mail: mail, phoneNumber: phoneNumber)
+        
+        viewModel.createUser { [weak self] result in
+            switch result {
+            case .success(let responseString):
+                print("User created successfully: \(responseString)")
+                
+                DispatchQueue.main.async {
+                    let vc = MainViewController()
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            case .failure(let error):
+                print("Failed to create user")
+                self?.showAlert(title: "Error", message: error.localizedDescription)
+            }
+            
+        }
+        
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func doneButtonTapped() {
@@ -460,6 +500,29 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
         mailTextField.resignFirstResponder()
         phoneNumberTextField.resignFirstResponder()
+    }
+    
+    func setupPhoneNumberTextField() {
+        phoneNumberTextField.keyboardType = .phonePad
+        
+        let plusMinusAccessoryView = UIToolbar()
+        plusMinusAccessoryView.sizeToFit()
+        
+        let plusButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(insertPlus))
+        let minusButton = UIBarButtonItem(title: "-", style: .plain, target: self, action: #selector(insertMinus))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        plusMinusAccessoryView.items = [flexibleSpace, plusButton, minusButton, flexibleSpace]
+        
+//        phoneNumberTextField.inputAccessoryView = plusMinusAccessoryView
+    }
+    
+    @objc func insertPlus() {
+        phoneNumberTextField.insertText("+")
+    }
+    
+    @objc func insertMinus() {
+        phoneNumberTextField.insertText("-")
     }
     
 

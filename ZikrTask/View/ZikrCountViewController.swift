@@ -196,22 +196,6 @@ class ZikrCountViewController: UIViewController {
         button.backgroundColor = .clear
         return button
     }()
-    
-    let tableViewBlurView: UIVisualEffectView = {
-        let blurview = UIVisualEffectView()
-        blurview.clipsToBounds = true
-        blurview.layer.cornerRadius = 16
-        return blurview
-    }()
-    
-    let tableView: UITableView = {
-       let tableview = UITableView()
-        tableview.clipsToBounds = true
-        tableview.layer.cornerRadius = 15
-        tableview.isScrollEnabled = false
-        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        return tableview
-    }()
         
     var count: Int = 0
     var player = AVAudioPlayer()
@@ -226,12 +210,7 @@ class ZikrCountViewController: UIViewController {
         setZikrTextView()
         setZikrCounterView()
         setAudioBlurView()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideTableView))
-//        tableViewBlurView.addGestureRecognizer(tapGesture)
+
         
         // Customize thumb image
         let thumbImage = UIImage(systemName: "circle.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -311,19 +290,6 @@ class ZikrCountViewController: UIViewController {
         zikrCounterBLurView.effect = effect
         zikrCounterBLurView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-        
-        view.addSubview(tableViewBlurView)
-        tableViewBlurView.effect = darkEffect
-        tableViewBlurView.frame = view.bounds
-        tableViewBlurView.alpha = 0
-        
-        tableViewBlurView.contentView.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.centerX.equalTo(tableViewBlurView.snp.centerX)
-            make.centerY.equalTo(tableViewBlurView.snp.centerY)
-            make.width.equalTo(tableViewBlurView.snp.width).multipliedBy(0.6)
-            make.height.equalTo(tableViewBlurView.snp.height).multipliedBy(0.18)
         }
         
     }

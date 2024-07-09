@@ -16,6 +16,8 @@
 		CC3966282BFCD56300C861C9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CC3966272BFCD56300C861C9 /* Base */; };
 		CC50C6672C2830EC00180E42 /* pianoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC50C6662C2830EC00180E42 /* pianoSound.mp3 */; };
 		CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */; };
+		CC5342082C3C459B00112114 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342072C3C459B00112114 /* UserModel.swift */; };
+		CC53420A2C3C460300112114 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342092C3C460300112114 /* UserViewModel.swift */; };
 		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
 		CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */; };
 		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
@@ -42,6 +44,8 @@
 		CC3966292BFCD56300C861C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC50C6662C2830EC00180E42 /* pianoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pianoSound.mp3; sourceTree = "<group>"; };
 		CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		CC5342072C3C459B00112114 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		CC5342092C3C460300112114 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC614F3B2BFFAA010078FC43 /* ZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountViewController.swift; sourceTree = "<group>"; };
 		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 		CCF6A5BF2BFD00F700921654 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CC5342092C3C460300112114 /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 		CCF6A5C12BFD010100921654 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC5342072C3C459B00112114 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,7 +330,9 @@
 				CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* ZikrCountViewController.swift in Sources */,
+				CC53420A2C3C460300112114 /* UserViewModel.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
+				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
