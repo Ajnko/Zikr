@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		224C501C889FB7CD7AC081D6 /* Pods_ZikrTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */; };
+		CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC13512E2C492F3200649A78 /* GroupViewModel.swift */; };
 		CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3966182BFCD56200C861C9 /* AppDelegate.swift */; };
 		CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */; };
 		CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661C2BFCD56200C861C9 /* LogInViewController.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZikrTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.release.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.release.xcconfig"; sourceTree = "<group>"; };
+		CC13512E2C492F3200649A78 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		CC3966152BFCD56200C861C9 /* ZikrTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZikrTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC3966182BFCD56200C861C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				CC5342092C3C460300112114 /* UserViewModel.swift */,
+				CC13512E2C492F3200649A78 /* GroupViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
+				CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */,
 				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,

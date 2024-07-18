@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import EMTNeumorphicView
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, GroupViewControllerDelegate {
     
     private let backgroundImage: UIImageView = {
         let image = UIImageView()
@@ -58,7 +58,8 @@ class MainViewController: UIViewController {
     let groupZikrData = ["Item 1", "Item 2", "Item 3", "Item 1", "Item 1", "Item 1", "Item 1"]
     let myZikrData = ["My Item 1", "My Item 2", "My Item 3", "My Item 1", "My Item 1", "My Item 1", "My Item 1", "My Item 1"]
     
-    var zikrEntries: [ZikrEntry] = []
+    var groups: [Group] = []
+
     
     
     weak var sectionSegmentOfFetch: UISegmentedControl!
@@ -74,7 +75,6 @@ class MainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        loadZikrEntries()
         
         //call methods
         addItemsToView()
@@ -174,39 +174,8 @@ class MainViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-//        collectionView.addSubview(addButton)
-//        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-//        addButton.snp.makeConstraints { make in
-//            make.bottom.equalTo(view.snp.bottom).offset(-45)
-//            make.right.equalTo(view.snp.right).offset(-15)
-//            make.width.equalTo(60)
-//            make.height.equalTo(60)
-//        }
     }
     
-    // MARK: - Handling Bottom Sheet Input
-
-    func addNewZikrEntry(groupName: String, zikrName: String, zikrCount: Int) {
-        let newEntry = ZikrEntry(groupName: groupName, zikrName: zikrName, zikrCount: zikrCount)
-        zikrEntries.append(newEntry)
-        collectionView.reloadData()
-        saveZikrEntries()
-    }
-
-    // MARK: - Persisting Data
-
-    func saveZikrEntries() {
-        if let data = try? JSONEncoder().encode(zikrEntries) {
-            UserDefaults.standard.set(data, forKey: "zikrEntries")
-        }
-    }
-
-    func loadZikrEntries() {
-        if let data = UserDefaults.standard.data(forKey: "zikrEntries"),
-           let entries = try? JSONDecoder().decode([ZikrEntry].self, from: data) {
-            zikrEntries = entries
-        }
-    }
     
     //MARK: - Segment Controller
     
@@ -216,7 +185,7 @@ class MainViewController: UIViewController {
     
     @objc func addButtonTapped() {
         let vc = AddGroupViewController()
-        vc.mainViewController = self
+        vc.delegate = self
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
@@ -234,6 +203,15 @@ class MainViewController: UIViewController {
         
     }
     
+    //MARK: - Protocol Method
+    
+    func didAddGroup(_ group: Group) {
+        groups.append(group)
+        collectionView.reloadData()
+    }
+    
+    //MARK: - Shows member list for each group
+    
     @objc func showMembersList() {
         let vc = MembersListViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -244,7 +222,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch segmentControler.selectedSegmentIndex {
             
-        case 0 : return zikrEntries.count
+        case 0 : return groups.count
         case 1 : return myZikrData.count
         default:
             return 5
@@ -262,11 +240,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             cell.layer.shadowOffset = CGSize(width: 0, height: 3)
             cell.layer.shadowRadius = 5
             cell.layer.cornerRadius = 15
-            let entry = zikrEntries[indexPath.item]
-            cell.groupNameLabel.text = entry.groupName
-            cell.groupZikrNameLabel.text = entry.zikrName
-            cell.zikrCountLabel.text = "Count: 0/\(entry.zikrCount)"
-            cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
+            let group = groups[indexPath.item]
+            cell.groupNameLabel.text = group.name
+            cell.zikrCountLabel.text = "Count: \(group.purpose)"
+            cell.groupZikrNameLabel.text = group.zikrName
+            
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalCollectionViewCell.identifier, for: indexPath) as! PersonalCollectionViewCell

@@ -7,8 +7,11 @@
 
 import Foundation
 
-struct ZikrEntry: Codable {
-    let groupName: String
+struct Group {
+    let ownerId: String
+    let name: String
+    let purpose: String
+    let comment: String?
+    let isPublic: Bool
     let zikrName: String
-    let zikrCount: Int
 }

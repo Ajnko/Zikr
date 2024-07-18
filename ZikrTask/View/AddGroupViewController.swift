@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol GroupViewControllerDelegate: AnyObject {
+    func didAddGroup(_ group: Group)
+}
+
 class AddGroupViewController: UIViewController {
     
     let blurView: UIVisualEffectView = {
@@ -199,9 +203,9 @@ class AddGroupViewController: UIViewController {
         cornerRadius: 10
     )
     
-    let saveButton: UIButton = {
+    let addGroupButton: UIButton = {
        let button = UIButton()
-        button.setTitle("Save", for: .normal)
+        button.setTitle("Add Group", for: .normal)
         button.setTitleColor(.lightMode, for: .normal)
         button.backgroundColor = .darkMode
         button.layer.cornerRadius = 10
@@ -212,7 +216,8 @@ class AddGroupViewController: UIViewController {
         return button
     }()
     
-    var mainViewController: MainViewController?
+    var viewModel = GroupViewModel()
+    weak var delegate: GroupViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -415,9 +420,9 @@ class AddGroupViewController: UIViewController {
         }
         
         //save button
-        blurView.contentView.addSubview(saveButton)
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        saveButton.snp.makeConstraints { make in
+        blurView.contentView.addSubview(addGroupButton)
+        addGroupButton.addTarget(self, action: #selector(addGroupButtonTapped), for: .touchUpInside)
+        addGroupButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.snp.bottom).offset(-30)
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
@@ -459,16 +464,42 @@ class AddGroupViewController: UIViewController {
         zikrCountTextField.resignFirstResponder()
     }
     
-    @objc func saveButtonTapped() {
-        guard let groupName = groupNameTextField.text, !groupName.isEmpty,
-              let zikrName = zikrNameTextField.text, !zikrName.isEmpty,
-              let zikrCountText = zikrCountTextField.text, let zikrCount = Int(zikrCountText) else {
-            // Show error message
+    @objc func addGroupButtonTapped() {
+        guard let name = groupNameTextField.text, !name.isEmpty,
+              let purpose = zikrCountTextField.text, !purpose.isEmpty,
+              let zikrName = zikrNameTextField.text, !zikrName.isEmpty else {
+            showAlert(title: "Validation Error", message: "Please fill all necessary fields correctly.")
             return
         }
         
-        mainViewController?.addNewZikrEntry(groupName: groupName, zikrName: zikrName, zikrCount: zikrCount)
-        self.dismiss(animated: true, completion: nil)
+        let comment = zikrInfoTextField.text
+        let isPublic = true
+        let ownerId = UUID().uuidString
+        
+        viewModel.group = Group(ownerId: ownerId, name: name, purpose: purpose, comment: comment, isPublic: isPublic, zikrName: zikrName)
+        
+        viewModel.createGroup { [weak self] result in
+            
+            switch result {
+            case .success(let responseString):
+                print("Group created successfully: \(responseString)")
+                if isPublic {
+                    let newGroup = Group(ownerId: ownerId, name: name, purpose: purpose, comment: comment, isPublic: isPublic, zikrName: zikrName)
+                    self?.delegate?.didAddGroup(newGroup)
+                    self?.dismiss(animated: true)
+                }
+            case .failure(let error):
+                print("Failed to create group: \(error.localizedDescription)")
+                self?.showAlert(title: "Error", message: error.localizedDescription)
+            }
+            
+        }
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
 
