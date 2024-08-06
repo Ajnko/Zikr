@@ -11,7 +11,7 @@ import AVFoundation
 import AudioToolbox
 import AudioToolbox.AudioServices
 
-class ZikrCountViewController: UIViewController {
+class GroupZikrCountViewController: UIViewController {
     
     let blurEffect = UIBlurEffect(style: .extraLight)
     let effect = UIBlurEffect(style: .light)
@@ -213,7 +213,7 @@ class ZikrCountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Zikr"
+        title = "Group Zikr"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .done, target: self, action: #selector(backButtonTapped))
         
         setupUI()
@@ -234,6 +234,9 @@ class ZikrCountViewController: UIViewController {
         progressView.progress = 0.0
         changeZikrCountButton.setTitle("\(maxCount)", for: .normal)
         zikrCountLabel.text = "\(count)"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: .groupCreated, object: nil)
+
     }
     
     func setupUI() {
@@ -448,6 +451,19 @@ class ZikrCountViewController: UIViewController {
             zikrCountLabel.text = "\(count)"
         }
     }
+    
+    @objc func updateUI(_ notification: Notification) {
+        if let zikrCount = notification.userInfo?["zikrCount"] as? Int {
+            zikrCountLabel.text = "\(zikrCount)"
+            progressView.progress = Float(zikrCount) / 100.0 // Assuming the max value is 100
+            zikrProgressView.progress = Float(zikrCount) / 100.0 // Assuming the max value is 100
+
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .groupCreated, object: nil)
+    }
    
     func animateLabel() {
         // Scale and fade-in effect
@@ -564,6 +580,6 @@ class ZikrCountViewController: UIViewController {
         print("tap")
         
     }
-    
+ 
 
 }

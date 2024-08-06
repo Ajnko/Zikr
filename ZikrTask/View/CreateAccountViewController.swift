@@ -10,6 +10,16 @@ import SnapKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    let scrollableContenView: UIView = {
+       let view = UIView()
+        return view
+    }()
+    
     let backgroundImage: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "backgroundImage")
@@ -56,7 +66,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }()
     
     let userNameLabel = CustomLabel(
-        text: "User name",
+        text: "Name",
         textColor: .textColor,
         fontSize: .systemFont(ofSize: 16),
         numberOfLines: 1
@@ -87,7 +97,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     )
     
     let userSurNameLabel = CustomLabel(
-        text: "User Surname",
+        text: "Surname",
         textColor: .textColor,
         fontSize: .systemFont(ofSize: 16),
         numberOfLines: 1
@@ -149,7 +159,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     )
     
     let mailLabel = CustomLabel(
-        text: "User e-mail",
+        text: "E-mail",
         textColor: .textColor,
         fontSize: .systemFont(ofSize: 16),
         numberOfLines: 1
@@ -224,10 +234,14 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }()
     
     var viewModel = UserViewModel()
+    var containerBottomConstraint: Constraint?
+    let containerView = UIView()
+    var activeTextField: UITextField?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Create Your Account"
+        self.title = "Create Account"
         
         setupUI()
         
@@ -242,7 +256,14 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         mailTextField.inputAccessoryView = toolbar
         phoneNumberTextField.inputAccessoryView = toolbar
         
+        userNameTextField.delegate = self
+        userSurNameTextField.delegate = self
+        passwordTextField.delegate = self
+        mailTextField.delegate = self
+        phoneNumberTextField.delegate = self
+        
         setupPhoneNumberTextField()
+        setupKeyboardHandling()
         
     }
     
@@ -252,7 +273,15 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             make.edges.equalToSuperview()
         }
         
-        view.addSubview(blurView)
+        view.addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(view.snp.width).multipliedBy(0.9)
+            make.height.equalTo(view.snp.height).multipliedBy(0.6)
+            containerBottomConstraint = make.bottom.equalToSuperview().offset(-200).constraint
+        }
+        
+        containerView.addSubview(blurView)
         blurView.effect = blurEffect
         blurView.clipsToBounds = true
         blurView.layer.cornerRadius = 15
@@ -450,6 +479,53 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    //MARK: - Text Field animation method
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+    
+    private func setupKeyboardHandling() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        // Add tap gesture to dismiss keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let keyboardHeight = keyboardFrame.height
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
+
+        // Adjust only if the active text field is one of the bottom ones
+        if activeTextField == phoneNumberTextField || activeTextField == mailTextField {
+            UIView.animate(withDuration: duration) {
+                self.containerBottomConstraint?.update(offset: -keyboardHeight)
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
+        
+        UIView.animate(withDuration: duration) {
+            self.containerBottomConstraint?.update(offset: -200)
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    
+    //MARK: - Create Account Method
+    
     @objc func createButtonTapped() {
         guard let name = userNameLabel.text, !name.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
@@ -525,5 +601,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         phoneNumberTextField.insertText("-")
     }
     
-
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
 }

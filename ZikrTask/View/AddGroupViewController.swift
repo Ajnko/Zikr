@@ -14,6 +14,11 @@ protocol GroupViewControllerDelegate: AnyObject {
 
 class AddGroupViewController: UIViewController {
     
+    let mainContainerView: UIView = {
+       let view = UIView()
+        return view
+    }()
+    
     let blurView: UIVisualEffectView = {
        let blurview = UIVisualEffectView()
         return blurview
@@ -218,7 +223,10 @@ class AddGroupViewController: UIViewController {
     
     var viewModel = GroupViewModel()
     weak var delegate: GroupViewControllerDelegate?
-    
+    var containerBottomConstraint: Constraint?
+    var activeTextField: UITextField?
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
@@ -237,6 +245,13 @@ class AddGroupViewController: UIViewController {
         zikrInfoTextField.inputAccessoryView = toolbar
         zikrCountTextField.inputAccessoryView = toolbar
         
+        groupNameTextField.delegate = self
+        zikrNameTextField.delegate = self
+        zikrInfoTextField.delegate = self
+        zikrCountTextField.delegate = self
+        
+        setupKeyboardHandling()
+        
     }
     
     private func setupUI() {
@@ -252,7 +267,7 @@ class AddGroupViewController: UIViewController {
         blurView.contentView.addSubview(titleImageContainerView)
         titleImageContainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.snp.top).offset(40)
+            make.top.equalTo(view.snp.top).offset(33)
             make.width.equalTo(100)
             make.height.equalTo(100)
         }
@@ -298,7 +313,7 @@ class AddGroupViewController: UIViewController {
         //group name label
         blurView.contentView.addSubview(groupName)
         groupName.snp.makeConstraints { make in
-            make.top.equalTo(containerView.snp.bottom).offset(25)
+            make.top.equalTo(containerView.snp.bottom).offset(20)
             make.left.equalTo(view.snp.left).offset(20)
         }
         
@@ -308,7 +323,7 @@ class AddGroupViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(groupName.snp.bottom).offset(8)
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
-            make.height.equalTo(view.snp.height).multipliedBy(0.07)
+            make.height.equalTo(view.snp.height).multipliedBy(0.06)
         }
         
         //group name textfield blur view
@@ -430,6 +445,7 @@ class AddGroupViewController: UIViewController {
         }
     }
     
+    //MARK: - Textfield padding views
     private func paddingViewForTextField() {
         
         //group name textfield
@@ -450,6 +466,27 @@ class AddGroupViewController: UIViewController {
         
     }
     
+    //MARK: - Keyboard Handling and dismissing when the screen is touched
+    private func setupKeyboardHandling() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        // Add tap gesture to dismiss keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    //MARK: - Textfield extensions
+    
     private func shadowsForTextField() {
         groupNameTextField.addShadow()
         zikrNameTextField.addShadow()
@@ -463,6 +500,8 @@ class AddGroupViewController: UIViewController {
         zikrInfoTextField.resignFirstResponder()
         zikrCountTextField.resignFirstResponder()
     }
+    
+    //MARK: - Create a group and post it using API and saves to CoreData
     
     @objc func addGroupButtonTapped() {
         guard let name = groupNameTextField.text, !name.isEmpty,
@@ -503,4 +542,41 @@ class AddGroupViewController: UIViewController {
     }
 
 
+}
+
+//MARK: - Textfield methods
+extension AddGroupViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let activeTextField = activeTextField else { return }
+
+        let keyboardHeight = keyboardFrame.height
+        let textFieldBottomY = activeTextField.convert(activeTextField.bounds, to: self.view).maxY
+        let viewHeight = self.view.frame.height
+        
+        if textFieldBottomY > viewHeight - keyboardHeight {
+            let offset = textFieldBottomY - (viewHeight - keyboardHeight)
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -offset
+            }
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+}
+
+extension Notification.Name {
+    static let groupCreated = Notification.Name("groupCreated")
 }

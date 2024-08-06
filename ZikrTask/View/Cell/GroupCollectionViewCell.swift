@@ -63,7 +63,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         numberOfLines: 0
     )
     let zikrCountLabel = CustomLabel(
-        text: "30.000 / 70.000",
+        text: "Count:",
         textColor: .white,
         fontSize: .systemFont(ofSize: 10),
         numberOfLines: 0
@@ -148,7 +148,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         
         blurView.contentView.addSubview(groupNameLabel)
         groupNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(30)
+            make.top.equalTo(self.snp.top).offset(20)
             make.left.equalTo(containerView.snp.right).offset(10)
         }
         
@@ -160,7 +160,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         
         blurView.contentView.addSubview(groupContainerView)
         groupContainerView.snp.makeConstraints { make in
-            make.top.equalTo(containerView.snp.top)
+            make.top.equalTo(groupNameLabel.snp.top)
             make.right.equalTo(self.snp.right).inset(15)
             make.width.equalTo(self.snp.width).multipliedBy(0.2)
             make.height.equalTo(self.snp.height).multipliedBy(0.297)
@@ -183,7 +183,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         
         blurView.contentView.addSubview(textContainerView)
         textContainerView.snp.makeConstraints { make in
-            make.centerY.equalTo(groupZikrNameLabel.snp.centerY)
+            make.top.equalTo(groupContainerView.snp.bottom).offset(3)
             make.right.equalTo(groupContainerView.snp.right)
             make.width.equalTo(self.snp.width).multipliedBy(0.29)
             make.height.equalTo(self.snp.height).multipliedBy(0.199)

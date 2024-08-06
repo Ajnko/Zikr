@@ -34,6 +34,7 @@ class GroupViewModel {
             case .success(let data):
                 if let data = data, let responseString = String(data: data, encoding: .utf8) {
                     print("Response: \(responseString)")
+                    
                     completion(.success(responseString))
                 }
             case .failure(let error):

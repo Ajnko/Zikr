@@ -79,6 +79,8 @@ class MainViewController: UIViewController, GroupViewControllerDelegate {
         //call methods
         addItemsToView()
         setConstraintToItems()
+        
+        collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,12 +188,13 @@ class MainViewController: UIViewController, GroupViewControllerDelegate {
     @objc func addButtonTapped() {
         let vc = AddGroupViewController()
         vc.delegate = self
+//        vc.bottomDelegate = self
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
             sheet.preferredCornerRadius = 40
             sheet.detents = [.custom(resolver: { context in
-                0.85 * context.maximumDetentValue
+                1 * context.maximumDetentValue
               })]
             sheet.largestUndimmedDetentIdentifier = .large
             sheet.prefersGrabberVisible = true
@@ -244,6 +247,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             cell.groupNameLabel.text = group.name
             cell.zikrCountLabel.text = "Count: \(group.purpose)"
             cell.groupZikrNameLabel.text = group.zikrName
+            cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
             
             return cell
         case 1:
@@ -267,8 +271,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ZikrCountViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        switch segmentControler.selectedSegmentIndex {
+        case 0:
+            let vc = GroupZikrCountViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            let vc = PersonalZikrViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
     }
 
 }
