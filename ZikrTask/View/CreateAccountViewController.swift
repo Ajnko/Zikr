@@ -525,46 +525,50 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
     
     //MARK: - Create Account Method
-    
-    @objc func createButtonTapped() {
-        guard let name = userNameLabel.text, !name.isEmpty,
+    func createUser() {
+        
+        guard let mail = mailTextField.text, !mail.isEmpty,
+              let name = userNameTextField.text, !name.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
-              let mail = mailTextField.text, !mail.isEmpty,
-              let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
+              let surname = userSurNameTextField.text, !surname.isEmpty,
+              let phone = phoneNumberTextField.text,!phone.isEmpty else {
             showAlert(title: "Validation Error", message: "Please fill all necessary fields correctly.")
             return
         }
         
-        let phoneNumberRegex = "^[+-]?\\d+$"
-        let phoneNumberPredicate = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)
-        guard phoneNumberPredicate.evaluate(with: phoneNumber) else {
-            showAlert(title: "Validation Error", message: "Please enter a valid phone number.")
-            return
-        }
-        
-        let surname = userSurNameTextField.text
-        
-        viewModel.user = User(name: name, surname: surname, password: password, mail: mail, phoneNumber: phoneNumber)
+        viewModel.phone = phone
+        viewModel.mail = mail
+        viewModel.name = name
+        viewModel.surname = surname
+        viewModel.password = password
         
         viewModel.createUser { [weak self] result in
             switch result {
-            case .success(let responseString):
-                print("User created successfully: \(responseString)")
-                
-                DispatchQueue.main.async {
-                    let vc = MainViewController()
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                }
+            case .success(let userModel):
+                print("User Successfully created: \(userModel)")
+                let vc = MainViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):
-                print("Failed to create user")
                 self?.showAlert(title: "Error", message: error.localizedDescription)
             }
             
         }
-        
+    }
+    @objc func createButtonTapped() {
+        createUser()
     }
     
-    func showAlert(title: String, message: String) {
+    
+    private func showAlertAndNavigate(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            let nextViewController = MainViewController() // Replace with your actual next view controller
+            self?.navigationController?.pushViewController(nextViewController, animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -589,8 +593,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         plusMinusAccessoryView.items = [flexibleSpace, plusButton, minusButton, flexibleSpace]
-        
-//        phoneNumberTextField.inputAccessoryView = plusMinusAccessoryView
     }
     
     @objc func insertPlus() {

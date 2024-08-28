@@ -7,10 +7,21 @@
 
 import Foundation
 
-struct User {
-    var name: String
-    var surname: String?
-    var password: String
-    var mail: String
-    var phoneNumber: String
+struct UserBodyPart: Codable {
+    let phone:Int
+    let mail:String
+    let name:String
+    let surname:String
+    let image_url:String
+    let password:String
+}
+
+struct UserModel: Codable {
+    let status : String
+    let message: String
+    let data: UserResult
+}
+
+struct UserResult: Codable {
+    let userId : Int
 }

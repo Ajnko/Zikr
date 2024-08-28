@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		224C501C889FB7CD7AC081D6 /* Pods_ZikrTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */; };
+		CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */; };
 		CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC13512E2C492F3200649A78 /* GroupViewModel.swift */; };
+		CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2C2A212C79E2B20014F37D /* ApiManager.swift */; };
 		CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3966182BFCD56200C861C9 /* AppDelegate.swift */; };
 		CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */; };
 		CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661C2BFCD56200C861C9 /* LogInViewController.swift */; };
@@ -39,7 +41,9 @@
 /* Begin PBXFileReference section */
 		5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZikrTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.release.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.release.xcconfig"; sourceTree = "<group>"; };
+		CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC13512E2C492F3200649A78 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
+		CC2C2A212C79E2B20014F37D /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		CC3966152BFCD56200C861C9 /* ZikrTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZikrTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC3966182BFCD56200C861C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +103,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CC2C2A202C79E2A20014F37D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CC2C2A212C79E2B20014F37D /* ApiManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		CC39660C2BFCD56200C861C9 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +132,7 @@
 		CC3966172BFCD56200C861C9 /* ZikrTask */ = {
 			isa = PBXGroup;
 			children = (
+				CC2C2A202C79E2A20014F37D /* Manager */,
 				CCF6A5C32BFD010B00921654 /* Extension */,
 				CCF6A5C22BFD010700921654 /* App */,
 				CCF6A5C12BFD010100921654 /* Model */,
@@ -216,6 +229,7 @@
 		CCF6A5F42BFD444F00921654 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */,
 				CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */,
 				CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */,
 				CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */,
@@ -353,7 +367,9 @@
 				CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */,
 				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
+				CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
+				CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
 				CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */,
 				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
