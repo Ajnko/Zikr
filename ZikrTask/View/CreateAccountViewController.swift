@@ -233,7 +233,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    var viewModel = UserViewModel()
+    var viewModel = CreateUserViewModel()
     var containerBottomConstraint: Constraint?
     let containerView = UIView()
     var activeTextField: UITextField?
@@ -254,6 +254,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         userSurNameTextField.inputAccessoryView = toolbar
         passwordTextField.inputAccessoryView = toolbar
         mailTextField.inputAccessoryView = toolbar
+        mailTextField.keyboardType = .emailAddress
         phoneNumberTextField.inputAccessoryView = toolbar
         
         userNameTextField.delegate = self
@@ -264,6 +265,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         
         setupPhoneNumberTextField()
         setupKeyboardHandling()
+        offTextFieldAutoCompletion(isOff: false)
         
     }
     
@@ -481,6 +483,14 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Text Field animation method
     
+    func offTextFieldAutoCompletion(isOff: Bool) {
+        userNameTextField.setAutoCompletion(enabled: isOff)
+        userSurNameTextField.setAutoCompletion(enabled: isOff)
+        passwordTextField.setAutoCompletion(enabled: isOff)
+        mailTextField.setAutoCompletion(enabled: isOff)
+        phoneNumberTextField.setAutoCompletion(enabled: isOff)
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
     }
@@ -525,6 +535,10 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
     
     //MARK: - Create Account Method
+    func saveUserId(_ userId: Int) {
+        UserDefaults.standard.setValue(userId, forKey: "userId")
+    }
+    
     func createUser() {
         
         guard let mail = mailTextField.text, !mail.isEmpty,
@@ -546,6 +560,11 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             switch result {
             case .success(let userModel):
                 print("User Successfully created: \(userModel)")
+                
+                //save userId to UserDefaults
+                self?.saveUserId(userModel.data.userId)
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+
                 let vc = MainViewController()
                 self?.navigationController?.pushViewController(vc, animated: true)
             case .failure(let error):

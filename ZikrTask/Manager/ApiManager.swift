@@ -6,107 +6,79 @@
 //
 
 import Foundation
-
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case delete = "DELETE"
-}
-
-enum HTTPError: LocalizedError {
-    case invalidResponse
-    case serverError(statusCode: Int, data: Data?)
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidResponse:
-            return "Invalid response from server."
-        case .serverError(let statusCode, _):
-            return "Server returned an error with status code: \(statusCode)"
-        }
-    }
-    
-    var data: Data? {
-        switch self {
-        case .serverError(_, let data):
-            return data
-        case .invalidResponse:
-            return nil
-        }
-    }
-}
+import Alamofire
 
 class ApiManager {
     static let shared = ApiManager()
     
-    private init() {}
-    
-    func performRequest<T: Codable>(url: URL, method: HTTPMethod, requestBody: Data?, parameters: [String: Any]? = nil, responseType: T.Type, headers: [String: String]? = nil, completion: @escaping (Result<T, Error>) -> Void) {
+    // MARK: - Login User
+    func loginUser(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
+        let url = APIConstants.loginURL(mail: email, password: password)
         
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        
-        guard let requestURL = urlComponents?.url else {
-            // Handle invalid URL
-            return
-        }
-        
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = method.rawValue
-        
-//        if let token = User_Defalts.shared.getAuthToken() {
-//            // Add token to request headers
-//            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        }
-        
-          request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-          request.setValue("keep-alive", forHTTPHeaderField: "Connection")
-          request.setValue("2.2.404", forHTTPHeaderField: "User-Agent-Version") // Corrected line
-          
-        if let params = parameters {
-            var queryItems = [URLQueryItem]()
-            for (key, value) in params {
-                let queryItem = URLQueryItem(name: key, value: "\(value)")
-                queryItems.append(queryItem)
-            }
-            urlComponents?.queryItems = queryItems
-        }
-        
-        if let additionalHeaders = headers {
-            for (key, value) in additionalHeaders {
-                request.setValue(value, forHTTPHeaderField: key)
-            }
-        }
-        
-        request.httpBody = requestBody
-        
-        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
+        AF.request(url, method: .get).responseDecodable(of: LoginResponse.self) { response in
+            switch response.result {
+            case .success(let loginResponse):
+                if let user = loginResponse.user.first {
+                    // Save the userId to UserDefaults
+                    UserDefaults.standard.set(user.userId, forKey: "userId")
+                    completion(.success(user))
+                } else {
+                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No user found"])
+                    completion(.failure(error))
+                }
+            case .failure(let error):
                 completion(.failure(error))
-                return
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(HTTPError.invalidResponse))
-                return
-            }
-            
-            if (200..<300).contains(httpResponse.statusCode) {
-                if let responseData = data {
+        }
+    }
+    
+    //MARK: - Add group
+    func addGroup(groupRequest: GroupRequest, completion: @escaping (Result<GroupResponse, Error>) -> Void) {
+        let url = APIConstants.addGroupURL()
+        
+        AF.request(url, method: .post, parameters: groupRequest, encoder: JSONParameterEncoder.default)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    // Print the raw data for debugging
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        print("Response JSON: \(jsonString)")
+                    }
+                    
+                    // Check if the response status code indicates success
+                    guard let statusCode = response.response?.statusCode, (200...299).contains(statusCode) else {
+                        let errorMessage = "HTTP Status Code: \(response.response?.statusCode ?? -1)"
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
+                        return
+                    }
+                    
+                    // Decode the response if status code is 200-299
                     do {
-                        let decodedResponse = try JSONDecoder().decode(responseType, from: responseData)
+                        let decodedResponse = try JSONDecoder().decode(GroupResponse.self, from: data)
                         completion(.success(decodedResponse))
                     } catch {
                         completion(.failure(error))
+                        print("Decoding Error: \(error)")
                     }
-                } else {
-                    completion(.failure(HTTPError.invalidResponse))
+                    
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            } else {
-                completion(.failure(HTTPError.serverError(statusCode: httpResponse.statusCode, data: data)))
             }
-        }
+    }
+    
+    //MARK: - Get Group
+    func fetchGroups(ownerId: String, completion: @escaping (Result<[Group], Error>) -> Void) {
+        let url = APIConstants.getGroupsURL(ownerId: ownerId)
         
-        dataTask.resume()
+        AF.request(url)
+            .responseDecodable(of: GetGroupResponse.self) { response in
+                switch response.result {
+                case .success(let groupResponse):
+                    completion(.success(groupResponse.data))  // Pass the array of Group
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
 }

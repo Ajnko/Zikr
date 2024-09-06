@@ -8,9 +8,6 @@
 import UIKit
 import SnapKit
 
-protocol GroupViewControllerDelegate: AnyObject {
-    func didAddGroup(_ group: Group)
-}
 
 class AddGroupViewController: UIViewController {
     
@@ -221,10 +218,9 @@ class AddGroupViewController: UIViewController {
         return button
     }()
     
-    var viewModel = GroupViewModel()
-    weak var delegate: GroupViewControllerDelegate?
     var containerBottomConstraint: Constraint?
     var activeTextField: UITextField?
+    private var viewModel = GroupViewModel()
 
 
     override func viewDidLoad() {
@@ -251,6 +247,8 @@ class AddGroupViewController: UIViewController {
         zikrCountTextField.delegate = self
         
         setupKeyboardHandling()
+        
+        NotificationCenter.default.post(name: NSNotification.Name("DataUpdated"), object: nil)
         
     }
     
@@ -443,6 +441,7 @@ class AddGroupViewController: UIViewController {
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.height.equalTo(view.snp.height).multipliedBy(0.07)
         }
+        
     }
     
     //MARK: - Textfield padding views
@@ -501,38 +500,31 @@ class AddGroupViewController: UIViewController {
         zikrCountTextField.resignFirstResponder()
     }
     
+    func saveUserId(_ userId: Int) {
+        UserDefaults.standard.setValue(userId, forKey: "userId")
+    }
+    
     //MARK: - Create a group and post it using API and saves to CoreData
     
     @objc func addGroupButtonTapped() {
         guard let name = groupNameTextField.text, !name.isEmpty,
-              let purpose = zikrCountTextField.text, !purpose.isEmpty,
-              let zikrName = zikrNameTextField.text, !zikrName.isEmpty else {
-            showAlert(title: "Validation Error", message: "Please fill all necessary fields correctly.")
+              let purpose = zikrCountTextField.text, !purpose.isEmpty else {
+            showAlert(title: "Error", message: "Please fill all necessary fields correctly")
             return
         }
+        let comment = zikrInfoTextField.text ?? ""
+        let imageUrl = "http://example.com/images/morninggroup.jpg"
         
-        let comment = zikrInfoTextField.text
-        let isPublic = true
-        let ownerId = UUID().uuidString
-        
-        viewModel.group = Group(ownerId: ownerId, name: name, purpose: purpose, comment: comment, isPublic: isPublic, zikrName: zikrName)
-        
-        viewModel.createGroup { [weak self] result in
+        viewModel.createGroup(name: name, purpose: purpose, comment: comment, imageUrl: imageUrl) { [self] success in
             
-            switch result {
-            case .success(let responseString):
-                print("Group created successfully: \(responseString)")
-                if isPublic {
-                    let newGroup = Group(ownerId: ownerId, name: name, purpose: purpose, comment: comment, isPublic: isPublic, zikrName: zikrName)
-                    self?.delegate?.didAddGroup(newGroup)
-                    self?.dismiss(animated: true)
-                }
-            case .failure(let error):
-                print("Failed to create group: \(error.localizedDescription)")
-                self?.showAlert(title: "Error", message: error.localizedDescription)
+            if success {
+                print("Group was created successfully.")
+                self.dismiss(animated: true)
+            } else {
+                print("Failed to create group")
             }
-            
         }
+        
     }
     
     private func showAlert(title: String, message: String) {

@@ -58,7 +58,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     )
     
     let loginLabel = CustomLabel(
-        text: "Login",
+        text: "E-mail",
         textColor: .textColor,
         fontSize: .systemFont(ofSize: 16),
         numberOfLines: 0
@@ -69,7 +69,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    let loginTextField = CustomTextField(
+    let mailTextField = CustomTextField(
         placeholder: "email",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
@@ -108,9 +108,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         cornerRadius: 10
     )
     
-    let nextButton: UIButton = {
+    let loginButton: UIButton = {
       let button = UIButton()
-        button.setTitle("Next", for: .normal)
+        button.setTitle("Log in", for: .normal)
         button.setTitleColor(.lightMode, for: .normal)
         button.backgroundColor = .textColor
         button.layer.cornerRadius = 10
@@ -130,6 +130,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator = UIActivityIndicatorView(style: .large)
+        return indicator
+    }()
+    
+    let loginViewModel = UserLoginViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = .darkMode
@@ -141,9 +150,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton]
         
-        loginTextField.inputAccessoryView = toolbar
+        mailTextField.inputAccessoryView = toolbar
         passwordTextField.inputAccessoryView = toolbar
-        
+        offAutoCompletion(isOff: false)
     }
     
     private func setupUI() {
@@ -202,16 +211,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.edges.equalToSuperview()
         }
         
-        loginTextFieldBlurView.contentView.addSubview(loginTextField)
-        loginTextField.snp.makeConstraints { make in
+        loginTextFieldBlurView.contentView.addSubview(mailTextField)
+        mailTextField.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
-        loginTextField.settinPaddingView(paddingView: paddingView)
+        mailTextField.settinPaddingView(paddingView: paddingView)
         
         blurView.contentView.addSubview(passwordLabel)
         passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(loginTextField.snp.bottom).offset(18)
+            make.top.equalTo(mailTextField.snp.bottom).offset(18)
             make.left.equalTo(loginLabel.snp.left)
         }
         
@@ -237,33 +246,66 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let leftview: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
         passwordTextField.settinPaddingView(paddingView: leftview)
         
-        blurView.contentView.addSubview(nextButton)
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        nextButton.snp.makeConstraints { make in
+        blurView.contentView.addSubview(loginButton)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(passwordContainerView.snp.bottom).offset(40)
-            make.width.equalTo(loginTextField.snp.width)
-            make.height.equalTo(loginTextField.snp.height)
+            make.width.equalTo(mailTextField.snp.width)
+            make.height.equalTo(mailTextField.snp.height)
         }
         
         blurView.contentView.addSubview(createAccountButton)
         createAccountButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         createAccountButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(nextButton.snp.bottom).offset(15)
+            make.top.equalTo(loginButton.snp.bottom).offset(15)
             make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
             make.height.equalTo(blurView.snp.height).multipliedBy(0.1)
+        }
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
     
     @objc func doneButtonTapped() {
-        loginTextField.resignFirstResponder()
+        mailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
-    @objc func nextButtonTapped() {
-        let vc = MainViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    @objc func loginButtonTapped() {
+        guard let email = mailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            showAlert(message: "Please enter both email and password")
+            return
+        }
+        
+        activityIndicator.startAnimating()
+        loginButton.isEnabled = false
+        
+        loginViewModel.loginUser(email: email, password: password) { [weak self] result in
+            
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.loginButton.isEnabled = true
+            }
+            
+            switch result {
+            case .success(let user):
+                
+                //saves userId in UserDefaults
+                UserDefaults.standard.setValue(user.userId, forKey: "userId")
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                
+                let mainVc = MainViewController()
+                self?.navigationController?.pushViewController(mainVc, animated: true)
+            case .failure(let error):
+                self?.showAlert(message: "Login failed: \(error.localizedDescription)")
+            }
+            
+        }
     }
     
     @objc func createButtonTapped() {
@@ -271,7 +313,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func offAutoCompletion(isOff: Bool) {
+        mailTextField.setAutoCompletion(enabled: isOff)
+        passwordTextField.setAutoCompletion(enabled: isOff)
+    }
     
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 
 
 }

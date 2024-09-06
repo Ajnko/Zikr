@@ -20,9 +20,12 @@
 		CC50C6672C2830EC00180E42 /* pianoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC50C6662C2830EC00180E42 /* pianoSound.mp3 */; };
 		CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */; };
 		CC5342082C3C459B00112114 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342072C3C459B00112114 /* UserModel.swift */; };
-		CC53420A2C3C460300112114 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342092C3C460300112114 /* UserViewModel.swift */; };
+		CC53420A2C3C460300112114 /* CreateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342092C3C460300112114 /* CreateUserViewModel.swift */; };
 		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
 		CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* GroupZikrCountViewController.swift */; };
+		CC9B2B7F2C889A4C00192DCD /* GetGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */; };
+		CC9B2B812C889DCA00192DCD /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2B802C889DCA00192DCD /* URL.swift */; };
+		CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */; };
 		CC9C5A9F2C624D1600D869C2 /* PersonalZikrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C5A9E2C624D1600D869C2 /* PersonalZikrViewController.swift */; };
 		CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */; };
 		CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */; };
@@ -30,6 +33,8 @@
 		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
 		CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */; };
 		CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */; };
+		CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE70CC72C88E2FE00977248 /* UserLogin.swift */; };
+		CCE70CCA2C88E34900977248 /* UserLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */; };
 		CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C52BFD01CC00921654 /* UIColor.swift */; };
 		CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C72BFD01CC00921654 /* UILabel.swift */; };
 		CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5C82BFD01CC00921654 /* UITextField.swift */; };
@@ -55,9 +60,12 @@
 		CC50C6662C2830EC00180E42 /* pianoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pianoSound.mp3; sourceTree = "<group>"; };
 		CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		CC5342072C3C459B00112114 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		CC5342092C3C460300112114 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		CC5342092C3C460300112114 /* CreateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewModel.swift; sourceTree = "<group>"; };
 		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC614F3B2BFFAA010078FC43 /* GroupZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupZikrCountViewController.swift; sourceTree = "<group>"; };
+		CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupModel.swift; sourceTree = "<group>"; };
+		CC9B2B802C889DCA00192DCD /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupViewModel.swift; sourceTree = "<group>"; };
 		CC9C5A9E2C624D1600D869C2 /* PersonalZikrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalZikrViewController.swift; sourceTree = "<group>"; };
 		CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListViewController.swift; sourceTree = "<group>"; };
 		CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListTableViewCell.swift; sourceTree = "<group>"; };
@@ -65,6 +73,8 @@
 		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CCE70CC72C88E2FE00977248 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModel.swift; sourceTree = "<group>"; };
 		CCF6A5C52BFD01CC00921654 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CCF6A5C72BFD01CC00921654 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		CCF6A5C82BFD01CC00921654 /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -149,8 +159,10 @@
 		CCF6A5BF2BFD00F700921654 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CC5342092C3C460300112114 /* UserViewModel.swift */,
+				CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */,
+				CC5342092C3C460300112114 /* CreateUserViewModel.swift */,
 				CC13512E2C492F3200649A78 /* GroupViewModel.swift */,
+				CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -176,8 +188,10 @@
 		CCF6A5C12BFD010100921654 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCE70CC72C88E2FE00977248 /* UserLogin.swift */,
 				CC5342072C3C459B00112114 /* UserModel.swift */,
 				CC9F76162C3D6988009323C3 /* GroupModel.swift */,
+				CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,6 +234,7 @@
 		CCF6A5C92BFD01CC00921654 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				CC9B2B802C889DCA00192DCD /* URL.swift */,
 				CCF6A5C72BFD01CC00921654 /* UILabel.swift */,
 				CCF6A5C82BFD01CC00921654 /* UITextField.swift */,
 			);
@@ -359,15 +374,20 @@
 				CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */,
-				CC53420A2C3C460300112114 /* UserViewModel.swift in Sources */,
+				CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */,
+				CC53420A2C3C460300112114 /* CreateUserViewModel.swift in Sources */,
+				CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */,
 				CC9F76172C3D6988009323C3 /* GroupModel.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
+				CC9B2B812C889DCA00192DCD /* URL.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
 				CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */,
 				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */,
+				CCE70CCA2C88E34900977248 /* UserLoginViewModel.swift in Sources */,
+				CC9B2B7F2C889A4C00192DCD /* GetGroupModel.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
 				CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,

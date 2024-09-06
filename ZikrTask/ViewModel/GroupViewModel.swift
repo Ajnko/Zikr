@@ -6,40 +6,34 @@
 //
 
 import Foundation
-import Alamofire
 
 class GroupViewModel {
-    var group: Group?
-    
-    func createGroup(completion: @escaping(Result<String, Error>) -> Void) {
-        guard let group = group else { return }
+    func createGroup(name: String, purpose: String, comment: String, imageUrl: String, completion: @escaping (Bool) -> Void) {
+
+        guard let ownerId = UserDefaults.standard.value(forKey: "userId") as? Int else {
+            print("ownerId not found in UserDefaults")
+            completion(false)
+            return
+        }
         
-        let parameters: [String: Any] = [
-            "ownerId"   : group.ownerId,
-            "name"      : group.name,
-            "purpose"   : group.purpose,
-            "comment"   : group.comment ?? "",
-            "isPublic"  : group.isPublic
-        ]
+        let groupRequest = GroupRequest(
+            ownerId: String(ownerId),
+            name: name,
+            purpose: purpose,
+            comment: comment,
+            imageUrl: imageUrl,
+            isPublic: true
+        )
         
-        AF.upload(multipartFormData: { multipartFormData in
-            for (key, value) in parameters {
-                if let data = "\(value)".data(using: .utf8) {
-                    multipartFormData.append(data, withName: key)
-                }
-            }
-        }, to: "https://zikrgroup.000webhostapp.com/create_group.php")
-        .response { response in
-            switch response.result {
-            case .success(let data):
-                if let data = data, let responseString = String(data: data, encoding: .utf8) {
-                    print("Response: \(responseString)")
-                    
-                    completion(.success(responseString))
-                }
+
+        ApiManager.shared.addGroup(groupRequest: groupRequest) { result in
+            switch result {
+            case .success(let response):
+                print("Group created successfully: \(response)")
+                completion(true)
             case .failure(let error):
-                print("Error: \(error.localizedDescription)")
-                completion(.failure(error))
+                print("Failed to create group: \(error)")
+                completion(false)
             }
         }
     }

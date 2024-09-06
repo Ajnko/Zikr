@@ -32,4 +32,8 @@ extension CustomTextField: UITextFieldDelegate {
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
     }
+    
+    func setAutoCompletion(enabled: Bool) {
+        self.autocorrectionType = enabled ? .yes : .no
+    }
 }
