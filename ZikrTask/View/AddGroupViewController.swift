@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol AddGroupDelegate: AnyObject {
+    func groupCreated()
+}
+
 
 class AddGroupViewController: UIViewController {
     
@@ -221,6 +225,7 @@ class AddGroupViewController: UIViewController {
     var containerBottomConstraint: Constraint?
     var activeTextField: UITextField?
     private var viewModel = GroupViewModel()
+    weak var delegate: AddGroupDelegate?
 
 
     override func viewDidLoad() {
@@ -519,6 +524,7 @@ class AddGroupViewController: UIViewController {
             
             if success {
                 print("Group was created successfully.")
+                self.delegate?.groupCreated()
                 self.dismiss(animated: true)
             } else {
                 print("Failed to create group")

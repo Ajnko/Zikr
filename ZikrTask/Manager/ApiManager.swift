@@ -11,21 +11,27 @@ import Alamofire
 class ApiManager {
     static let shared = ApiManager()
     
+    private init() {}
+    
     // MARK: - Login User
-    func loginUser(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
+    
+    func login(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
         let url = APIConstants.loginURL(mail: email, password: password)
         
-        AF.request(url, method: .get).responseDecodable(of: LoginResponse.self) { response in
+        AF.request(url).responseData { response in
             switch response.result {
-            case .success(let loginResponse):
-                if let user = loginResponse.user.first {
-                    // Save the userId to UserDefaults
-                    UserDefaults.standard.set(user.userId, forKey: "userId")
+            case .success(let data):
+                do {
+                    let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+                    guard let user = loginResponse.user.first else {
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No user found"])))
+                        return
+                    }
                     completion(.success(user))
-                } else {
-                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No user found"])
+                } catch {
                     completion(.failure(error))
                 }
+                
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -68,17 +74,27 @@ class ApiManager {
     }
     
     //MARK: - Get Group
-    func fetchGroups(ownerId: String, completion: @escaping (Result<[Group], Error>) -> Void) {
-        let url = APIConstants.getGroupsURL(ownerId: ownerId)
+    func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
+        guard let userId = UserDefaults.standard.string(forKey: "userId") else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])))
+            return
+        }
         
-        AF.request(url)
-            .responseDecodable(of: GetGroupResponse.self) { response in
-                switch response.result {
-                case .success(let groupResponse):
-                    completion(.success(groupResponse.data))  // Pass the array of Group
-                case .failure(let error):
+        let url = APIConstants.getGroupsURL(ownerId: userId)
+        
+        AF.request(url).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let groupsResponse = try JSONDecoder().decode(GroupsResponse.self, from: data)
+                    completion(.success(groupsResponse.data))
+                } catch {
                     completion(.failure(error))
                 }
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
+        }
     }
 }

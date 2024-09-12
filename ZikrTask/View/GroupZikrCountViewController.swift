@@ -210,10 +210,12 @@ class GroupZikrCountViewController: UIViewController {
     var isOn: Bool = true
     
     var maxCount: Int = 33
+    var groupName: String?
+    var groupPurpose: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Group Zikr"
+        self.title = groupName
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .done, target: self, action: #selector(backButtonTapped))
         
         setupUI()
@@ -232,11 +234,11 @@ class GroupZikrCountViewController: UIViewController {
         audioSlider.maximumTrackTintColor = UIColor.white
         
         progressView.progress = 0.0
-        changeZikrCountButton.setTitle("\(maxCount)", for: .normal)
+        progressLabel.text = groupPurpose
+        let purpose = Int(groupPurpose!)
+        changeZikrCountButton.setTitle("\(purpose ?? 10)", for: .normal)
         zikrCountLabel.text = "\(count)"
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: .groupCreated, object: nil)
-
     }
     
     func setupUI() {
@@ -434,9 +436,10 @@ class GroupZikrCountViewController: UIViewController {
     @objc func zikrCountButtonTapped() {
         count += 1
         
-        if count >= maxCount {
+        if count >= Int(groupPurpose!)! {
             
             zikrProgressView.progress = 1.0
+            progressView.progress = 1.0
             zikrCountLabel.text = "\(count)"
             // Device vibrates
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -444,25 +447,14 @@ class GroupZikrCountViewController: UIViewController {
             // Reset count and progress
             count = 0
             zikrProgressView.progress = 0.0
+            progressView.progress = 0.0
         } else {
             // Update progress view and label
-            let progress = Float(count) / Float(maxCount)
+            let progress = Float(count) / Float(groupPurpose!)!
             zikrProgressView.progress = progress
+            progressView.progress = progress
             zikrCountLabel.text = "\(count)"
         }
-    }
-    
-    @objc func updateUI(_ notification: Notification) {
-        if let zikrCount = notification.userInfo?["zikrCount"] as? Int {
-            zikrCountLabel.text = "\(zikrCount)"
-            progressView.progress = Float(zikrCount) / 100.0 // Assuming the max value is 100
-            zikrProgressView.progress = Float(zikrCount) / 100.0 // Assuming the max value is 100
-
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .groupCreated, object: nil)
     }
    
     func animateLabel() {
@@ -486,13 +478,15 @@ class GroupZikrCountViewController: UIViewController {
             textField.placeholder = "Enter maximum count"
             textField.keyboardType = .numberPad
         }
-        let confirmAction = UIAlertAction(title: "OK", style: .default) { _ in
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { [self] _ in
             if let textField = alertController.textFields?.first,
                let text = textField.text,
                let newMaxCount = Int(text) {
-                self.maxCount = newMaxCount
-                self.changeZikrCountButton.setTitle("\(newMaxCount)", for: .normal)
+                let purpose = Int(maxCount)
+//                self.purpose = newMaxCount
+                self.changeZikrCountButton.setTitle("\(purpose)", for: .normal)
                 self.zikrProgressView.progress = 0.0
+                self.progressView.progress = 0.0
                 self.count = 0
                 self.zikrCountLabel.text = "\(self.count)"
             }

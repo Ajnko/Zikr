@@ -7,30 +7,22 @@
 
 import Foundation
 
+import Foundation
+
 class GetGroupViewModel {
+    private let apiManager = ApiManager.shared
     var groups: [Group] = []
     
-    func createGroup(name: String, purpose: String, comment: String, imageUrl: String, completion: @escaping (Bool) -> Void) {
-        // Your existing createGroup method
-    }
-    
-    func fetchGroups(completion: @escaping (Bool) -> Void) {
-        guard let ownerId = UserDefaults.standard.value(forKey: "userId") as? Int else {
-            print("ownerId not found in UserDefaults")
-            completion(false)
-            return
-        }
-        
-        ApiManager.shared.fetchGroups(ownerId: String(ownerId)) { result in
+    func fetchGroups(completion: @escaping (Result<Void, Error>) -> Void) {
+        apiManager.fetchGroups { [weak self] result in
             switch result {
             case .success(let groups):
-                self.groups = groups  // Assign the array of Group objects
-                completion(true)
+                self?.groups = groups
+                completion(.success(()))
+                
             case .failure(let error):
-                print("Failed to fetch groups: \(error)")
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
 }
-

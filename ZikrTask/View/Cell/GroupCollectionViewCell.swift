@@ -148,7 +148,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         
         blurView.contentView.addSubview(groupNameLabel)
         groupNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(20)
+            make.top.equalTo(self.snp.top).offset(15)
             make.left.equalTo(containerView.snp.right).offset(10)
         }
         
@@ -163,7 +163,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(groupNameLabel.snp.top)
             make.right.equalTo(self.snp.right).inset(15)
             make.width.equalTo(self.snp.width).multipliedBy(0.2)
-            make.height.equalTo(self.snp.height).multipliedBy(0.297)
+            make.height.equalTo(self.snp.height).multipliedBy(0.293)
         }
         
         groupContainerView.addSubview(groupMembersButton)
@@ -211,9 +211,9 @@ class GroupCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(with data: Group) {
-        groupNameLabel.text = data.name
-        zikrCountLabel.text = "Count: \(data.purpose)"
+    func configureCell(with group: Group) {
+        groupNameLabel.text = group.name
+        zikrCountLabel.text = "Count: \(group.purpose)"
     }
     
 }

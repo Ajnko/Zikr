@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import EMTNeumorphicView
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, AddGroupDelegate {
     
     private let backgroundImage: UIImageView = {
         let image = UIImageView()
@@ -45,18 +45,6 @@ class MainViewController: UIViewController {
         return collectionview
     }()
     
-    private let swipingCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.scrollDirection = .horizontal
-        
-        let collectionview = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionview.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionview.backgroundColor = .clear
-        return collectionview
-    }()
-    
     let addButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -84,17 +72,17 @@ class MainViewController: UIViewController {
     
     private var selectedSegmentIndex = 0
     
-    let viewModel = GetGroupViewModel()
+    let getGroupViewModel = GetGroupViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Zikr"
         
         self.navigationItem.hidesBackButton = true
-
+        
         let leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .done, target: self, action: #selector(logoutButtonTapped))
         leftBarButtonItem.tintColor = .darkMode
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: nil)
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(presentProfileVC))
         rightBarButtonItem.tintColor = .darkMode
         self.navigationItem.setLeftBarButtonItems([leftBarButtonItem], animated: true)
         self.navigationItem.setRightBarButtonItems([rightBarButtonItem], animated: true)
@@ -104,14 +92,8 @@ class MainViewController: UIViewController {
         setConstraintToItems()
         configureDelegates()
         
-        fetchAndReloadData()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name("DataUpdated"), object: nil)
-
-    }
-    
-    @objc func reloadData() {
-        dataCollectionView.reloadData()
+        fetchData()
+        groupCreated()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,7 +103,6 @@ class MainViewController: UIViewController {
         segmentCollectionView.reloadData()
         dataCollectionView.reloadData()
         
-        fetchAndReloadData()
     }
     
     private func configureDelegates() {
@@ -129,22 +110,19 @@ class MainViewController: UIViewController {
         dataCollectionView.dataSource = self
         segmentCollectionView.delegate = self
         segmentCollectionView.dataSource = self
-        swipingCollectionView.delegate = self
-        swipingCollectionView.dataSource = self
     }
     
-    //Method addItemsToView
+    
     private func addItemsToView() {
-        //to view
+        
         view.addSubview(backgroundImage)
         view.addSubview(segmentCollectionView)
         view.addSubview(dataCollectionView)
-        view.addSubview(swipingCollectionView)
         backgroundImage.bringSubviewToFront(segmentCollectionView)
         backgroundImage.bringSubviewToFront(dataCollectionView)
     }
     
-    //Method setConstraintToItems
+    
     private func setConstraintToItems() {
         
         backgroundImage.snp.makeConstraints { make in
@@ -163,28 +141,24 @@ class MainViewController: UIViewController {
             make.left.right.bottom.equalToSuperview()
         }
         
-        swipingCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(segmentCollectionView.snp.bottom).offset(20)
-            make.left.right.bottom.equalToSuperview()
-        }
-        
-        swipingCollectionView.addSubview(blurView)
+        dataCollectionView.addSubview(blurView)
         blurView.effect = blurEffect
         blurView.clipsToBounds = true
         blurView.layer.cornerRadius = 30
-        blurView.snp.makeConstraints { make in
+        blurView.snp.makeConstraints{ make in
             make.bottom.equalTo(view.snp.bottom).offset(-45)
             make.right.equalTo(view.snp.right).offset(-15)
             make.width.equalTo(60)
             make.height.equalTo(60)
         }
-        swipingCollectionView.bringSubviewToFront(blurView)
+        dataCollectionView.bringSubviewToFront(blurView)
         
         blurView.contentView.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         addButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         
         view.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints { make in
@@ -193,19 +167,23 @@ class MainViewController: UIViewController {
         
     }
     
-    func fetchAndReloadData() {
+    func groupCreated() {
+        fetchData()
+    }
+    
+    func fetchData() {
         showActivityIndicator()
-        
-        viewModel.fetchGroups { [weak self] success in
+        getGroupViewModel.fetchGroups { [weak self] result in
+            
             DispatchQueue.main.async {
-                
                 self?.hideActivityIndicator()
                 
-                if success {
+                switch result {
+                case .success(let success):
                     self?.dataCollectionView.reloadData()
-                    self?.segmentCollectionView.reloadData()
-                } else {
-                    print("Failed to load groups")
+                    print("DataCollectionView reloaded")
+                case .failure(let error):
+                    print("Error fetching groups: \(error.localizedDescription)")
                 }
             }
         }
@@ -213,12 +191,10 @@ class MainViewController: UIViewController {
     
     private func showActivityIndicator() {
         activityIndicator.startAnimating()
-        dataCollectionView.isUserInteractionEnabled = false
     }
     
     private func hideActivityIndicator() {
         activityIndicator.stopAnimating()
-        dataCollectionView.isUserInteractionEnabled = true
     }
     
     
@@ -226,6 +202,7 @@ class MainViewController: UIViewController {
     
     @objc func addButtonTapped() {
         let vc = AddGroupViewController()
+        vc.delegate = self
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
@@ -245,8 +222,33 @@ class MainViewController: UIViewController {
     }
     
     @objc func logoutButtonTapped() {
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        showAler(title: "Wait", message: "Are you sure you want to logout?")
+    }
+    
+    private func showAler(title: String, message: String) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert
+        )
         
+        let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { _ in
+            self.performLogout()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(logoutAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+        
+    }
+    
+    private func performLogout() {
+        // Clear UserDefaults or any other data related to the logged-in user
+        UserDefaults.standard.removeObject(forKey: "userId")
+        UserDefaults.standard.removeObject(forKey: "isLoggedIn")
+        
+        // Navigate back to the login screen or perform other necessary actions
         let loginVC = LogInViewController()
         let navController = UINavigationController(rootViewController: loginVC)
         
@@ -255,7 +257,13 @@ class MainViewController: UIViewController {
             window.makeKeyAndVisible()
         }
     }
-
+    
+    //MARK: - Present Profile VC
+    @objc func presentProfileVC() {
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
     //MARK: - Shows member list for each group
     
     @objc func showMembersList() {
@@ -271,14 +279,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
         } else if collectionView == dataCollectionView {
             switch selectedSegmentIndex {
             case 0:
-                return viewModel.groups.count
+                return getGroupViewModel.groups.count
             case 1:
                 return 10
             default:
                 break
             }
-        } else if collectionView == swipingCollectionView {
-            return 2
         }
         
         return 10
@@ -305,8 +311,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.layer.shadowOffset = CGSize(width: 0, height: 3)
                 cell.layer.shadowRadius = 5
                 cell.layer.cornerRadius = 15
-                let group = viewModel.groups[indexPath.item]
+                let group = getGroupViewModel.groups[indexPath.item]
                 cell.configureCell(with: group)
+                cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
                 
                 return cell
             } else {
@@ -320,10 +327,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 
                 return cell
             }
-        } else if collectionView == swipingCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-            return cell
         }
+        
         return UICollectionViewCell()
     }
     
@@ -332,8 +337,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             return CGSize(width: (view.frame.width / 2.07), height: (view.frame.height) / 14)
         } else if collectionView == dataCollectionView {
             return CGSize(width: (view.frame.width) - 40, height: (view.frame.height) / 9)
-        } else if collectionView == swipingCollectionView {
-            return CGSize(width: view.frame.width, height: view.frame.height)
         }
         return CGSize.zero
     }
@@ -350,39 +353,20 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == segmentCollectionView {
             selectedSegmentIndex = indexPath.item
-            swipingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             segmentCollectionView.reloadData()
             dataCollectionView.reloadData()
         } else {
             if selectedSegmentIndex == 0 {
-                guard !viewModel.groups.isEmpty && indexPath.item < viewModel.groups.count else {return}
+                let selectedGroup = getGroupViewModel.groups[indexPath.item]
                 let vc = GroupZikrCountViewController()
+                vc.groupName = selectedGroup.name
+                vc.groupPurpose = selectedGroup.purpose
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 let vc = PersonalZikrViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == swipingCollectionView {
-            let pageIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
-            updateSegmentControllerSelection(for: pageIndex)
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView == swipingCollectionView {
-            let pageIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
-            updateSegmentControllerSelection(for: pageIndex)
-        }
-    }
-    
-    private func updateSegmentControllerSelection(for page: Int) {
-        selectedSegmentIndex = page
-        segmentCollectionView.reloadData()
-        dataCollectionView.reloadData()
     }
 }
 

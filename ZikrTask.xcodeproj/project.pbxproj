@@ -41,6 +41,10 @@
 		CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5CD2BFD053C00921654 /* Shadows.swift */; };
 		CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5F22BFD395200921654 /* MainViewController.swift */; };
 		CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */; };
+		CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */; };
+		CCFED3A02C9359FC00AE5A96 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */; };
+		CCFED3A22C9363DA00AE5A96 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */; };
+		CCFED3A42C937AC000AE5A96 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED3A32C937AC000AE5A96 /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +85,10 @@
 		CCF6A5CD2BFD053C00921654 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		CCF6A5F22BFD395200921654 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		CCFED3A32C937AC000AE5A96 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		E08F1B70C3D7ADF291199CC5 /* Pods-ZikrTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.debug.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +171,7 @@
 				CC5342092C3C460300112114 /* CreateUserViewModel.swift */,
 				CC13512E2C492F3200649A78 /* GroupViewModel.swift */,
 				CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */,
+				CCFED3A32C937AC000AE5A96 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -172,6 +181,7 @@
 			children = (
 				CC39661C2BFCD56200C861C9 /* LogInViewController.swift */,
 				CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */,
+				CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */,
 				CCF6A5F22BFD395200921654 /* MainViewController.swift */,
 				CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */,
 				CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */,
@@ -244,6 +254,8 @@
 		CCF6A5F42BFD444F00921654 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */,
+				CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */,
 				CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */,
 				CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */,
 				CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */,
@@ -370,15 +382,18 @@
 				CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */,
 				CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */,
 				CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */,
+				CCFED3A22C9363DA00AE5A96 /* ProfileHeaderView.swift in Sources */,
 				CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */,
 				CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */,
 				CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */,
 				CC53420A2C3C460300112114 /* CreateUserViewModel.swift in Sources */,
+				CCFED3A02C9359FC00AE5A96 /* ProfileTableViewCell.swift in Sources */,
 				CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */,
 				CC9F76172C3D6988009323C3 /* GroupModel.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
+				CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
 				CC9B2B812C889DCA00192DCD /* URL.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
@@ -394,6 +409,7 @@
 				CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */,
 				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
 				CC9C5A9F2C624D1600D869C2 /* PersonalZikrViewController.swift in Sources */,
+				CCFED3A42C937AC000AE5A96 /* ProfileViewModel.swift in Sources */,
 				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
 				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,
 				CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */,

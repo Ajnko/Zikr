@@ -275,38 +275,38 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
     }
     
-    @objc func loginButtonTapped() {
+    @objc private func loginButtonTapped() {
         guard let email = mailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
-            showAlert(message: "Please enter both email and password")
+            showAlert(message: "Please enter both email and password.")
             return
         }
         
         activityIndicator.startAnimating()
         loginButton.isEnabled = false
         
-        loginViewModel.loginUser(email: email, password: password) { [weak self] result in
-            
-            DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
-                self?.loginButton.isEnabled = true
-            }
-            
+        loginViewModel.login(email: email, password: password) { [weak self] result in
+        
             switch result {
             case .success(let user):
                 
-                //saves userId in UserDefaults
-                UserDefaults.standard.setValue(user.userId, forKey: "userId")
+                print("User logged in successfully: \(user)")
+                
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 
-                let mainVc = MainViewController()
-                self?.navigationController?.pushViewController(mainVc, animated: true)
+                DispatchQueue.main.async {
+                    let mainVC = MainViewController()
+                    self?.navigationController?.pushViewController(mainVC, animated: true)
+                }
             case .failure(let error):
-                self?.showAlert(message: "Login failed: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self?.showAlert(message: error.localizedDescription)
+                }
             }
-            
         }
     }
+
+
     
     @objc func createButtonTapped() {
         let vc = CreateAccountViewController()
