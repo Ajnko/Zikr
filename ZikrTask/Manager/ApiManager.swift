@@ -13,6 +13,34 @@ class ApiManager {
     
     private init() {}
     
+    //MARK: - Create User
+    
+    func createUser(userBodyPart: UserBodyPart, completion: @escaping (Result<UserModel, Error>) -> Void) {
+        let url = APIConstants.addUserURL()
+
+        AF.request(url, method: .post, parameters: userBodyPart, encoder: JSONParameterEncoder.default)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print("Raw response: \(value)")  // Print raw response for debugging
+
+                    // Ensure that the response matches the expected structure
+                    do {
+                        let data = try JSONSerialization.data(withJSONObject: value, options: [])
+                        let userModel = try JSONDecoder().decode(UserModel.self, from: data)
+                        completion(.success(userModel))
+                    } catch {
+                        print("Decoding error: \(error.localizedDescription)")
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    print("Request Error: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
+
+    
     // MARK: - Login User
     
     func login(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {

@@ -244,9 +244,8 @@ class MainViewController: UIViewController, AddGroupDelegate {
     }
     
     private func performLogout() {
-        // Clear UserDefaults or any other data related to the logged-in user
-        UserDefaults.standard.removeObject(forKey: "userId")
-        UserDefaults.standard.removeObject(forKey: "isLoggedIn")
+        
+        removeDataFromUserDefaults()
         
         // Navigate back to the login screen or perform other necessary actions
         let loginVC = LogInViewController()
@@ -256,6 +255,16 @@ class MainViewController: UIViewController, AddGroupDelegate {
             window.rootViewController = navController
             window.makeKeyAndVisible()
         }
+    }
+    
+    private func removeDataFromUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "userId")
+        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "surname")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "phone")
+        UserDefaults.standard.removeObject(forKey: "image_url")
+        UserDefaults.standard.removeObject(forKey: "isLoggedIn")
     }
     
     //MARK: - Present Profile VC

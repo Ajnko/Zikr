@@ -442,7 +442,7 @@ class AddGroupViewController: UIViewController {
         addGroupButton.addTarget(self, action: #selector(addGroupButtonTapped), for: .touchUpInside)
         addGroupButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.snp.bottom).offset(-30)
+            make.bottom.equalTo(view.snp.bottom).offset(-40)
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.height.equalTo(view.snp.height).multipliedBy(0.07)
         }

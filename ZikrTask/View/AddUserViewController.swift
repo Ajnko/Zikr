@@ -17,8 +17,8 @@ class AddUserViewController: UIViewController {
     //blur effect
     let blurEffect = UIBlurEffect(style: .light)
     
-    let groupName = CustomLabel(
-        text: "Guruh Nomi",
+    let userIdLabel = CustomLabel(
+        text: "User ID",
         textColor: .textColor,
         fontSize: .boldSystemFont(ofSize: 16),
         numberOfLines: 0
@@ -36,13 +36,13 @@ class AddUserViewController: UIViewController {
         return view
     }()
     
-    let groupNameTextFieldBlurView: UIVisualEffectView = {
+    let userIdTextFieldBlurView: UIVisualEffectView = {
        let view = UIVisualEffectView()
         return view
     }()
     
-    let groupNameTextField = CustomTextField(
-        placeholder: "Guruh nomi",
+    let userIdTextField = CustomTextField(
+        placeholder: "Enter User ID ",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
         backgroundColor: .clear,
@@ -80,15 +80,15 @@ class AddUserViewController: UIViewController {
         setupUI()
         
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
-        groupNameTextField.settinPaddingView(paddingView: paddingView)
-        groupNameTextField.addShadow()
+        userIdTextField.settinPaddingView(paddingView: paddingView)
+        userIdTextField.addShadow()
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton]
         
-        groupNameTextField.inputAccessoryView = toolbar
+        userIdTextField.inputAccessoryView = toolbar
     }
     
     func setupUI() {
@@ -98,8 +98,8 @@ class AddUserViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        blurView.contentView.addSubview(groupName)
-        groupName.snp.makeConstraints { make in
+        blurView.contentView.addSubview(userIdLabel)
+        userIdLabel.snp.makeConstraints { make in
             make.top.equalTo(blurView.snp.centerY).multipliedBy(0.15)
             make.left.equalTo(blurView.snp.left).offset(20)
         }
@@ -107,30 +107,22 @@ class AddUserViewController: UIViewController {
         blurView.contentView.addSubview(groupNameTextFieldcontainerView)
         groupNameTextFieldcontainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(groupName.snp.bottom).offset(8)
+            make.top.equalTo(userIdLabel.snp.bottom).offset(8)
             make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
             make.height.equalTo(blurView.snp.height).multipliedBy(0.07)
         }
         
-        groupNameTextFieldcontainerView.addSubview(groupNameTextFieldBlurView)
-        groupNameTextFieldBlurView.effect = blurEffect
-        groupNameTextFieldBlurView.clipsToBounds = true
-        groupNameTextFieldBlurView.layer.cornerRadius = 10
-        groupNameTextFieldBlurView.snp.makeConstraints { make in
+        groupNameTextFieldcontainerView.addSubview(userIdTextFieldBlurView)
+        userIdTextFieldBlurView.effect = blurEffect
+        userIdTextFieldBlurView.clipsToBounds = true
+        userIdTextFieldBlurView.layer.cornerRadius = 10
+        userIdTextFieldBlurView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        groupNameTextFieldBlurView.contentView.addSubview(groupNameTextField)
-        groupNameTextField.snp.makeConstraints { make in
+        userIdTextFieldBlurView.contentView.addSubview(userIdTextField)
+        userIdTextField.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-        
-        blurView.contentView.addSubview(addUserButton)
-        addUserButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(blurView.snp.bottom).offset(15)
-            make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
-            make.width.equalTo(blurView.snp.width).multipliedBy(0.1)
         }
         
         infoButton.snp.makeConstraints { make in
@@ -138,14 +130,21 @@ class AddUserViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        groupNameTextField.rightView = infoButton
-        groupNameTextField.rightViewMode = .always
+        userIdTextField.rightView = infoButton
+        userIdTextField.rightViewMode = .always
         
+        blurView.contentView.addSubview(addUserButton)
+        addUserButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottom).offset(-40)
+            make.width.equalTo(view.snp.width).multipliedBy(0.9)
+            make.height.equalTo(view.snp.height).multipliedBy(0.07)
+        }
         
     }
     
     @objc func doneButtonTapped() {
-        groupNameTextField.resignFirstResponder()
+        userIdTextField.resignFirstResponder()
     }
     
 }
