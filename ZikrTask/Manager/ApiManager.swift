@@ -125,4 +125,31 @@ class ApiManager {
             }
         }
     }
+    
+    //MARK: - Subcribe to the Group
+    func subscribeToGroup(userId: Int, groupId: Int, completion: @escaping (Result<String, Error>) -> Void) {
+        let url = APIConstants.subscribeToGroupURL()
+        
+        // Create the request body
+        let parameters: [String: Any] = [
+            "userId": userId,
+            "groupId": groupId
+        ]
+        
+        // Send the POST request
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            switch response.result {
+            case .success(let data):
+                if let json = data as? [String: Any], let status = json["status"] as? String, status == "200" {
+                    let message = json["message"] as? String ?? "Subscription successful"
+                    completion(.success(message))
+                } else {
+                    let errorMessage = (data as? [String: Any])?["message"] as? String ?? "Unknown error"
+                    completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

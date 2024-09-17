@@ -25,6 +25,8 @@ class MembersListViewController: UIViewController {
         return tableview
     }()
     
+    let getFollowersViewModel = GetGroupViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Members List"
@@ -33,6 +35,7 @@ class MembersListViewController: UIViewController {
         membersTableView.dataSource = self
         
         setupUI()
+        fetchFollowers()
     }
     
     func setupUI() {
@@ -47,17 +50,22 @@ class MembersListViewController: UIViewController {
         }
     }
     
+    func fetchFollowers() {
+        getFollowersViewModel.fetchFollowers()
+    }
+    
 
 }
 
 extension MembersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return getFollowersViewModel.followers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MembersListTableViewCell.identifier, for: indexPath) as! MembersListTableViewCell
         cell.backgroundColor = .clear
+        cell.membersNameLabel.text = getFollowersViewModel.followers[indexPath.row]
         return cell
     }
 }

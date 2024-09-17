@@ -11,6 +11,7 @@
 		CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */; };
 		CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC13512E2C492F3200649A78 /* GroupViewModel.swift */; };
 		CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2C2A212C79E2B20014F37D /* ApiManager.swift */; };
+		CC383D9A2C94C4280043FF5A /* SubscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC383D992C94C4280043FF5A /* SubscribeViewModel.swift */; };
 		CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3966182BFCD56200C861C9 /* AppDelegate.swift */; };
 		CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */; };
 		CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661C2BFCD56200C861C9 /* LogInViewController.swift */; };
@@ -53,6 +54,7 @@
 		CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC13512E2C492F3200649A78 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		CC2C2A212C79E2B20014F37D /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		CC383D992C94C4280043FF5A /* SubscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewModel.swift; sourceTree = "<group>"; };
 		CC3966152BFCD56200C861C9 /* ZikrTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZikrTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC3966182BFCD56200C861C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				CC13512E2C492F3200649A78 /* GroupViewModel.swift */,
 				CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */,
 				CCFED3A32C937AC000AE5A96 /* ProfileViewModel.swift */,
+				CC383D992C94C4280043FF5A /* SubscribeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				CCFED3A02C9359FC00AE5A96 /* ProfileTableViewCell.swift in Sources */,
 				CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */,
 				CC9F76172C3D6988009323C3 /* GroupModel.swift in Sources */,
+				CC383D9A2C94C4280043FF5A /* SubscribeViewModel.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
 				CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,

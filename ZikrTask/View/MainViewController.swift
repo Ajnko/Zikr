@@ -265,6 +265,7 @@ class MainViewController: UIViewController, AddGroupDelegate {
         UserDefaults.standard.removeObject(forKey: "phone")
         UserDefaults.standard.removeObject(forKey: "image_url")
         UserDefaults.standard.removeObject(forKey: "isLoggedIn")
+        UserDefaults.standard.removeObject(forKey: "groupId")
     }
     
     //MARK: - Present Profile VC

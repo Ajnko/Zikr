@@ -30,6 +30,8 @@ class GroupViewModel {
             switch result {
             case .success(let response):
                 print("Group created successfully: \(response)")
+                UserDefaults.standard.setValue(response.data.groupId, forKey: "groupId")
+                print("Group ID is successfully saved to UserDefaults: \(response.data.groupId)")
                 completion(true)
             case .failure(let error):
                 print("Failed to create group: \(error)")

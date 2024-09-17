@@ -16,6 +16,7 @@ struct APIConstants {
     static let addUser = "/zikrs/add-user"
     static let addGroup = "/zikrs/add-group"
     static let getGroups = "/zikrs/group?ownerId="
+    static let subscribeToGroup = "/tasks/groups/subscribe"
     
     // Full URLs
     static func loginURL(mail: String, password: String) -> String {
@@ -23,7 +24,7 @@ struct APIConstants {
     }
     
     static func addUserURL() -> String {
-        return baseURL + addUser  // Update URL for creating user
+        return baseURL + addUser
     }
     
     static func addGroupURL() -> String {
@@ -33,5 +34,11 @@ struct APIConstants {
     static func getGroupsURL(ownerId: String) -> String {
         return baseURL + getGroups + ownerId
     }
+    
+    // Subscribe user to group URL
+    static func subscribeToGroupURL() -> String {
+        return baseURL + subscribeToGroup
+    }
 }
+
 

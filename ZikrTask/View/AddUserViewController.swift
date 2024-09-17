@@ -70,6 +70,8 @@ class AddUserViewController: UIViewController {
         return button
     }()
     
+    let subscribeViewModel = SubscribeViewModel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,6 +136,7 @@ class AddUserViewController: UIViewController {
         userIdTextField.rightViewMode = .always
         
         blurView.contentView.addSubview(addUserButton)
+        addUserButton.addTarget(self, action: #selector(addUserButtonTapped), for: .touchUpInside)
         addUserButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.snp.bottom).offset(-40)
@@ -145,6 +148,14 @@ class AddUserViewController: UIViewController {
     
     @objc func doneButtonTapped() {
         userIdTextField.resignFirstResponder()
+    }
+    
+    @objc func addUserButtonTapped() {
+        guard let userId = userIdTextField.text, !userId.isEmpty else {
+            return
+        }
+        subscribeViewModel.subscribeUserToGroup(userIdText: userId)
+        dismiss(animated: true)
     }
     
 }
