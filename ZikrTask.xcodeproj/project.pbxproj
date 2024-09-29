@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		224C501C889FB7CD7AC081D6 /* Pods_ZikrTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */; };
+		A6A0BCA22CA95316003C4935 /* AddHatimGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A0BCA12CA952FB003C4935 /* AddHatimGroupViewController.swift */; };
+		A6B3F0252C99BF0200320328 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F0242C99BF0200320328 /* MenuViewController.swift */; };
+		A6B3F0272C99BF2D00320328 /* HatimMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F0262C99BF2D00320328 /* HatimMainViewController.swift */; };
+		A6B3F0292C99BF4100320328 /* GroupHatimInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F0282C99BF4100320328 /* GroupHatimInfoViewController.swift */; };
+		A6B3F02C2C99BF7600320328 /* GroupHatimCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F02B2C99BF7600320328 /* GroupHatimCollectionViewCell.swift */; };
+		A6B3F02E2C99BF8900320328 /* PersonalHatimCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F02D2C99BF8900320328 /* PersonalHatimCollectionViewCell.swift */; };
+		A6B3F0312C99BFB800320328 /* HatimGroupInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F0302C99BFB800320328 /* HatimGroupInfoCollectionViewCell.swift */; };
+		A6B3F0332C99BFE800320328 /* HatimInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F0322C99BFE800320328 /* HatimInfoHeaderView.swift */; };
+		A6B3F0362C99C05800320328 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3F0352C99C05800320328 /* MenuCollectionViewCell.swift */; };
+		A6DD5D652CA1ECAB00176F63 /* HatimGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DD5D642CA1ECA800176F63 /* HatimGroupModel.swift */; };
 		CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */; };
 		CC13512F2C492F3200649A78 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC13512E2C492F3200649A78 /* GroupViewModel.swift */; };
 		CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2C2A212C79E2B20014F37D /* ApiManager.swift */; };
@@ -50,6 +60,16 @@
 
 /* Begin PBXFileReference section */
 		5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZikrTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A0BCA12CA952FB003C4935 /* AddHatimGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHatimGroupViewController.swift; sourceTree = "<group>"; };
+		A6B3F0242C99BF0200320328 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		A6B3F0262C99BF2D00320328 /* HatimMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimMainViewController.swift; sourceTree = "<group>"; };
+		A6B3F0282C99BF4100320328 /* GroupHatimInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHatimInfoViewController.swift; sourceTree = "<group>"; };
+		A6B3F02B2C99BF7600320328 /* GroupHatimCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHatimCollectionViewCell.swift; sourceTree = "<group>"; };
+		A6B3F02D2C99BF8900320328 /* PersonalHatimCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalHatimCollectionViewCell.swift; sourceTree = "<group>"; };
+		A6B3F0302C99BFB800320328 /* HatimGroupInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		A6B3F0322C99BFE800320328 /* HatimInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimInfoHeaderView.swift; sourceTree = "<group>"; };
+		A6B3F0352C99C05800320328 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		A6DD5D642CA1ECA800176F63 /* HatimGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupModel.swift; sourceTree = "<group>"; };
 		C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.release.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.release.xcconfig"; sourceTree = "<group>"; };
 		CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC13512E2C492F3200649A78 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
@@ -123,6 +143,46 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A6B3F0232C99BEE100320328 /* Hatim */ = {
+			isa = PBXGroup;
+			children = (
+				A6B3F0242C99BF0200320328 /* MenuViewController.swift */,
+				A6B3F0262C99BF2D00320328 /* HatimMainViewController.swift */,
+				A6B3F0282C99BF4100320328 /* GroupHatimInfoViewController.swift */,
+				A6A0BCA12CA952FB003C4935 /* AddHatimGroupViewController.swift */,
+				A6B3F0342C99C04700320328 /* Cell */,
+			);
+			path = Hatim;
+			sourceTree = "<group>";
+		};
+		A6B3F02A2C99BF5700320328 /* HatimCell */ = {
+			isa = PBXGroup;
+			children = (
+				A6B3F02B2C99BF7600320328 /* GroupHatimCollectionViewCell.swift */,
+				A6B3F02D2C99BF8900320328 /* PersonalHatimCollectionViewCell.swift */,
+				A6B3F02F2C99BF9E00320328 /* HatimInfoCell */,
+			);
+			path = HatimCell;
+			sourceTree = "<group>";
+		};
+		A6B3F02F2C99BF9E00320328 /* HatimInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				A6B3F0302C99BFB800320328 /* HatimGroupInfoCollectionViewCell.swift */,
+				A6B3F0322C99BFE800320328 /* HatimInfoHeaderView.swift */,
+			);
+			path = HatimInfoCell;
+			sourceTree = "<group>";
+		};
+		A6B3F0342C99C04700320328 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A6B3F0352C99C05800320328 /* MenuCollectionViewCell.swift */,
+				A6B3F02A2C99BF5700320328 /* HatimCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		CC2C2A202C79E2A20014F37D /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +242,7 @@
 		CCF6A5C02BFD00FC00921654 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A6B3F0232C99BEE100320328 /* Hatim */,
 				CC39661C2BFCD56200C861C9 /* LogInViewController.swift */,
 				CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */,
 				CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */,
@@ -205,6 +266,7 @@
 				CC5342072C3C459B00112114 /* UserModel.swift */,
 				CC9F76162C3D6988009323C3 /* GroupModel.swift */,
 				CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */,
+				A6DD5D642CA1ECA800176F63 /* HatimGroupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -385,19 +447,25 @@
 				CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */,
 				CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */,
 				CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */,
+				A6B3F0362C99C05800320328 /* MenuCollectionViewCell.swift in Sources */,
 				CCFED3A22C9363DA00AE5A96 /* ProfileHeaderView.swift in Sources */,
 				CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */,
 				CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */,
+				A6A0BCA22CA95316003C4935 /* AddHatimGroupViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
+				A6B3F0332C99BFE800320328 /* HatimInfoHeaderView.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */,
 				CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */,
+				A6B3F0312C99BFB800320328 /* HatimGroupInfoCollectionViewCell.swift in Sources */,
 				CC53420A2C3C460300112114 /* CreateUserViewModel.swift in Sources */,
 				CCFED3A02C9359FC00AE5A96 /* ProfileTableViewCell.swift in Sources */,
 				CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */,
 				CC9F76172C3D6988009323C3 /* GroupModel.swift in Sources */,
 				CC383D9A2C94C4280043FF5A /* SubscribeViewModel.swift in Sources */,
+				A6B3F02E2C99BF8900320328 /* PersonalHatimCollectionViewCell.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
 				CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */,
+				A6DD5D652CA1ECAB00176F63 /* HatimGroupModel.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
 				CC9B2B812C889DCA00192DCD /* URL.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
@@ -405,6 +473,7 @@
 				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */,
+				A6B3F02C2C99BF7600320328 /* GroupHatimCollectionViewCell.swift in Sources */,
 				CCE70CCA2C88E34900977248 /* UserLoginViewModel.swift in Sources */,
 				CC9B2B7F2C889A4C00192DCD /* GetGroupModel.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
@@ -412,11 +481,14 @@
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
 				CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */,
 				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
+				A6B3F0292C99BF4100320328 /* GroupHatimInfoViewController.swift in Sources */,
 				CC9C5A9F2C624D1600D869C2 /* PersonalZikrViewController.swift in Sources */,
+				A6B3F0252C99BF0200320328 /* MenuViewController.swift in Sources */,
 				CCFED3A42C937AC000AE5A96 /* ProfileViewModel.swift in Sources */,
 				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
 				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,
 				CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */,
+				A6B3F0272C99BF2D00320328 /* HatimMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +633,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DVC3LMSS9Q;
+				DEVELOPMENT_TEAM = LYCXTPX25J;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZikrTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -590,7 +663,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DVC3LMSS9Q;
+				DEVELOPMENT_TEAM = LYCXTPX25J;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZikrTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
