@@ -70,7 +70,7 @@ class AddUserViewController: UIViewController {
         return button
     }()
     
-    let subscribeViewModel = SubscribeViewModel()
+//    let subscribeViewModel = SubscribeViewModel()
     
     
     override func viewDidLoad() {
@@ -151,11 +151,11 @@ class AddUserViewController: UIViewController {
     }
     
     @objc func addUserButtonTapped() {
-        guard let userId = userIdTextField.text, !userId.isEmpty else {
-            return
-        }
-        subscribeViewModel.subscribeUserToGroup(userIdText: userId)
-        dismiss(animated: true)
+//        guard let userId = userIdTextField.text, !userId.isEmpty else {
+//            return
+//        }
+//        subscribeViewModel.subscribeUserToGroup(userIdText: userId)
+//        dismiss(animated: true)
     }
     
 }

@@ -211,9 +211,9 @@ class GroupCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(with group: Group) {
-        groupNameLabel.text = group.name
-        zikrCountLabel.text = "Count: \(group.purpose)"
-    }
+//    func configureCell(with group: Group) {
+//        groupNameLabel.text = group.name
+//        zikrCountLabel.text = "Count: \(group.purpose)"
+//    }
     
 }

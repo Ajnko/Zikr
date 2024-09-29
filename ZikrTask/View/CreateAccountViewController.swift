@@ -233,6 +233,14 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator = UIActivityIndicatorView(style: .large)
+        return indicator
+    }()
+    
+    
     var viewModel = CreateUserViewModel()
     var containerBottomConstraint: Constraint?
     let containerView = UIView()
@@ -479,6 +487,11 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             make.height.equalTo(blurView.snp.height).multipliedBy(0.1)
         }
         
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
     }
     
     //MARK: - Text Field animation method
@@ -573,6 +586,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
+    
+    
     @objc func createButtonTapped() {
         createUser()
     }

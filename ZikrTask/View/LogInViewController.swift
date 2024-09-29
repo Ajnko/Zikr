@@ -137,7 +137,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return indicator
     }()
     
-    let loginViewModel = UserLoginViewModel()
+//    let loginViewModel = UserLoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -276,34 +276,34 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func loginButtonTapped() {
-        guard let email = mailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else {
-            showAlert(message: "Please enter both email and password.")
-            return
-        }
-        
-        activityIndicator.startAnimating()
-        loginButton.isEnabled = false
-        
-        loginViewModel.login(email: email, password: password) { [weak self] result in
-        
-            switch result {
-            case .success(let user):
-                
-                print("User logged in successfully: \(user)")
-                
-                UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                
-                DispatchQueue.main.async {
-                    let mainVC = MainViewController()
-                    self?.navigationController?.pushViewController(mainVC, animated: true)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.showAlert(message: error.localizedDescription)
-                }
-            }
-        }
+//        guard let email = mailTextField.text, !email.isEmpty,
+//              let password = passwordTextField.text, !password.isEmpty else {
+//            showAlert(message: "Please enter both email and password.")
+//            return
+//        }
+//        
+//        activityIndicator.startAnimating()
+//        loginButton.isEnabled = false
+//        
+//        loginViewModel.login(email: email, password: password) { [weak self] result in
+//        
+//            switch result {
+//            case .success(let user):
+//                
+//                print("User logged in successfully: \(user)")
+//                
+//                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+//                
+//                DispatchQueue.main.async {
+//                    let mainVC = MainViewController()
+//                    self?.navigationController?.pushViewController(mainVC, animated: true)
+//                }
+//            case .failure(let error):
+//                DispatchQueue.main.async {
+//                    self?.showAlert(message: error.localizedDescription)
+//                }
+//            }
+//        }
     }
 
 

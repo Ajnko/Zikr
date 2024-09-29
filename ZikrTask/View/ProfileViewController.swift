@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
         return tableview
     }()
     
-    private let profileViewModel = ProfileViewModel()
+//    private let profileViewModel = ProfileViewModel()
     
     
     override func viewDidLoad() {
@@ -46,9 +46,9 @@ class ProfileViewController: UIViewController {
         //MARK: - HeaderView for ProfileTableView
         let header = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 120))
         header.backgroundColor = .clear
-        header.nameLabel.text = profileViewModel.name
-        header.surnameLabel.text = profileViewModel.surname
-        header.userIdLabel.text = "Your ID: \(profileViewModel.userId)"
+//        header.nameLabel.text = profileViewModel.name
+//        header.surnameLabel.text = profileViewModel.surname
+//        header.userIdLabel.text = "Your ID: \(profileViewModel.userId)"
         profileTableView.tableHeaderView = header
     }
     
@@ -82,12 +82,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profileViewModel.getProfileData().count
+        return 0
+//        return profileViewModel.getProfileData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
-        cell.profileDetailsLabel.text = profileViewModel.getProfileData()[indexPath.row]
+//        cell.profileDetailsLabel.text = profileViewModel.getProfileData()[indexPath.row]
         cell.backgroundColor = .clear
         return cell
         

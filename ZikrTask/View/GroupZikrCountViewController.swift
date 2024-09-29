@@ -216,8 +216,10 @@ class GroupZikrCountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = groupName
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .done, target: self, action: #selector(backButtonTapped))
-        
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .done, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .darkMode
+        self.navigationItem.setLeftBarButtonItems([backButton], animated: true)
+
         setupUI()
         setZikrTextView()
         setZikrCounterView()

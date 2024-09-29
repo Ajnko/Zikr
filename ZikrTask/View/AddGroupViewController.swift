@@ -224,7 +224,7 @@ class AddGroupViewController: UIViewController {
     
     var containerBottomConstraint: Constraint?
     var activeTextField: UITextField?
-    private var viewModel = GroupViewModel()
+//    private var viewModel = GroupViewModel()
     weak var delegate: AddGroupDelegate?
 
 
@@ -512,24 +512,24 @@ class AddGroupViewController: UIViewController {
     //MARK: - Create a group and post it using API and saves to CoreData
     
     @objc func addGroupButtonTapped() {
-        guard let name = groupNameTextField.text, !name.isEmpty,
-              let purpose = zikrCountTextField.text, !purpose.isEmpty else {
-            showAlert(title: "Error", message: "Please fill all necessary fields correctly")
-            return
-        }
-        let comment = zikrInfoTextField.text ?? ""
-        let imageUrl = "http://example.com/images/morninggroup.jpg"
-        
-        viewModel.createGroup(name: name, purpose: purpose, comment: comment, imageUrl: imageUrl) { [self] success in
-            
-            if success {
-                print("Group was created successfully.")
-                self.delegate?.groupCreated()
-                self.dismiss(animated: true)
-            } else {
-                print("Failed to create group")
-            }
-        }
+//        guard let name = groupNameTextField.text, !name.isEmpty,
+//              let purpose = zikrCountTextField.text, !purpose.isEmpty else {
+//            showAlert(title: "Error", message: "Please fill all necessary fields correctly")
+//            return
+//        }
+//        let comment = zikrInfoTextField.text ?? ""
+//        let imageUrl = "http://example.com/images/morninggroup.jpg"
+//        
+//        viewModel.createGroup(name: name, purpose: purpose, comment: comment, imageUrl: imageUrl) { [self] success in
+//            
+//            if success {
+//                print("Group was created successfully.")
+//                self.delegate?.groupCreated()
+//                self.dismiss(animated: true)
+//            } else {
+//                print("Failed to create group")
+//            }
+//        }
         
     }
     

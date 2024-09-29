@@ -72,7 +72,7 @@ class MainViewController: UIViewController, AddGroupDelegate {
     
     private var selectedSegmentIndex = 0
     
-    let getGroupViewModel = GetGroupViewModel()
+//    let getGroupViewModel = GetGroupViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -172,21 +172,21 @@ class MainViewController: UIViewController, AddGroupDelegate {
     }
     
     func fetchData() {
-        showActivityIndicator()
-        getGroupViewModel.fetchGroups { [weak self] result in
-            
-            DispatchQueue.main.async {
-                self?.hideActivityIndicator()
-                
-                switch result {
-                case .success(let success):
-                    self?.dataCollectionView.reloadData()
-                    print("DataCollectionView reloaded")
-                case .failure(let error):
-                    print("Error fetching groups: \(error.localizedDescription)")
-                }
-            }
-        }
+//        showActivityIndicator()
+//        getGroupViewModel.fetchGroups { [weak self] result in
+//            
+//            DispatchQueue.main.async {
+//                self?.hideActivityIndicator()
+//                
+//                switch result {
+//                case .success(let success):
+//                    self?.dataCollectionView.reloadData()
+//                    print("DataCollectionView reloaded")
+//                case .failure(let error):
+//                    print("Error fetching groups: \(error.localizedDescription)")
+//                }
+//            }
+//        }
     }
     
     private func showActivityIndicator() {
@@ -289,7 +289,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
         } else if collectionView == dataCollectionView {
             switch selectedSegmentIndex {
             case 0:
-                return getGroupViewModel.groups.count
+                return 0 /*getGroupViewModel.groups.count*/
             case 1:
                 return 10
             default:
@@ -321,10 +321,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.layer.shadowOffset = CGSize(width: 0, height: 3)
                 cell.layer.shadowRadius = 5
                 cell.layer.cornerRadius = 15
-                let group = getGroupViewModel.groups[indexPath.item]
-                cell.configureCell(with: group)
-                cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
-                
+//                let group = getGroupViewModel.groups[indexPath.item]
+//                cell.configureCell(with: group)
+//                cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
+//                
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalCollectionViewCell.identifier, for: indexPath) as! PersonalCollectionViewCell
@@ -367,10 +367,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             dataCollectionView.reloadData()
         } else {
             if selectedSegmentIndex == 0 {
-                let selectedGroup = getGroupViewModel.groups[indexPath.item]
+//                let selectedGroup = getGroupViewModel.groups[indexPath.item]
                 let vc = GroupZikrCountViewController()
-                vc.groupName = selectedGroup.name
-                vc.groupPurpose = selectedGroup.purpose
+//                vc.groupName = selectedGroup.name
+//                vc.groupPurpose = selectedGroup.purpose
                 self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 let vc = PersonalZikrViewController()
