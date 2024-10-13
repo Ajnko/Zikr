@@ -10,7 +10,7 @@ import SnapKit
 
 class MenuCollectionViewCell: UICollectionViewCell {
     
-    //MARK: - Proporties - jhgffgjhgjhghjghh
+    //MARK: - Proporties -
     
     static let identifier = "MenuCollectionViewCell"
     let textLabel: UILabel = {
