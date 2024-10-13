@@ -15,6 +15,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
     static let identifier = "MenuCollectionViewCell"
     let textLabel: UILabel = {
         let label = UILabel()
+        //label for member list
         return label
     }()
     
