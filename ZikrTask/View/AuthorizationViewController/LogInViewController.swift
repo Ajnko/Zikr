@@ -77,6 +77,37 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         cornerRadius: 10
     )
     
+    let phoneNumberLabel = CustomLabel(
+        text: "Phone Number",
+        textColor: .textColor,
+        fontSize: .systemFont(ofSize: 16),
+        numberOfLines: 0
+    )
+    
+    let phoneNumberContainerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 25
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        view.layer.shadowRadius = 4
+        view.backgroundColor = .clear
+        return view
+    }()
+
+    let phoneNumberTextFieldBlurView: UIVisualEffectView = {
+       let view = UIVisualEffectView()
+        return view
+    }()
+    
+    let phoneNumberTextField = CustomTextField(
+        placeholder: "Phone",
+        textColor: .textColor,
+        font: .systemFont(ofSize: 15),
+        backgroundColor: .clear,
+        cornerRadius: 10
+    )
+    
     let passwordLabel = CustomLabel(
         text: "Password",
         textColor: .textColor,
@@ -124,7 +155,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     let createAccountButton: UIButton = {
        let button = UIButton()
         button.setTitle("Create an Account", for: .normal)
-        button.setTitleColor(.darkMode, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .clear
         button.titleLabel?.font =  .boldSystemFont(ofSize: 16)
         return button
@@ -137,7 +168,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return indicator
     }()
     
-//    let loginViewModel = UserLoginViewModel()
+    let loginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,6 +184,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         mailTextField.inputAccessoryView = toolbar
         passwordTextField.inputAccessoryView = toolbar
         offAutoCompletion(isOff: false)
+        
     }
     
     private func setupUI() {
@@ -186,7 +218,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
-            make.height.equalTo(view.snp.height).multipliedBy(0.4)
+            make.height.equalTo(view.snp.height).multipliedBy(0.5)
         }
         
         blurView.contentView.addSubview(loginLabel)
@@ -200,7 +232,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             make.centerX.equalToSuperview()
             make.top.equalTo(loginLabel.snp.bottom).offset(10)
             make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
-            make.height.equalTo(blurView.snp.height).multipliedBy(0.13)
+            make.height.equalTo(blurView.snp.height).multipliedBy(0.1)
         }
         
         containerView.addSubview(loginTextFieldBlurView)
@@ -218,9 +250,38 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
         mailTextField.settinPaddingView(paddingView: paddingView)
         
+        blurView.contentView.addSubview(phoneNumberLabel)
+        phoneNumberLabel.snp.makeConstraints { make in
+            make.top.equalTo(mailTextField.snp.bottom).offset(18)
+            make.left.equalTo(loginLabel.snp.left)
+        }
+        
+        blurView.contentView.addSubview(phoneNumberContainerView)
+        phoneNumberContainerView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(phoneNumberLabel.snp.bottom).offset(10)
+            make.width.equalTo(containerView.snp.width)
+            make.height.equalTo(containerView.snp.height)
+        }
+        
+        phoneNumberContainerView.addSubview(phoneNumberTextFieldBlurView)
+        phoneNumberTextFieldBlurView.effect = blurEffect
+        phoneNumberTextFieldBlurView.clipsToBounds = true
+        phoneNumberTextFieldBlurView.layer.cornerRadius = 10
+        phoneNumberTextFieldBlurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        phoneNumberTextFieldBlurView.contentView.addSubview(phoneNumberTextField)
+        phoneNumberTextField.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        let lview: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
+        phoneNumberTextField.settinPaddingView(paddingView: lview)
+        
         blurView.contentView.addSubview(passwordLabel)
         passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(mailTextField.snp.bottom).offset(18)
+            make.top.equalTo(phoneNumberContainerView.snp.bottom).offset(18)
             make.left.equalTo(loginLabel.snp.left)
         }
         
@@ -259,7 +320,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         createAccountButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         createAccountButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(loginButton.snp.bottom).offset(15)
+            make.top.equalTo(loginButton.snp.bottom).offset(12)
             make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
             make.height.equalTo(blurView.snp.height).multipliedBy(0.1)
         }
@@ -276,34 +337,33 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func loginButtonTapped() {
-//        guard let email = mailTextField.text, !email.isEmpty,
-//              let password = passwordTextField.text, !password.isEmpty else {
-//            showAlert(message: "Please enter both email and password.")
-//            return
-//        }
-//        
-//        activityIndicator.startAnimating()
-//        loginButton.isEnabled = false
-//        
-//        loginViewModel.login(email: email, password: password) { [weak self] result in
-//        
-//            switch result {
-//            case .success(let user):
-//                
-//                print("User logged in successfully: \(user)")
-//                
-//                UserDefaults.standard.set(true, forKey: "isLoggedIn")
-//                
-//                DispatchQueue.main.async {
-//                    let mainVC = MainViewController()
-//                    self?.navigationController?.pushViewController(mainVC, animated: true)
-//                }
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                    self?.showAlert(message: error.localizedDescription)
-//                }
-//            }
-//        }
+        guard let email = mailTextField.text, !email.isEmpty,
+              let phone = phoneNumberTextField.text, !phone.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            showAlert(title: "Error", message: "Please fill in all fields.")
+            return
+        }
+        
+        loginViewModel.loginUser(email: email, phone: phone, password: password) { [weak self] message in
+            self?.showActivityIndicator()
+            DispatchQueue.main.async {
+                if message == "Login successful" {
+                    let menuVC = MenuViewController()
+                    self?.navigationController?.pushViewController(menuVC, animated: true)
+                    self?.hideActivityIndicator()
+                } else {
+                    self?.showAlert(title: "Error", message: message ?? "Login failed due to unknown error.")
+                }
+            }
+        }
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
     }
 
 
@@ -318,10 +378,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.setAutoCompletion(enabled: isOff)
     }
     
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 
 

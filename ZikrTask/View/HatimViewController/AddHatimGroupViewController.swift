@@ -1,27 +1,26 @@
 //
-//  AddGroupViewController.swift
+//  AddHatimGroupViewController.swift
 //  ZikrTask
 //
-//  Created by Abdulbosid Jalilov on 22/05/24.
+//  Created by Faxriddin Mo'ydinxonov on 29/09/24.
 //
 
 import UIKit
 import SnapKit
 
-protocol AddGroupDelegate: AnyObject {
+protocol AddHatimGroupDelegate: AnyObject {
     func groupCreated()
 }
 
-
-class AddGroupViewController: UIViewController {
+class AddHatimGroupViewController: UIViewController {
     
     let mainContainerView: UIView = {
-       let view = UIView()
+        let view = UIView()
         return view
     }()
     
     let blurView: UIVisualEffectView = {
-       let blurview = UIVisualEffectView()
+        let blurview = UIVisualEffectView()
         return blurview
     }()
     //blur effect
@@ -40,12 +39,12 @@ class AddGroupViewController: UIViewController {
     }()
     
     let titleImageBlurView: UIVisualEffectView = {
-       let blurview = UIVisualEffectView()
+        let blurview = UIVisualEffectView()
         return blurview
     }()
-        
+    
     let titleImageView: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "logo")
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .clear
@@ -71,7 +70,7 @@ class AddGroupViewController: UIViewController {
     
     let plusImageBlurView: UIVisualEffectView = {
         let blurview = UIVisualEffectView()
-         return blurview
+        return blurview
     }()
     let plusImageView: UIImageView = {
         let image = UIImageView()
@@ -101,7 +100,7 @@ class AddGroupViewController: UIViewController {
     }()
     
     let groupNameTextFieldBlurView: UIVisualEffectView = {
-       let view = UIVisualEffectView()
+        let view = UIVisualEffectView()
         return view
     }()
     
@@ -113,14 +112,14 @@ class AddGroupViewController: UIViewController {
         cornerRadius: 10
     )
     
-    let zikrName = CustomLabel(
-        text: "Zikr Nomi",
+    let hatimName = CustomLabel(
+        text: "Kimga bag'ishlanadi",
         textColor: .textColor,
         fontSize: .boldSystemFont(ofSize: 16),
         numberOfLines: 0
     )
     
-    let zikrNameTextFieldcontainerView: UIView = {
+    let hatimNameTextFieldcontainerView: UIView = {
         let view = UIView()
         view.tintColor = .white
         view.layer.cornerRadius = 25
@@ -132,27 +131,27 @@ class AddGroupViewController: UIViewController {
         return view
     }()
     
-    let zikrNameTextFieldBlurView: UIVisualEffectView = {
-       let view = UIVisualEffectView()
+    let hatimNameTextFieldBlurView: UIVisualEffectView = {
+        let view = UIVisualEffectView()
         return view
     }()
     
-    let zikrNameTextField = CustomTextField(
-        placeholder: "Zikr nomi",
+    let hatimNameTextField = CustomTextField(
+        placeholder: "Kimga bag'ishlanadi",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
         backgroundColor: .clear,
         cornerRadius: 10
     )
     
-    let zikrInfo = CustomLabel(
-        text: "Zikr Info",
+    let hatimCount = CustomLabel(
+        text: "Hatim soni",
         textColor: .textColor,
         fontSize: .boldSystemFont(ofSize: 16),
         numberOfLines: 0
     )
     
-    let zikrInfoTextFieldcontainerView: UIView = {
+    let hatimCountTextFieldcontainerView: UIView = {
         let view = UIView()
         view.tintColor = .white
         view.layer.cornerRadius = 25
@@ -164,45 +163,13 @@ class AddGroupViewController: UIViewController {
         return view
     }()
     
-    let zikrInfoTextFieldBlurView: UIVisualEffectView = {
-       let view = UIVisualEffectView()
+    let hatimCountTextFieldBlurView: UIVisualEffectView = {
+        let view = UIVisualEffectView()
         return view
     }()
     
-    let zikrInfoTextField = CustomTextField(
-        placeholder: "Zikr info",
-        textColor: .textColor,
-        font: .systemFont(ofSize: 15),
-        backgroundColor: .clear,
-        cornerRadius: 10
-    )
-    
-    let zikrCount = CustomLabel(
-        text: "Zikr Count",
-        textColor: .textColor,
-        fontSize: .boldSystemFont(ofSize: 16),
-        numberOfLines: 0
-    )
-    
-    let zikrCountTextFieldcontainerView: UIView = {
-        let view = UIView()
-        view.tintColor = .white
-        view.layer.cornerRadius = 25
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
-        view.layer.shadowRadius = 4
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    let zikrCountTextFieldBlurView: UIVisualEffectView = {
-       let view = UIVisualEffectView()
-        return view
-    }()
-    
-    let zikrCountTextField = CustomTextField(
-        placeholder: "Zikr count",
+    let hatimCountTextField = CustomTextField(
+        placeholder: "Hatim soni",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
         backgroundColor: .clear,
@@ -210,7 +177,7 @@ class AddGroupViewController: UIViewController {
     )
     
     let addGroupButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Add Group", for: .normal)
         button.setTitleColor(.lightMode, for: .normal)
         button.backgroundColor = .darkMode
@@ -224,10 +191,11 @@ class AddGroupViewController: UIViewController {
     
     var containerBottomConstraint: Constraint?
     var activeTextField: UITextField?
-//    private var viewModel = GroupViewModel()
-    weak var delegate: AddGroupDelegate?
-
-
+    //    private var viewModel = GroupViewModel()
+    weak var delegate: AddHatimGroupDelegate?
+    
+    private var viewModel = CreateHatimGroupViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
@@ -242,18 +210,17 @@ class AddGroupViewController: UIViewController {
         toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton]
         
         groupNameTextField.inputAccessoryView = toolbar
-        zikrNameTextField.inputAccessoryView = toolbar
-        zikrInfoTextField.inputAccessoryView = toolbar
-        zikrCountTextField.inputAccessoryView = toolbar
+        hatimNameTextField.inputAccessoryView = toolbar
+        hatimCountTextField.inputAccessoryView = toolbar
         
         groupNameTextField.delegate = self
-        zikrNameTextField.delegate = self
-        zikrInfoTextField.delegate = self
-        zikrCountTextField.delegate = self
+        hatimNameTextField.delegate = self
+        hatimCountTextField.delegate = self
         
         setupKeyboardHandling()
         
-        NotificationCenter.default.post(name: NSNotification.Name("DataUpdated"), object: nil)
+        //api manager
+        let apiService = ApiManager()
         
     }
     
@@ -344,96 +311,65 @@ class AddGroupViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        //zikr name label
-        blurView.contentView.addSubview(zikrName)
-        zikrName.snp.makeConstraints { make in
+        //hatim name label
+        blurView.contentView.addSubview(hatimName)
+        hatimName.snp.makeConstraints { make in
             make.top.equalTo(groupNameTextFieldcontainerView.snp.bottom).offset(10)
             make.left.equalTo(view.snp.left).offset(20)
         }
         
-        //zikr name textfield container view
-        blurView.contentView.addSubview(zikrNameTextFieldcontainerView)
-        zikrNameTextFieldcontainerView.snp.makeConstraints { make in
+        //hatim name textfield container view
+        blurView.contentView.addSubview(hatimNameTextFieldcontainerView)
+        hatimNameTextFieldcontainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(zikrName.snp.bottom).offset(8)
+            make.top.equalTo(hatimName.snp.bottom).offset(8)
             make.width.equalTo(groupNameTextFieldcontainerView.snp.width)
             make.height.equalTo(groupNameTextFieldcontainerView.snp.height)
         }
         
-        //zikr name textfield blur view
-        zikrNameTextFieldcontainerView.addSubview(zikrNameTextFieldBlurView)
-        zikrNameTextFieldBlurView.effect = blurEffect
-        zikrNameTextFieldBlurView.clipsToBounds = true
-        zikrNameTextFieldBlurView.layer.cornerRadius = 10
-        zikrNameTextFieldBlurView.snp.makeConstraints { make in
+        //hatim name textfield blur view
+        hatimNameTextFieldcontainerView.addSubview(hatimNameTextFieldBlurView)
+        hatimNameTextFieldBlurView.effect = blurEffect
+        hatimNameTextFieldBlurView.clipsToBounds = true
+        hatimNameTextFieldBlurView.layer.cornerRadius = 10
+        hatimNameTextFieldBlurView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        //zikr name textfield blur view
-        zikrNameTextFieldBlurView.contentView.addSubview(zikrNameTextField)
-        zikrNameTextField.snp.makeConstraints { make in
+        //hatim name textfield blur view
+        hatimNameTextFieldBlurView.contentView.addSubview(hatimNameTextField)
+        hatimNameTextField.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        //zikr info label
-        blurView.contentView.addSubview(zikrInfo)
-        zikrInfo.snp.makeConstraints { make in
-            make.top.equalTo(zikrNameTextFieldcontainerView.snp.bottom).offset(10)
+        //hatim count label
+        blurView.contentView.addSubview(hatimCount)
+        hatimCount.snp.makeConstraints { make in
+            make.top.equalTo(hatimNameTextFieldcontainerView.snp.bottom).offset(10)
             make.left.equalTo(view.snp.left).offset(20)
         }
         
-        //zikr info textfield container view
-        blurView.contentView.addSubview(zikrInfoTextFieldcontainerView)
-        zikrInfoTextFieldcontainerView.snp.makeConstraints { make in
+        //hatim count textfield container view
+        blurView.contentView.addSubview(hatimCountTextFieldcontainerView)
+        hatimCountTextFieldcontainerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(zikrInfo.snp.bottom).offset(8)
+            make.top.equalTo(hatimCount.snp.bottom).offset(8)
             make.width.equalTo(groupNameTextFieldcontainerView.snp.width)
             make.height.equalTo(groupNameTextFieldcontainerView.snp.height)
         }
         
-        //zikr info textfield blur view
-        zikrInfoTextFieldcontainerView.addSubview(zikrInfoTextFieldBlurView)
-        zikrInfoTextFieldBlurView.effect = blurEffect
-        zikrInfoTextFieldBlurView.clipsToBounds = true
-        zikrInfoTextFieldBlurView.layer.cornerRadius = 10
-        zikrInfoTextFieldBlurView.snp.makeConstraints { make in
+        //hatim count textfield blur view
+        hatimCountTextFieldcontainerView.addSubview(hatimCountTextFieldBlurView)
+        hatimCountTextFieldBlurView.effect = blurEffect
+        hatimCountTextFieldBlurView.clipsToBounds = true
+        hatimCountTextFieldBlurView.layer.cornerRadius = 10
+        hatimCountTextFieldBlurView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        //zikr info textfield
-        zikrInfoTextFieldBlurView.contentView.addSubview(zikrInfoTextField)
-        zikrInfoTextField.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
-        //zikr count label
-        blurView.contentView.addSubview(zikrCount)
-        zikrCount.snp.makeConstraints { make in
-            make.top.equalTo(zikrInfoTextFieldcontainerView.snp.bottom).offset(10)
-            make.left.equalTo(view.snp.left).offset(20)
-        }
-        
-        //zikr count textfield container view
-        blurView.contentView.addSubview(zikrCountTextFieldcontainerView)
-        zikrCountTextFieldcontainerView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(zikrCount.snp.bottom).offset(8)
-            make.width.equalTo(groupNameTextFieldcontainerView.snp.width)
-            make.height.equalTo(groupNameTextFieldcontainerView.snp.height)
-        }
-        
-        //zikr count text field blur view
-        zikrCountTextFieldcontainerView.addSubview(zikrCountTextFieldBlurView)
-        zikrCountTextFieldBlurView.effect = blurEffect
-        zikrCountTextFieldBlurView.clipsToBounds = true
-        zikrCountTextFieldBlurView.layer.cornerRadius = 10
-        zikrCountTextFieldBlurView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        //zikr count textfield
-        zikrCountTextFieldBlurView.contentView.addSubview(zikrCountTextField)
-        zikrCountTextField.snp.makeConstraints { make in
+        //hatim count textfield
+        hatimCountTextFieldBlurView.contentView.addSubview(hatimCountTextField)
+        hatimCountTextField.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -456,17 +392,13 @@ class AddGroupViewController: UIViewController {
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
         groupNameTextField.settinPaddingView(paddingView: paddingView)
         
-        //zikr name textfield
+        //hatim name textfield
         let leftview: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
-        zikrNameTextField.settinPaddingView(paddingView: leftview)
+        hatimNameTextField.settinPaddingView(paddingView: leftview)
         
-        //zikr info textfield
-        let lv: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
-        zikrInfoTextField.settinPaddingView(paddingView: lv)
-        
-        //zikr count textfield
+        //hatim count textfield
         let v: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
-        zikrCountTextField.settinPaddingView(paddingView: v)
+        hatimCountTextField.settinPaddingView(paddingView: v)
         
     }
     
@@ -481,9 +413,6 @@ class AddGroupViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -493,61 +422,61 @@ class AddGroupViewController: UIViewController {
     
     private func shadowsForTextField() {
         groupNameTextField.addShadow()
-        zikrNameTextField.addShadow()
-        zikrInfoTextField.addShadow()
-        zikrCountTextField.addShadow()
+        hatimNameTextField.addShadow()
+        hatimCountTextField.addShadow()
     }
     
     @objc func doneButtonTapped() {
         groupNameTextField.resignFirstResponder()
-        zikrNameTextField.resignFirstResponder()
-        zikrInfoTextField.resignFirstResponder()
-        zikrCountTextField.resignFirstResponder()
+        hatimNameTextField.resignFirstResponder()
+        hatimCountTextField.resignFirstResponder()
     }
     
     func saveUserId(_ userId: Int) {
         UserDefaults.standard.setValue(userId, forKey: "userId")
     }
     
-    //MARK: - Create a group and post it using API and saves to CoreData
+    //MARK: - Actions in create hatim group
     
     @objc func addGroupButtonTapped() {
-//        guard let name = groupNameTextField.text, !name.isEmpty,
-//              let purpose = zikrCountTextField.text, !purpose.isEmpty else {
-//            showAlert(title: "Error", message: "Please fill all necessary fields correctly")
-//            return
-//        }
-//        let comment = zikrInfoTextField.text ?? ""
-//        let imageUrl = "http://example.com/images/morninggroup.jpg"
-//        
-//        viewModel.createGroup(name: name, purpose: purpose, comment: comment, imageUrl: imageUrl) { [self] success in
-//            
-//            if success {
-//                print("Group was created successfully.")
-//                self.delegate?.groupCreated()
-//                self.dismiss(animated: true)
-//            } else {
-//                print("Failed to create group")
-//            }
-//        }
+        guard let name = groupNameTextField.text, !name.isEmpty,
+              let kimga = hatimNameTextField.text, !kimga.isEmpty,
+              let hatmSoniString = hatimCountTextField.text, let hatmSoni = Int(hatmSoniString) else {
+            showAlert(title: "Validation Error", message: "Please fill all fields.")
+            return
+        }
         
+        viewModel.createGroup(name: name, kimga: kimga, hatmCount: hatmSoni) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    print("Group created with ID: \(response)")
+                    self.delegate?.groupCreated()
+                    self.dismiss(animated: true)
+                case .failure(let error):
+                    print("Failed to create group: \(error.localizedDescription)")
+                }
+            }
+        }
     }
+    
+    
+    //MARK: - Create a group and post it using API and saves to CoreData
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
-
-
+    
 }
 
 //MARK: - Textfield methods
-extension AddGroupViewController: UITextFieldDelegate {
+extension AddHatimGroupViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeTextField = nil
     }
@@ -555,7 +484,7 @@ extension AddGroupViewController: UITextFieldDelegate {
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
               let activeTextField = activeTextField else { return }
-
+        
         let keyboardHeight = keyboardFrame.height
         let textFieldBottomY = activeTextField.convert(activeTextField.bounds, to: self.view).maxY
         let viewHeight = self.view.frame.height
@@ -567,14 +496,10 @@ extension AddGroupViewController: UITextFieldDelegate {
             }
         }
     }
-
+    
     @objc private func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
         }
     }
-}
-
-extension Notification.Name {
-    static let groupCreated = Notification.Name("groupCreated")
 }

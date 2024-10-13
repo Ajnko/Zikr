@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isLogedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
         
         if isLogedIn {
-            let mainvc = MainViewController()
-            window?.rootViewController = UINavigationController(rootViewController: mainvc)
+            let menuVC = MenuViewController()
+            window?.rootViewController = UINavigationController(rootViewController: menuVC)
         } else {
             let loginVc = LogInViewController()
             window?.rootViewController = UINavigationController(rootViewController: loginVc)

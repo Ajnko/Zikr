@@ -11,160 +11,204 @@ import Alamofire
 class ApiManager {
     static let shared = ApiManager()
     
-    private init() {}
+    //    private init() {}
     
     //MARK: - Create User
     
-    func registerUser(userRequest: UserRegisterRequest, completion: @escaping (Result<UserRegisterResponse, Error>) -> Void) {
-        let url = "https://dzikr.uz/register"
+    func registerUser(name: String, surname: String, email: String, password: String, phone: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+        let url = "\(APIConstants.baseURL)/auth/register"
         
-        AF.request(url, method: .post, parameters: userRequest, encoder: JSONParameterEncoder.default)
-            .validate()
-            .responseDecodable(of: UserRegisterResponse.self) {response in
-                switch response.result {
-                case .success(let userResponse):
-                    completion(.success(userResponse))
-                case .failure(let error):
+        print("Register URL: \(url)")
+        
+        let parameters: [String: Any] = [
+            "name": name,
+            "surname": surname,
+            "email": email,
+            "password": password,
+            "phone": phone
+        ]
+        
+        // Making POST request with Alamofire
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+            switch response.result {
+            case .success(let data):
+                // Print raw response data for debugging
+                if let data = data {
+                    let rawData = String(data: data, encoding: .utf8) ?? "No Data"
+                    print("Raw Response Data: \(rawData)")
+                }
+                
+                // Attempt to decode to UserResponse
+                do {
+                    let decodedResponse = try JSONDecoder().decode(UserResponse.self, from: data!)
+                    completion(.success(decodedResponse))
+                } catch {
+                    print("Decoding Error: \(error)")
                     completion(.failure(error))
                 }
+                
+            case .failure(let error):
+                print("Request Error: \(error)")
+                completion(.failure(error))
             }
+        }
     }
     
-//    func createUser(userBodyPart: UserBodyPart, completion: @escaping (Result<UserModel, Error>) -> Void) {
-//        let url = APIConstants.addUserURL()
-//
-//        AF.request(url, method: .post, parameters: userBodyPart, encoder: JSONParameterEncoder.default)
-//            .responseJSON { response in
-//                switch response.result {
-//                case .success(let value):
-//                    print("Raw response: \(value)")  // Print raw response for debugging
-//
-//                    // Ensure that the response matches the expected structure
-//                    do {
-//                        let data = try JSONSerialization.data(withJSONObject: value, options: [])
-//                        let userModel = try JSONDecoder().decode(UserModel.self, from: data)
-//                        completion(.success(userModel))
-//                    } catch {
-//                        print("Decoding error: \(error.localizedDescription)")
-//                        completion(.failure(error))
-//                    }
-//                case .failure(let error):
-//                    print("Request Error: \(error.localizedDescription)")
-//                    completion(.failure(error))
-//                }
-//            }
-//    }
-
+    //MARK: - Create group
+    
+    func createGroup(groupRequest: GroupCreationRequest, completion: @escaping (Result<GroupResponse, Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            completion(.failure(NSError(domain: "ApiManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User is not authenticated"])))
+            return
+        }
+        
+        let url = "\(APIConstants.baseURL)/groups"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(url, method: .post, parameters: groupRequest, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: GroupResponse.self) { response in
+            switch response.result {
+            case .success(let groupResponse):
+                completion(.success(groupResponse))
+            case .failure(let error):
+                // Handle response errors separately for better debugging
+                if let data = response.data {
+                    print("Raw Response Data: \(String(data: data, encoding: .utf8) ?? "No data")")
+                }
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - Create Zikr
+    
+    //    func createZikr(zikrRequest: ZikrRequest, completion: @escaping (Result<ZikrResponse, Error>) -> Void) {
+    //        guard let token = UserDefaults.standard.string(forKey: "token"),
+    //              let groupId = UserDefaults.standard.string(forKey: "groupId") else {
+    //            completion(.failure(NSError(domain: "Token or Group ID not found", code: 401, userInfo: nil)))
+    //            return
+    //        }
+    //
+    //        let url = "\(APIConstants.baseURL)/zikr"
+    //
+    //        var parameters: [String: Any] = [
+    //            "name": zikrRequest.name,
+    //            "desc": zikrRequest.desc,
+    //            "body": zikrRequest.body,
+    //            "goal": zikrRequest.goal,
+    //            "sound_url": "https://example.com/sound.mp3", // Use your sound URL as needed
+    //            "groupId": groupId
+    //        ]
+    //
+    //        // Making POST request with Alamofire
+    //        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Authorization": "Bearer \(token)"]).responseDecodable(of: ZikrResponse.self) { response in
+    //            switch response.result {
+    //            case .success(let zikrResponse):
+    //                completion(.success(zikrResponse))
+    //            case .failure(let error):
+    //                completion(.failure(error))
+    //            }
+    //        }
+    //    }
     
     // MARK: - Login User
     
-//    func login(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
-//        let url = APIConstants.loginURL(mail: email, password: password)
-//        
-//        AF.request(url).responseData { response in
-//            switch response.result {
-//            case .success(let data):
-//                do {
-//                    let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-//                    guard let user = loginResponse.user.first else {
-//                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No user found"])))
-//                        return
-//                    }
-//                    completion(.success(user))
-//                } catch {
-//                    completion(.failure(error))
-//                }
-//                
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//    
-    //MARK: - Add group
-//    func addGroup(groupRequest: GroupRequest, completion: @escaping (Result<GroupResponse, Error>) -> Void) {
-//        let url = APIConstants.addGroupURL()
-//        
-//        AF.request(url, method: .post, parameters: groupRequest, encoder: JSONParameterEncoder.default)
-//            .responseData { response in
-//                switch response.result {
-//                case .success(let data):
-//                    // Print the raw data for debugging
-//                    if let jsonString = String(data: data, encoding: .utf8) {
-//                        print("Response JSON: \(jsonString)")
-//                    }
-//                    
-//                    // Check if the response status code indicates success
-//                    guard let statusCode = response.response?.statusCode, (200...299).contains(statusCode) else {
-//                        let errorMessage = "HTTP Status Code: \(response.response?.statusCode ?? -1)"
-//                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
-//                        return
-//                    }
-//                    
-//                    // Decode the response if status code is 200-299
-//                    do {
-//                        let decodedResponse = try JSONDecoder().decode(GroupResponse.self, from: data)
-//                        completion(.success(decodedResponse))
-//                    } catch {
-//                        completion(.failure(error))
-//                        print("Decoding Error: \(error)")
-//                    }
-//                    
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//    }
-//    
+    func loginUser(email: String, phone: String, password: String, completion: @escaping(Result<LoginResponse, Error>) -> Void) {
+        let url = "\(APIConstants.baseURL)/auth/login"
+        
+        let parameters: [String: Any] = [
+            "email": email,
+            "phone": phone,
+            "password": password
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseDecodable(of:LoginResponse.self) { resposne in
+            switch resposne.result {
+            case .success(let loginResponse):
+                completion(.success(loginResponse))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     //MARK: - Get Group
-//    func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
-//        guard let userId = UserDefaults.standard.string(forKey: "userId") else {
-//            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])))
-//            return
-//        }
-//        
-//        let url = APIConstants.getGroupsURL(ownerId: userId)
-//        
-//        AF.request(url).responseData { response in
-//            switch response.result {
-//            case .success(let data):
-//                do {
-//                    let groupsResponse = try JSONDecoder().decode(GroupsResponse.self, from: data)
-//                    completion(.success(groupsResponse.data))
-//                } catch {
-//                    completion(.failure(error))
-//                }
-//                
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//    
-    //MARK: - Subcribe to the Group
-//    func subscribeToGroup(userId: Int, groupId: Int, completion: @escaping (Result<String, Error>) -> Void) {
-//        let url = APIConstants.subscribeToGroupURL()
-//        
-//        // Create the request body
-//        let parameters: [String: Any] = [
-//            "userId": userId,
-//            "groupId": groupId
-//        ]
-//        
-//        // Send the POST request
-//        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-//            switch response.result {
-//            case .success(let data):
-//                if let json = data as? [String: Any], let status = json["status"] as? String, status == "200" {
-//                    let message = json["message"] as? String ?? "Subscription successful"
-//                    completion(.success(message))
-//                } else {
-//                    let errorMessage = (data as? [String: Any])?["message"] as? String ?? "Unknown error"
-//                    completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
-//                }
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
+    
+    func getGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
+        let url = "\(APIConstants.baseURL)/groups/public/mine?groupType=ZIKR"
+        
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Token not found"])))
+            return
+        }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseDecodable(of: [Group].self) { response in
+            switch response.result {
+            case .success(let groups):
+                completion(.success(groups))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - Create Hatim Group -
+    
+    func createHatimGroup(groupRequest: HatimGroupCreationRequest, completion: @escaping (Result<HatimCreateGroupResponse, Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            completion(.failure(NSError(domain: "ApiManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User is not authenticated"])))
+            return
+        }
+        
+        let url = "\(APIConstants.baseURL)/groups"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(url, method: .post, parameters: groupRequest, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: HatimCreateGroupResponse.self) { response in
+            switch response.result {
+            case .success(let groupResponse):
+                completion(.success(groupResponse))
+            case .failure(let error):
+                // Handle response errors separately for better debugging
+                if let data = response.data {
+                    print("Raw Response Data: \(String(data: data, encoding: .utf8) ?? "No data")")
+                }
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - Get Hatim Group
+    func fetchHatimGroups(completion: @escaping (Result<[HatimGroupData], Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            completion(.failure(NSError(domain: "No token found", code: 401, userInfo: nil)))
+            return
+        }
+        
+        let url = "http://35.188.2.212:7474/api/v1/groups/public/mine?groupType=QURAN"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        AF.request(url, headers: headers).responseDecodable(of: [HatimGroupData].self) { response in
+            switch response.result {
+            case .success(let groups):
+                completion(.success(groups))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }

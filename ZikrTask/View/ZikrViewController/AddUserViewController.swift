@@ -151,11 +151,7 @@ class AddUserViewController: UIViewController {
     }
     
     @objc func addUserButtonTapped() {
-//        guard let userId = userIdTextField.text, !userId.isEmpty else {
-//            return
-//        }
-//        subscribeViewModel.subscribeUserToGroup(userIdText: userId)
-//        dismiss(animated: true)
+        
     }
     
 }

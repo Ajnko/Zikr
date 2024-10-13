@@ -7,49 +7,32 @@
 
 import Foundation
 
-struct UserRegisterRequest: Codable {
-    let name: String
-    let surname: String
-    let phone: String
-    let mail: String
-    let image_url: String
-    let password: String
-}
-
-struct UserRegisterResponse: Codable {
+struct UserResponse: Codable {
     let message: String
-    let data: UserData
-}
-
-struct UserData: Codable {
-    let userId: Int
+    let user: User
     let token: String
-    let user: UserDetails
 }
 
-struct UserDetails: Codable {
+struct User: Codable {
+    let userId: String
+    let phone: String
+    let email: String
     let name: String
     let surname: String
-    let phone: String
-    let mail: String
-    let image_url: String
+    let imageUrl: String?
+    let createdAt: String
+    let updatedAt: String
+    let role: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "userId"
+        case phone = "phone"
+        case email = "email"
+        case name = "name"
+        case surname = "surname"
+        case imageUrl = "image_url"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case role = "role"
+    }
 }
-
-//struct UserBodyPart: Codable {
-//    let phone:Int
-//    let mail:String
-//    let name:String
-//    let surname:String
-//    let image_url:String
-//    let password:String
-//}
-//
-//struct UserModel: Codable {
-//    let status : String
-//    let message: String
-//    let data: UserResult
-//}
-//
-//struct UserResult: Codable {
-//    let userId : Int
-//}

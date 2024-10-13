@@ -1,19 +1,18 @@
 //
-//  MainCollectionViewCell.swift
+//  PersonalHatimCollectionViewCell.swift
 //  ZikrTask
 //
-//  Created by Abdulbosid Jalilov on 22/05/24.
+//  Created by Faxriddin Mo'ydinxonov on 17/09/24.
 //
 
 import UIKit
 import SnapKit
 
-class GroupCollectionViewCell: UICollectionViewCell {
-    
-    static let identifier = "GroupCollectionViewCell"
+class PersonalHatimCollectionViewCell: UICollectionViewCell {
+    static let identifier = "PersonalHatimCollectionViewCell"
     
     let blurView: UIVisualEffectView = {
-       let blurview = UIVisualEffectView()
+        let blurview = UIVisualEffectView()
         return blurview
     }()
     //blur effect
@@ -27,20 +26,40 @@ class GroupCollectionViewCell: UICollectionViewCell {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = CGSize(width: 0, height: 3)
         view.layer.shadowRadius = 4
+        //        view.backgroundColor = #colorLiteral(red: 0.8738430142, green: 0.8458103538, blue: 0.7841303349, alpha: 1)
         view.backgroundColor = .darkMode
         return view
     }()
     
     let imageView: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(systemName: "person.fill")
         image.tintColor = .white
         return image
     }()
     
+    let hatimTitle = CustomLabel(
+        text: "Hatim Title",
+        textColor: .textColor,
+        fontSize: .systemFont(ofSize: 15),
+        numberOfLines: 0
+    )
+    let hatimNameLabel = CustomLabel(
+        text: "Hatim Name",
+        textColor: .textColor,
+        fontSize: .systemFont(ofSize: 15),
+        numberOfLines: 0
+    )
+    let progressLabel = CustomLabel(
+        text: "1/30",
+        textColor: .white,
+        fontSize: .systemFont(ofSize: 10),
+        numberOfLines: 0
+    )
+    
     let textContainerView: UIView = {
         let view = UIView()
-//        view.backgroundColor = #colorLiteral(red: 0.8738430142, green: 0.8458103538, blue: 0.7841303349, alpha: 1)
+        //        view.backgroundColor = #colorLiteral(red: 0.8738430142, green: 0.8458103538, blue: 0.7841303349, alpha: 1)
         view.backgroundColor = .darkMode
         view.layer.cornerRadius = 10
         view.layer.shadowColor = UIColor.black.cgColor
@@ -49,68 +68,23 @@ class GroupCollectionViewCell: UICollectionViewCell {
         view.layer.shadowRadius = 4
         return view
     }()
-    
-    let groupNameLabel = CustomLabel(
-        text: "Group Name",
-        textColor: .textColor,
-        fontSize: .systemFont(ofSize: 15),
-        numberOfLines: 0
-    )
-    let groupZikrNameLabel = CustomLabel(
-        text: "Zikr Name",
-        textColor: .textColor,
-        fontSize: .systemFont(ofSize: 15),
-        numberOfLines: 0
-    )
-    let zikrCountLabel = CustomLabel(
-        text: "Count:",
-        textColor: .white,
-        fontSize: .systemFont(ofSize: 10),
-        numberOfLines: 0
-    )
-    
-    let groupContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .darkMode
-        view.layer.cornerRadius = 10
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
-        view.layer.shadowRadius = 4
-        return view
-    }()
-    
-    let groupMembersButton: UIButton = {
-       let button = UIButton()
-        button.setImage(UIImage(systemName: "person.3.fill"), for: .normal)
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        return button
-    }()
-    
-    let groupLabel = CustomLabel(
-        text: "30",
-        textColor: .white,
-        fontSize: .systemFont(ofSize: 10),
-        numberOfLines: 0
-    )
     
     let progressBlurView: UIVisualEffectView = {
-       let view = UIVisualEffectView()
+        let view = UIVisualEffectView()
         return view
     }()
     let progressBlurEffect = UIBlurEffect(style: .extraLight)
     
     let progressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .default)
-        progress.clipsToBounds = true
         progress.layer.cornerRadius = 5
-        progress.progress = 0.6
+        progress.clipsToBounds = true
+        progress.progress = 0.7
         progress.trackTintColor = .clear
+        //        progress.progressTintColor = #colorLiteral(red: 0.8735236526, green: 0.8339383602, blue: 0.7783764005, alpha: 1)
         progress.progressTintColor = .darkMode
         return progress
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -146,51 +120,28 @@ class GroupCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(16)
         }
         
-        blurView.contentView.addSubview(groupNameLabel)
-        groupNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(15)
+        blurView.contentView.addSubview(hatimTitle)
+        hatimTitle.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top).offset(30)
             make.left.equalTo(containerView.snp.right).offset(10)
         }
         
-        blurView.contentView.addSubview(groupZikrNameLabel)
-        groupZikrNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(groupNameLabel.snp.bottom).offset(10)
-            make.left.equalTo(groupNameLabel.snp.left)
-        }
-        
-        blurView.contentView.addSubview(groupContainerView)
-        groupContainerView.snp.makeConstraints { make in
-            make.top.equalTo(groupNameLabel.snp.top)
-            make.right.equalTo(self.snp.right).inset(15)
-            make.width.equalTo(self.snp.width).multipliedBy(0.2)
-            make.height.equalTo(self.snp.height).multipliedBy(0.293)
-        }
-        
-        groupContainerView.addSubview(groupMembersButton)
-        groupMembersButton.addShadow()
-        groupMembersButton.snp.makeConstraints { make in
-            make.centerY.equalTo(groupContainerView.snp.centerY)
-            make.right.equalTo(groupContainerView.snp.centerX).inset(-10)
-            make.width.equalTo(groupContainerView.snp.width).multipliedBy(0.37)
-            make.height.equalTo(groupContainerView.snp.height).multipliedBy(0.47)
-        }
-        
-        groupContainerView.addSubview(groupLabel)
-        groupLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(groupContainerView.snp.centerY)
-            make.left.equalTo(groupMembersButton.snp.right).inset(-4)
+        blurView.contentView.addSubview(hatimNameLabel)
+        hatimNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(hatimTitle.snp.bottom).offset(10)
+            make.left.equalTo(hatimTitle.snp.left)
         }
         
         blurView.contentView.addSubview(textContainerView)
         textContainerView.snp.makeConstraints { make in
-            make.top.equalTo(groupContainerView.snp.bottom).offset(3)
-            make.right.equalTo(groupContainerView.snp.right)
-            make.width.equalTo(self.snp.width).multipliedBy(0.29)
+            make.top.equalTo(hatimNameLabel.snp.top)
+            make.right.equalTo(self.snp.right).inset(15)
+            make.width.equalTo(self.snp.width).multipliedBy(0.24)
             make.height.equalTo(self.snp.height).multipliedBy(0.199)
         }
         
-        textContainerView.addSubview(zikrCountLabel)
-        zikrCountLabel.snp.makeConstraints { make in
+        textContainerView.addSubview(progressLabel)
+        progressLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
         
@@ -209,11 +160,6 @@ class GroupCollectionViewCell: UICollectionViewCell {
         progressView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    func configureCell(with group: Group) {
-        groupNameLabel.text = group.name
         
     }
-    
 }

@@ -241,7 +241,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }()
     
     
-    var viewModel = CreateUserViewModel()
+//    var viewModel = CreateUserViewModel()
+    private var viewModel = UserRegistrationViewModel()
     var containerBottomConstraint: Constraint?
     let containerView = UIView()
     var activeTextField: UITextField?
@@ -264,6 +265,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         mailTextField.inputAccessoryView = toolbar
         mailTextField.keyboardType = .emailAddress
         phoneNumberTextField.inputAccessoryView = toolbar
+        phoneNumberTextField.keyboardType = .numberPad
         
         userNameTextField.delegate = self
         userSurNameTextField.delegate = self
@@ -517,7 +519,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
-        // Add tap gesture to dismiss keyboard
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
@@ -528,7 +529,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         let keyboardHeight = keyboardFrame.height
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
 
-        // Adjust only if the active text field is one of the bottom ones
         if activeTextField == phoneNumberTextField || activeTextField == mailTextField {
             UIView.animate(withDuration: duration) {
                 self.containerBottomConstraint?.update(offset: -keyboardHeight)
@@ -548,12 +548,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
     
     //MARK: - Create Account Method
-    func saveUserId(_ userId: Int) {
-        UserDefaults.standard.setValue(userId, forKey: "userId")
-    }
     
     func createUser() {
-        
         guard let mail = mailTextField.text, !mail.isEmpty,
               let name = userNameTextField.text, !name.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
@@ -563,43 +559,22 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        viewModel.phone = phone
-        viewModel.mail = mail
-        viewModel.name = name
-        viewModel.surname = surname
-        viewModel.password = password
-        
-        viewModel.createUser { [weak self] result in
-            switch result {
-            case .success(let userModel):
-                print("User Successfully created: \(userModel)")
-                
-                //save userId to UserDefaults
-                self?.saveUserId(userModel.data.userId)
-                UserDefaults.standard.set(true, forKey: "isLoggedIn")
-
-                let vc = MainViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
-            case .failure(let error):
-                self?.showAlert(title: "Error", message: error.localizedDescription)
+        viewModel.registerUser(name: name, surname: surname, email: mail, password: password, phone: phone) { [weak self] message in
+            DispatchQueue.main.async {
+                if let message = message, message.lowercased() == "registration successful" {
+                    let menuVC = MenuViewController()
+                    self?.navigationController?.pushViewController(menuVC, animated: true)
+                } else {
+                    self?.showAlert(title: "Error", message: "Failed to register your account due to: \(message ?? "an unknown error.")")
+                    print(message as Any)
+                }
             }
-            
         }
+        
     }
-    
     
     @objc func createButtonTapped() {
         createUser()
-    }
-    
-    
-    private func showAlertAndNavigate(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
-            let nextViewController = MainViewController() // Replace with your actual next view controller
-            self?.navigationController?.pushViewController(nextViewController, animated: true)
-        }))
-        present(alert, animated: true, completion: nil)
     }
     
     private func showAlert(title: String, message: String) {

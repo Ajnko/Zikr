@@ -235,11 +235,11 @@ class GroupZikrCountViewController: UIViewController {
         audioSlider.minimumTrackTintColor = .darkMode
         audioSlider.maximumTrackTintColor = UIColor.white
         
-        progressView.progress = 0.0
-        progressLabel.text = groupPurpose
-        let purpose = Int(groupPurpose!)
-        changeZikrCountButton.setTitle("\(purpose ?? 10)", for: .normal)
-        zikrCountLabel.text = "\(count)"
+//        progressView.progress = 0.0
+//        progressLabel.text = groupPurpose
+//        let purpose = Int(groupPurpose!)
+//        changeZikrCountButton.setTitle("\(purpose ?? 10)", for: .normal)
+//        zikrCountLabel.text = "\(count)"
         
     }
     

@@ -1,13 +1,13 @@
 //
-//  GetGroupModel.swift
+//  GetHatimGroupModel.swift
 //  ZikrTask
 //
-//  Created by Abdulbosid Jalilov on 04/09/24.
+//  Created by Faxriddin Mo'ydinxonov on 02/10/24.
 //
 
 import Foundation
 
-struct Group: Codable {
+struct HatimGroupData: Decodable {
     let idGroup: String
     let name: String
     let groupType: String
@@ -16,9 +16,10 @@ struct Group: Codable {
     let kimga: String
     let isPublic: Bool
     let hatmSoni: Int
-    let createdAt: String
-    let updatedAt: String
+    let createdAt: String // You can convert this to a Date if needed
+    let updatedAt: String // You can convert this to a Date if needed
     
+    // Coding keys to match the JSON keys if they differ from the property names
     enum CodingKeys: String, CodingKey {
         case idGroup
         case name
@@ -32,5 +33,3 @@ struct Group: Codable {
         case updatedAt = "updated_at"
     }
 }
-
-

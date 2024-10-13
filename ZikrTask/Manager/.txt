@@ -1,0 +1,39 @@
+    func registerUser(name: String, surname: String, email: String, password: String, phone: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+        let url = "\(APIConstants.baseURL)/auth/register" // Correct endpoint
+        
+        // Print the URL for debugging
+        print("Register URL: \(url)")
+        
+        let parameters: [String: Any] = [
+            "name": name,
+            "surname": surname,
+            "email": email,
+            "password": password,
+            "phone": phone
+        ]
+        
+        // Making POST request with Alamofire
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+            switch response.result {
+            case .success(let data):
+                // Print raw response data for debugging
+                if let data = data {
+                    let rawData = String(data: data, encoding: .utf8) ?? "No Data"
+                    print("Raw Response Data: \(rawData)")
+                }
+                
+                // Attempt to decode to UserResponse
+                do {
+                    let decodedResponse = try JSONDecoder().decode(UserResponse.self, from: data!)
+                    completion(.success(decodedResponse))
+                } catch {
+                    print("Decoding Error: \(error)")
+                    completion(.failure(error))
+                }
+                
+            case .failure(let error):
+                print("Request Error: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }

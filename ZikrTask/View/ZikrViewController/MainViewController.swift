@@ -72,7 +72,7 @@ class MainViewController: UIViewController, AddGroupDelegate {
     
     private var selectedSegmentIndex = 0
     
-//    let getGroupViewModel = GetGroupViewModel()
+    var viewModel = GroupViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +92,7 @@ class MainViewController: UIViewController, AddGroupDelegate {
         setConstraintToItems()
         configureDelegates()
         
-        fetchData()
+        fetchGroups()
         groupCreated()
     }
     
@@ -102,7 +102,8 @@ class MainViewController: UIViewController, AddGroupDelegate {
         selectedSegmentIndex = 0
         segmentCollectionView.reloadData()
         dataCollectionView.reloadData()
-        
+        fetchGroups()
+        groupCreated()
     }
     
     private func configureDelegates() {
@@ -168,25 +169,21 @@ class MainViewController: UIViewController, AddGroupDelegate {
     }
     
     func groupCreated() {
-        fetchData()
+        fetchGroups()
     }
     
-    func fetchData() {
-//        showActivityIndicator()
-//        getGroupViewModel.fetchGroups { [weak self] result in
-//            
-//            DispatchQueue.main.async {
-//                self?.hideActivityIndicator()
-//                
-//                switch result {
-//                case .success(let success):
-//                    self?.dataCollectionView.reloadData()
-//                    print("DataCollectionView reloaded")
-//                case .failure(let error):
-//                    print("Error fetching groups: \(error.localizedDescription)")
-//                }
-//            }
-//        }
+    func fetchGroups() {
+        showActivityIndicator()
+        viewModel.fetchGroups { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                if let errorMessage = errorMessage {
+                    self?.showAlert(title: "Error", message: errorMessage)
+                } else {
+                    self?.hideActivityIndicator()
+                    self?.dataCollectionView.reloadData()
+                }
+            }
+        }
     }
     
     private func showActivityIndicator() {
@@ -203,6 +200,9 @@ class MainViewController: UIViewController, AddGroupDelegate {
     @objc func addButtonTapped() {
         let vc = AddGroupViewController()
         vc.delegate = self
+        vc.onDismiss = { [weak self] in
+            self?.dismiss(animated: true)
+        }
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
@@ -222,10 +222,10 @@ class MainViewController: UIViewController, AddGroupDelegate {
     }
     
     @objc func logoutButtonTapped() {
-        showAler(title: "Wait", message: "Are you sure you want to logout?")
+        showAlert(title: "Wait", message: "Are you sure you want to logout?")
     }
     
-    private func showAler(title: String, message: String) {
+    private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert
@@ -247,7 +247,6 @@ class MainViewController: UIViewController, AddGroupDelegate {
         
         removeDataFromUserDefaults()
         
-        // Navigate back to the login screen or perform other necessary actions
         let loginVC = LogInViewController()
         let navController = UINavigationController(rootViewController: loginVC)
         
@@ -266,6 +265,7 @@ class MainViewController: UIViewController, AddGroupDelegate {
         UserDefaults.standard.removeObject(forKey: "image_url")
         UserDefaults.standard.removeObject(forKey: "isLoggedIn")
         UserDefaults.standard.removeObject(forKey: "groupId")
+        UserDefaults.standard.removeObject(forKey: "token")
     }
     
     //MARK: - Present Profile VC
@@ -289,7 +289,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
         } else if collectionView == dataCollectionView {
             switch selectedSegmentIndex {
             case 0:
-                return 0 /*getGroupViewModel.groups.count*/
+                return viewModel.groups.count
             case 1:
                 return 10
             default:
@@ -321,10 +321,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.layer.shadowOffset = CGSize(width: 0, height: 3)
                 cell.layer.shadowRadius = 5
                 cell.layer.cornerRadius = 15
-//                let group = getGroupViewModel.groups[indexPath.item]
-//                cell.configureCell(with: group)
+                let group = viewModel.groups[indexPath.row]
+                cell.configureCell(with: group)
 //                cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
-//                
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalCollectionViewCell.identifier, for: indexPath) as! PersonalCollectionViewCell
