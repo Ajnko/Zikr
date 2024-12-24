@@ -10,21 +10,7 @@
 		224C501C889FB7CD7AC081D6 /* Pods_ZikrTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B342DE2D552499878BB535A /* Pods_ZikrTask.framework */; };
 		CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */; };
 		CC13512F2C492F3200649A78 /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC13512E2C492F3200649A78 /* CreateGroupViewModel.swift */; };
-		CC16DD942CBBED380029AF4E /* HatimGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DD932CBBED370029AF4E /* HatimGroupModel.swift */; };
-		CC16DD972CBBED4E0029AF4E /* GetHatimGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DD962CBBED4E0029AF4E /* GetHatimGroupData.swift */; };
-		CC16DD9A2CBBED6A0029AF4E /* CreateHatimGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DD992CBBED6A0029AF4E /* CreateHatimGroupViewModel.swift */; };
-		CC16DD9C2CBBED700029AF4E /* HatimGetGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DD9B2CBBED700029AF4E /* HatimGetGroupViewModel.swift */; };
 		CC16DD9F2CBBEDA20029AF4E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DD9E2CBBEDA20029AF4E /* MenuViewController.swift */; };
-		CC16DDA22CBBEDB30029AF4E /* HatimMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDA12CBBEDB30029AF4E /* HatimMainViewController.swift */; };
-		CC16DDA42CBBEDB80029AF4E /* GroupHatimInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDA32CBBEDB80029AF4E /* GroupHatimInfoViewController.swift */; };
-		CC16DDA62CBBEDBD0029AF4E /* AddHatimGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDA52CBBEDBD0029AF4E /* AddHatimGroupViewController.swift */; };
-		CC16DDA82CBBEDC20029AF4E /* HatimGroupMembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDA72CBBEDC20029AF4E /* HatimGroupMembersListViewController.swift */; };
-		CC16DDAD2CBBEE280029AF4E /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDAC2CBBEE280029AF4E /* MenuCollectionViewCell.swift */; };
-		CC16DDB02CBBEE490029AF4E /* GroupHatimCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDAF2CBBEE490029AF4E /* GroupHatimCollectionViewCell.swift */; };
-		CC16DDB22CBBEE4E0029AF4E /* PersonalHatimCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB12CBBEE4E0029AF4E /* PersonalHatimCollectionViewCell.swift */; };
-		CC16DDB52CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB42CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift */; };
-		CC16DDB72CBBEE620029AF4E /* HatimInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB62CBBEE620029AF4E /* HatimInfoHeaderView.swift */; };
-		CC16DDBA2CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB92CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift */; };
 		CC1D25A52CBD5B010062400F /* GetZikrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D25A42CBD5AFC0062400F /* GetZikrModel.swift */; };
 		CC1FEFEC2CEF8B4D008CD1DC /* SendNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FEFEB2CEF8B3F008CD1DC /* SendNotificationModel.swift */; };
 		CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2C2A212C79E2B20014F37D /* ApiManager.swift */; };
@@ -68,6 +54,50 @@
 		CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5CD2BFD053C00921654 /* Shadows.swift */; };
 		CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5F22BFD395200921654 /* MainViewController.swift */; };
 		CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */; };
+		CCF933922D1AFAEE004ADE02 /* HatmPersonalInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933782D1AFAEE004ADE02 /* HatmPersonalInfoHeaderView.swift */; };
+		CCF933932D1AFAEE004ADE02 /* PatchBookedPora.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933652D1AFAEE004ADE02 /* PatchBookedPora.swift */; };
+		CCF933942D1AFAEE004ADE02 /* HatimGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933612D1AFAEE004ADE02 /* HatimGroupModel.swift */; };
+		CCF933952D1AFAEE004ADE02 /* HatmGroupProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933632D1AFAEE004ADE02 /* HatmGroupProfile.swift */; };
+		CCF933962D1AFAEE004ADE02 /* HatmPersonalInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933772D1AFAEE004ADE02 /* HatmPersonalInfoCollectionViewCell.swift */; };
+		CCF933972D1AFAEE004ADE02 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9337E2D1AFAEE004ADE02 /* MenuCollectionViewCell.swift */; };
+		CCF933982D1AFAEE004ADE02 /* BookedPoraRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933592D1AFAEE004ADE02 /* BookedPoraRequest.swift */; };
+		CCF933992D1AFAEE004ADE02 /* GetBookedPoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933862D1AFAEE004ADE02 /* GetBookedPoraViewModel.swift */; };
+		CCF9339A2D1AFAEE004ADE02 /* FinishedPoraResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9335D2D1AFAEE004ADE02 /* FinishedPoraResponse.swift */; };
+		CCF9339B2D1AFAEE004ADE02 /* PatchBookedPoralarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9338C2D1AFAEE004ADE02 /* PatchBookedPoralarViewModel.swift */; };
+		CCF9339C2D1AFAEE004ADE02 /* GetUserDetailFromID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933882D1AFAEE004ADE02 /* GetUserDetailFromID.swift */; };
+		CCF9339D2D1AFAEE004ADE02 /* BookPoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933812D1AFAEE004ADE02 /* BookPoraViewModel.swift */; };
+		CCF9339E2D1AFAEE004ADE02 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9338F2D1AFAEE004ADE02 /* UserProfileViewModel.swift */; };
+		CCF9339F2D1AFAEE004ADE02 /* GetBookedPoraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9335E2D1AFAEE004ADE02 /* GetBookedPoraModel.swift */; };
+		CCF933A02D1AFAEE004ADE02 /* GroupHatimInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9336B2D1AFAEE004ADE02 /* GroupHatimInfoViewController.swift */; };
+		CCF933A12D1AFAEE004ADE02 /* AddPersonalHatmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9336F2D1AFAEE004ADE02 /* AddPersonalHatmViewController.swift */; };
+		CCF933A22D1AFAEE004ADE02 /* DeleteHatmGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933832D1AFAEE004ADE02 /* DeleteHatmGroupViewModel.swift */; };
+		CCF933A32D1AFAEE004ADE02 /* HatimGroupInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933742D1AFAEE004ADE02 /* HatimGroupInfoCollectionViewCell.swift */; };
+		CCF933A42D1AFAEE004ADE02 /* HatimMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933682D1AFAEE004ADE02 /* HatimMainViewController.swift */; };
+		CCF933A52D1AFAEE004ADE02 /* PoralarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9338E2D1AFAEE004ADE02 /* PoralarViewModel.swift */; };
+		CCF933A62D1AFAEE004ADE02 /* HatmGroupUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933642D1AFAEE004ADE02 /* HatmGroupUserModel.swift */; };
+		CCF933A72D1AFAEE004ADE02 /* GetHatimGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9335F2D1AFAEE004ADE02 /* GetHatimGroupData.swift */; };
+		CCF933A82D1AFAEE004ADE02 /* FinishedPoraRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9335C2D1AFAEE004ADE02 /* FinishedPoraRequest.swift */; };
+		CCF933A92D1AFAEE004ADE02 /* FinishedPoraPatchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9335B2D1AFAEE004ADE02 /* FinishedPoraPatchRequest.swift */; };
+		CCF933AA2D1AFAEE004ADE02 /* GetUserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933892D1AFAEE004ADE02 /* GetUserDetailViewModel.swift */; };
+		CCF933AB2D1AFAEE004ADE02 /* HatimGroupMembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9336C2D1AFAEE004ADE02 /* HatimGroupMembersListViewController.swift */; };
+		CCF933AC2D1AFAEE004ADE02 /* PatchBookedPoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9338D2D1AFAEE004ADE02 /* PatchBookedPoraViewModel.swift */; };
+		CCF933AD2D1AFAEE004ADE02 /* GetFinishedPoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933872D1AFAEE004ADE02 /* GetFinishedPoraViewModel.swift */; };
+		CCF933AE2D1AFAEE004ADE02 /* FinishedPoraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933852D1AFAEE004ADE02 /* FinishedPoraViewModel.swift */; };
+		CCF933AF2D1AFAEE004ADE02 /* HatimInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933752D1AFAEE004ADE02 /* HatimInfoHeaderView.swift */; };
+		CCF933B02D1AFAEE004ADE02 /* CreateHatimGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933822D1AFAEE004ADE02 /* CreateHatimGroupViewModel.swift */; };
+		CCF933B12D1AFAEE004ADE02 /* EditHatmGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933702D1AFAEE004ADE02 /* EditHatmGroupViewController.swift */; };
+		CCF933B22D1AFAEE004ADE02 /* EditHatmGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9335A2D1AFAEE004ADE02 /* EditHatmGroup.swift */; };
+		CCF933B32D1AFAEE004ADE02 /* EditHatmGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933842D1AFAEE004ADE02 /* EditHatmGroupViewModel.swift */; };
+		CCF933B42D1AFAEE004ADE02 /* HatmGroupJuzCountDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933622D1AFAEE004ADE02 /* HatmGroupJuzCountDetail.swift */; };
+		CCF933B52D1AFAEE004ADE02 /* HatmGroupDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9338B2D1AFAEE004ADE02 /* HatmGroupDetailsViewModel.swift */; };
+		CCF933B62D1AFAEE004ADE02 /* PoralarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933662D1AFAEE004ADE02 /* PoralarModel.swift */; };
+		CCF933B72D1AFAEE004ADE02 /* HatimGetGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9338A2D1AFAEE004ADE02 /* HatimGetGroupViewModel.swift */; };
+		CCF933B82D1AFAEE004ADE02 /* PersonalHatmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933692D1AFAEE004ADE02 /* PersonalHatmInfoViewController.swift */; };
+		CCF933B92D1AFAEE004ADE02 /* PersonalHatimCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9337C2D1AFAEE004ADE02 /* PersonalHatimCollectionViewCell.swift */; };
+		CCF933BA2D1AFAEE004ADE02 /* GroupHatimCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9337B2D1AFAEE004ADE02 /* GroupHatimCollectionViewCell.swift */; };
+		CCF933BB2D1AFAEE004ADE02 /* HatmGroupMemberListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933722D1AFAEE004ADE02 /* HatmGroupMemberListCollectionViewCell.swift */; };
+		CCF933BC2D1AFAEE004ADE02 /* AddHatimGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF9336E2D1AFAEE004ADE02 /* AddHatimGroupViewController.swift */; };
+		CCF933BD2D1AFAEE004ADE02 /* GetUserProfileFromID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF933602D1AFAEE004ADE02 /* GetUserProfileFromID.swift */; };
 		CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */; };
 		CCFED3A02C9359FC00AE5A96 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */; };
 		CCFED3A22C9363DA00AE5A96 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */; };
@@ -79,21 +109,7 @@
 		C626B4167D8F69A3B6B6BCD2 /* Pods-ZikrTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZikrTask.release.xcconfig"; path = "Target Support Files/Pods-ZikrTask/Pods-ZikrTask.release.xcconfig"; sourceTree = "<group>"; };
 		CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC13512E2C492F3200649A78 /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
-		CC16DD932CBBED370029AF4E /* HatimGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupModel.swift; sourceTree = "<group>"; };
-		CC16DD962CBBED4E0029AF4E /* GetHatimGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHatimGroupData.swift; sourceTree = "<group>"; };
-		CC16DD992CBBED6A0029AF4E /* CreateHatimGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHatimGroupViewModel.swift; sourceTree = "<group>"; };
-		CC16DD9B2CBBED700029AF4E /* HatimGetGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGetGroupViewModel.swift; sourceTree = "<group>"; };
 		CC16DD9E2CBBEDA20029AF4E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		CC16DDA12CBBEDB30029AF4E /* HatimMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimMainViewController.swift; sourceTree = "<group>"; };
-		CC16DDA32CBBEDB80029AF4E /* GroupHatimInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHatimInfoViewController.swift; sourceTree = "<group>"; };
-		CC16DDA52CBBEDBD0029AF4E /* AddHatimGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHatimGroupViewController.swift; sourceTree = "<group>"; };
-		CC16DDA72CBBEDC20029AF4E /* HatimGroupMembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupMembersListViewController.swift; sourceTree = "<group>"; };
-		CC16DDAC2CBBEE280029AF4E /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		CC16DDAF2CBBEE490029AF4E /* GroupHatimCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHatimCollectionViewCell.swift; sourceTree = "<group>"; };
-		CC16DDB12CBBEE4E0029AF4E /* PersonalHatimCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalHatimCollectionViewCell.swift; sourceTree = "<group>"; };
-		CC16DDB42CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupInfoCollectionViewCell.swift; sourceTree = "<group>"; };
-		CC16DDB62CBBEE620029AF4E /* HatimInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimInfoHeaderView.swift; sourceTree = "<group>"; };
-		CC16DDB92CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupMemberListTableViewCell.swift; sourceTree = "<group>"; };
 		CC1D25A42CBD5AFC0062400F /* GetZikrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZikrModel.swift; sourceTree = "<group>"; };
 		CC1FEFEB2CEF8B3F008CD1DC /* SendNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNotificationModel.swift; sourceTree = "<group>"; };
 		CC2C2A212C79E2B20014F37D /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -139,6 +155,50 @@
 		CCF6A5CD2BFD053C00921654 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		CCF6A5F22BFD395200921654 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF933592D1AFAEE004ADE02 /* BookedPoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookedPoraRequest.swift; sourceTree = "<group>"; };
+		CCF9335A2D1AFAEE004ADE02 /* EditHatmGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHatmGroup.swift; sourceTree = "<group>"; };
+		CCF9335B2D1AFAEE004ADE02 /* FinishedPoraPatchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedPoraPatchRequest.swift; sourceTree = "<group>"; };
+		CCF9335C2D1AFAEE004ADE02 /* FinishedPoraRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedPoraRequest.swift; sourceTree = "<group>"; };
+		CCF9335D2D1AFAEE004ADE02 /* FinishedPoraResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedPoraResponse.swift; sourceTree = "<group>"; };
+		CCF9335E2D1AFAEE004ADE02 /* GetBookedPoraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBookedPoraModel.swift; sourceTree = "<group>"; };
+		CCF9335F2D1AFAEE004ADE02 /* GetHatimGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHatimGroupData.swift; sourceTree = "<group>"; };
+		CCF933602D1AFAEE004ADE02 /* GetUserProfileFromID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileFromID.swift; sourceTree = "<group>"; };
+		CCF933612D1AFAEE004ADE02 /* HatimGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupModel.swift; sourceTree = "<group>"; };
+		CCF933622D1AFAEE004ADE02 /* HatmGroupJuzCountDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmGroupJuzCountDetail.swift; sourceTree = "<group>"; };
+		CCF933632D1AFAEE004ADE02 /* HatmGroupProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmGroupProfile.swift; sourceTree = "<group>"; };
+		CCF933642D1AFAEE004ADE02 /* HatmGroupUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmGroupUserModel.swift; sourceTree = "<group>"; };
+		CCF933652D1AFAEE004ADE02 /* PatchBookedPora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchBookedPora.swift; sourceTree = "<group>"; };
+		CCF933662D1AFAEE004ADE02 /* PoralarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoralarModel.swift; sourceTree = "<group>"; };
+		CCF933682D1AFAEE004ADE02 /* HatimMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimMainViewController.swift; sourceTree = "<group>"; };
+		CCF933692D1AFAEE004ADE02 /* PersonalHatmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalHatmInfoViewController.swift; sourceTree = "<group>"; };
+		CCF9336B2D1AFAEE004ADE02 /* GroupHatimInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHatimInfoViewController.swift; sourceTree = "<group>"; };
+		CCF9336C2D1AFAEE004ADE02 /* HatimGroupMembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupMembersListViewController.swift; sourceTree = "<group>"; };
+		CCF9336E2D1AFAEE004ADE02 /* AddHatimGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHatimGroupViewController.swift; sourceTree = "<group>"; };
+		CCF9336F2D1AFAEE004ADE02 /* AddPersonalHatmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonalHatmViewController.swift; sourceTree = "<group>"; };
+		CCF933702D1AFAEE004ADE02 /* EditHatmGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHatmGroupViewController.swift; sourceTree = "<group>"; };
+		CCF933722D1AFAEE004ADE02 /* HatmGroupMemberListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmGroupMemberListCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF933742D1AFAEE004ADE02 /* HatimGroupInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF933752D1AFAEE004ADE02 /* HatimInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimInfoHeaderView.swift; sourceTree = "<group>"; };
+		CCF933772D1AFAEE004ADE02 /* HatmPersonalInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmPersonalInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF933782D1AFAEE004ADE02 /* HatmPersonalInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmPersonalInfoHeaderView.swift; sourceTree = "<group>"; };
+		CCF9337B2D1AFAEE004ADE02 /* GroupHatimCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHatimCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF9337C2D1AFAEE004ADE02 /* PersonalHatimCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalHatimCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF9337E2D1AFAEE004ADE02 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCF933812D1AFAEE004ADE02 /* BookPoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPoraViewModel.swift; sourceTree = "<group>"; };
+		CCF933822D1AFAEE004ADE02 /* CreateHatimGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHatimGroupViewModel.swift; sourceTree = "<group>"; };
+		CCF933832D1AFAEE004ADE02 /* DeleteHatmGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHatmGroupViewModel.swift; sourceTree = "<group>"; };
+		CCF933842D1AFAEE004ADE02 /* EditHatmGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHatmGroupViewModel.swift; sourceTree = "<group>"; };
+		CCF933852D1AFAEE004ADE02 /* FinishedPoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedPoraViewModel.swift; sourceTree = "<group>"; };
+		CCF933862D1AFAEE004ADE02 /* GetBookedPoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBookedPoraViewModel.swift; sourceTree = "<group>"; };
+		CCF933872D1AFAEE004ADE02 /* GetFinishedPoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFinishedPoraViewModel.swift; sourceTree = "<group>"; };
+		CCF933882D1AFAEE004ADE02 /* GetUserDetailFromID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDetailFromID.swift; sourceTree = "<group>"; };
+		CCF933892D1AFAEE004ADE02 /* GetUserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDetailViewModel.swift; sourceTree = "<group>"; };
+		CCF9338A2D1AFAEE004ADE02 /* HatimGetGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGetGroupViewModel.swift; sourceTree = "<group>"; };
+		CCF9338B2D1AFAEE004ADE02 /* HatmGroupDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatmGroupDetailsViewModel.swift; sourceTree = "<group>"; };
+		CCF9338C2D1AFAEE004ADE02 /* PatchBookedPoralarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchBookedPoralarViewModel.swift; sourceTree = "<group>"; };
+		CCF9338D2D1AFAEE004ADE02 /* PatchBookedPoraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchBookedPoraViewModel.swift; sourceTree = "<group>"; };
+		CCF9338E2D1AFAEE004ADE02 /* PoralarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoralarViewModel.swift; sourceTree = "<group>"; };
+		CCF9338F2D1AFAEE004ADE02 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -175,41 +235,12 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		CC16DD952CBBED400029AF4E /* HatimModel */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DD962CBBED4E0029AF4E /* GetHatimGroupData.swift */,
-				CC16DD932CBBED370029AF4E /* HatimGroupModel.swift */,
-			);
-			path = HatimModel;
-			sourceTree = "<group>";
-		};
-		CC16DD982CBBED5A0029AF4E /* HatmViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DD9B2CBBED700029AF4E /* HatimGetGroupViewModel.swift */,
-				CC16DD992CBBED6A0029AF4E /* CreateHatimGroupViewModel.swift */,
-			);
-			path = HatmViewModel;
-			sourceTree = "<group>";
-		};
 		CC16DD9D2CBBED940029AF4E /* MenuViewController */ = {
 			isa = PBXGroup;
 			children = (
 				CC16DD9E2CBBEDA20029AF4E /* MenuViewController.swift */,
 			);
 			path = MenuViewController;
-			sourceTree = "<group>";
-		};
-		CC16DDA02CBBEDA70029AF4E /* HatimViewController */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DDA32CBBEDB80029AF4E /* GroupHatimInfoViewController.swift */,
-				CC16DDA12CBBEDB30029AF4E /* HatimMainViewController.swift */,
-				CC16DDA52CBBEDBD0029AF4E /* AddHatimGroupViewController.swift */,
-				CC16DDA72CBBEDC20029AF4E /* HatimGroupMembersListViewController.swift */,
-			);
-			path = HatimViewController;
 			sourceTree = "<group>";
 		};
 		CC16DDA92CBBEDCE0029AF4E /* ZikrViewController */ = {
@@ -235,43 +266,6 @@
 				CC5342052C3BF0EC00112114 /* UserRegistrationViewController.swift */,
 			);
 			path = AuthorizationViewController;
-			sourceTree = "<group>";
-		};
-		CC16DDAB2CBBEE170029AF4E /* Hatm */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DDAC2CBBEE280029AF4E /* MenuCollectionViewCell.swift */,
-				CC16DDAE2CBBEE320029AF4E /* HatmCell */,
-			);
-			path = Hatm;
-			sourceTree = "<group>";
-		};
-		CC16DDAE2CBBEE320029AF4E /* HatmCell */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DDAF2CBBEE490029AF4E /* GroupHatimCollectionViewCell.swift */,
-				CC16DDB12CBBEE4E0029AF4E /* PersonalHatimCollectionViewCell.swift */,
-				CC16DDB32CBBEE520029AF4E /* HatmInfoCell */,
-			);
-			path = HatmCell;
-			sourceTree = "<group>";
-		};
-		CC16DDB32CBBEE520029AF4E /* HatmInfoCell */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DDB42CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift */,
-				CC16DDB62CBBEE620029AF4E /* HatimInfoHeaderView.swift */,
-				CC16DDB82CBBEE6B0029AF4E /* HatmGroupMemberCell */,
-			);
-			path = HatmInfoCell;
-			sourceTree = "<group>";
-		};
-		CC16DDB82CBBEE6B0029AF4E /* HatmGroupMemberCell */ = {
-			isa = PBXGroup;
-			children = (
-				CC16DDB92CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift */,
-			);
-			path = HatmGroupMemberCell;
 			sourceTree = "<group>";
 		};
 		CC2C2A202C79E2A20014F37D /* Manager */ = {
@@ -303,12 +297,9 @@
 		CC3966172BFCD56200C861C9 /* ZikrTask */ = {
 			isa = PBXGroup;
 			children = (
+				CCF933912D1AFAEE004ADE02 /* Hatm */,
+				CCF933582D1AFA3B004ADE02 /* Zikr */,
 				CC2C2A202C79E2A20014F37D /* Manager */,
-				CCF6A5C32BFD010B00921654 /* Extension */,
-				CCF6A5C22BFD010700921654 /* App */,
-				CCF6A5C12BFD010100921654 /* Model */,
-				CCF6A5C02BFD00FC00921654 /* View */,
-				CCF6A5BF2BFD00F700921654 /* ViewModel */,
 				CC3966242BFCD56300C861C9 /* Assets.xcassets */,
 				CC50C6662C2830EC00180E42 /* pianoSound.mp3 */,
 				CC3966292BFCD56300C861C9 /* Info.plist */,
@@ -368,7 +359,6 @@
 			isa = PBXGroup;
 			children = (
 				CC84AC142CBD43D300F86D41 /* ZikrViewModel */,
-				CC16DD982CBBED5A0029AF4E /* HatmViewModel */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -378,7 +368,6 @@
 			children = (
 				CC16DDAA2CBBEDF60029AF4E /* AuthorizationViewController */,
 				CC16DDA92CBBEDCE0029AF4E /* ZikrViewController */,
-				CC16DDA02CBBEDA70029AF4E /* HatimViewController */,
 				CC16DD9D2CBBED940029AF4E /* MenuViewController */,
 				CCF6A5F42BFD444F00921654 /* Cell */,
 				CCF6A5C42BFD011D00921654 /* Storyboard */,
@@ -390,7 +379,6 @@
 			isa = PBXGroup;
 			children = (
 				CCA046132CC8CD5B0018B82E /* ZikrModel */,
-				CC16DD952CBBED400029AF4E /* HatimModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,9 +432,167 @@
 			isa = PBXGroup;
 			children = (
 				CC84AC132CBD43BB00F86D41 /* Zikr */,
-				CC16DDAB2CBBEE170029AF4E /* Hatm */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		CCF933582D1AFA3B004ADE02 /* Zikr */ = {
+			isa = PBXGroup;
+			children = (
+				CCF6A5C22BFD010700921654 /* App */,
+				CCF6A5C32BFD010B00921654 /* Extension */,
+				CCF6A5BF2BFD00F700921654 /* ViewModel */,
+				CCF6A5C02BFD00FC00921654 /* View */,
+				CCF6A5C12BFD010100921654 /* Model */,
+			);
+			path = Zikr;
+			sourceTree = "<group>";
+		};
+		CCF933672D1AFAEE004ADE02 /* HatimModel */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933592D1AFAEE004ADE02 /* BookedPoraRequest.swift */,
+				CCF9335A2D1AFAEE004ADE02 /* EditHatmGroup.swift */,
+				CCF9335B2D1AFAEE004ADE02 /* FinishedPoraPatchRequest.swift */,
+				CCF9335C2D1AFAEE004ADE02 /* FinishedPoraRequest.swift */,
+				CCF9335D2D1AFAEE004ADE02 /* FinishedPoraResponse.swift */,
+				CCF9335E2D1AFAEE004ADE02 /* GetBookedPoraModel.swift */,
+				CCF9335F2D1AFAEE004ADE02 /* GetHatimGroupData.swift */,
+				CCF933602D1AFAEE004ADE02 /* GetUserProfileFromID.swift */,
+				CCF933612D1AFAEE004ADE02 /* HatimGroupModel.swift */,
+				CCF933622D1AFAEE004ADE02 /* HatmGroupJuzCountDetail.swift */,
+				CCF933632D1AFAEE004ADE02 /* HatmGroupProfile.swift */,
+				CCF933642D1AFAEE004ADE02 /* HatmGroupUserModel.swift */,
+				CCF933652D1AFAEE004ADE02 /* PatchBookedPora.swift */,
+				CCF933662D1AFAEE004ADE02 /* PoralarModel.swift */,
+			);
+			path = HatimModel;
+			sourceTree = "<group>";
+		};
+		CCF9336A2D1AFAEE004ADE02 /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933692D1AFAEE004ADE02 /* PersonalHatmInfoViewController.swift */,
+			);
+			path = Personal;
+			sourceTree = "<group>";
+		};
+		CCF9336D2D1AFAEE004ADE02 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				CCF9336B2D1AFAEE004ADE02 /* GroupHatimInfoViewController.swift */,
+				CCF9336C2D1AFAEE004ADE02 /* HatimGroupMembersListViewController.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		CCF933712D1AFAEE004ADE02 /* AddandEditHatmGroup */ = {
+			isa = PBXGroup;
+			children = (
+				CCF9336E2D1AFAEE004ADE02 /* AddHatimGroupViewController.swift */,
+				CCF9336F2D1AFAEE004ADE02 /* AddPersonalHatmViewController.swift */,
+				CCF933702D1AFAEE004ADE02 /* EditHatmGroupViewController.swift */,
+			);
+			path = AddandEditHatmGroup;
+			sourceTree = "<group>";
+		};
+		CCF933732D1AFAEE004ADE02 /* HatmGroupMemberCell */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933722D1AFAEE004ADE02 /* HatmGroupMemberListCollectionViewCell.swift */,
+			);
+			path = HatmGroupMemberCell;
+			sourceTree = "<group>";
+		};
+		CCF933762D1AFAEE004ADE02 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933732D1AFAEE004ADE02 /* HatmGroupMemberCell */,
+				CCF933742D1AFAEE004ADE02 /* HatimGroupInfoCollectionViewCell.swift */,
+				CCF933752D1AFAEE004ADE02 /* HatimInfoHeaderView.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		CCF933792D1AFAEE004ADE02 /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933772D1AFAEE004ADE02 /* HatmPersonalInfoCollectionViewCell.swift */,
+				CCF933782D1AFAEE004ADE02 /* HatmPersonalInfoHeaderView.swift */,
+			);
+			path = Personal;
+			sourceTree = "<group>";
+		};
+		CCF9337A2D1AFAEE004ADE02 /* HatmInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933762D1AFAEE004ADE02 /* Group */,
+				CCF933792D1AFAEE004ADE02 /* Personal */,
+			);
+			path = HatmInfoCell;
+			sourceTree = "<group>";
+		};
+		CCF9337D2D1AFAEE004ADE02 /* HatmCell */ = {
+			isa = PBXGroup;
+			children = (
+				CCF9337A2D1AFAEE004ADE02 /* HatmInfoCell */,
+				CCF9337B2D1AFAEE004ADE02 /* GroupHatimCollectionViewCell.swift */,
+				CCF9337C2D1AFAEE004ADE02 /* PersonalHatimCollectionViewCell.swift */,
+			);
+			path = HatmCell;
+			sourceTree = "<group>";
+		};
+		CCF9337F2D1AFAEE004ADE02 /* HatmCell */ = {
+			isa = PBXGroup;
+			children = (
+				CCF9337D2D1AFAEE004ADE02 /* HatmCell */,
+				CCF9337E2D1AFAEE004ADE02 /* MenuCollectionViewCell.swift */,
+			);
+			path = HatmCell;
+			sourceTree = "<group>";
+		};
+		CCF933802D1AFAEE004ADE02 /* HatmViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933682D1AFAEE004ADE02 /* HatimMainViewController.swift */,
+				CCF9336A2D1AFAEE004ADE02 /* Personal */,
+				CCF9336D2D1AFAEE004ADE02 /* Group */,
+				CCF933712D1AFAEE004ADE02 /* AddandEditHatmGroup */,
+				CCF9337F2D1AFAEE004ADE02 /* HatmCell */,
+			);
+			path = HatmViewController;
+			sourceTree = "<group>";
+		};
+		CCF933902D1AFAEE004ADE02 /* HatmViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933812D1AFAEE004ADE02 /* BookPoraViewModel.swift */,
+				CCF933822D1AFAEE004ADE02 /* CreateHatimGroupViewModel.swift */,
+				CCF933832D1AFAEE004ADE02 /* DeleteHatmGroupViewModel.swift */,
+				CCF933842D1AFAEE004ADE02 /* EditHatmGroupViewModel.swift */,
+				CCF933852D1AFAEE004ADE02 /* FinishedPoraViewModel.swift */,
+				CCF933862D1AFAEE004ADE02 /* GetBookedPoraViewModel.swift */,
+				CCF933872D1AFAEE004ADE02 /* GetFinishedPoraViewModel.swift */,
+				CCF933882D1AFAEE004ADE02 /* GetUserDetailFromID.swift */,
+				CCF933892D1AFAEE004ADE02 /* GetUserDetailViewModel.swift */,
+				CCF9338A2D1AFAEE004ADE02 /* HatimGetGroupViewModel.swift */,
+				CCF9338B2D1AFAEE004ADE02 /* HatmGroupDetailsViewModel.swift */,
+				CCF9338C2D1AFAEE004ADE02 /* PatchBookedPoralarViewModel.swift */,
+				CCF9338D2D1AFAEE004ADE02 /* PatchBookedPoraViewModel.swift */,
+				CCF9338E2D1AFAEE004ADE02 /* PoralarViewModel.swift */,
+				CCF9338F2D1AFAEE004ADE02 /* UserProfileViewModel.swift */,
+			);
+			path = HatmViewModel;
+			sourceTree = "<group>";
+		};
+		CCF933912D1AFAEE004ADE02 /* Hatm */ = {
+			isa = PBXGroup;
+			children = (
+				CCF933672D1AFAEE004ADE02 /* HatimModel */,
+				CCF933802D1AFAEE004ADE02 /* HatmViewController */,
+				CCF933902D1AFAEE004ADE02 /* HatmViewModel */,
+			);
+			path = Hatm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,7 +712,6 @@
 			files = (
 				CCA046172CC8D4680018B82E /* ZikrCountViewModel.swift in Sources */,
 				CCA046152CC8CD710018B82E /* ZikrCountsModel.swift in Sources */,
-				CC16DDB22CBBEE4E0029AF4E /* PersonalHatimCollectionViewCell.swift in Sources */,
 				CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */,
 				CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */,
 				CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */,
@@ -575,7 +720,6 @@
 				CC5342062C3BF0EC00112114 /* UserRegistrationViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
 				CCB4CF9D2CE7996E00ADE32B /* AddUserCollectioViewCell.swift in Sources */,
-				CC16DDA62CBBEDBD0029AF4E /* AddHatimGroupViewController.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */,
 				CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */,
 				CC53420A2C3C460300112114 /* UserRegistrationViewModel.swift in Sources */,
@@ -587,41 +731,73 @@
 				CCB4CF9B2CE7954700ADE32B /* AddUserViewModel.swift in Sources */,
 				CC7AD81B2CF0B28B00617DB3 /* NotificationViewModel.swift in Sources */,
 				CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */,
-				CC16DDA42CBBEDB80029AF4E /* GroupHatimInfoViewController.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
 				CC9B2B812C889DCA00192DCD /* URL.swift in Sources */,
-				CC16DDB02CBBEE490029AF4E /* GroupHatimCollectionViewCell.swift in Sources */,
 				CC1D25A52CBD5B010062400F /* GetZikrModel.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
 				CC1FEFEC2CEF8B4D008CD1DC /* SendNotificationModel.swift in Sources */,
 				CC13512F2C492F3200649A78 /* CreateGroupViewModel.swift in Sources */,
 				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
-				CC16DDAD2CBBEE280029AF4E /* MenuCollectionViewCell.swift in Sources */,
-				CC16DD972CBBED4E0029AF4E /* GetHatimGroupData.swift in Sources */,
-				CC16DDA82CBBEDC20029AF4E /* HatimGroupMembersListViewController.swift in Sources */,
-				CC16DDB52CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift in Sources */,
 				CCB4CF992CE68E1800ADE32B /* AddUserModel.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */,
-				CC16DDB72CBBEE620029AF4E /* HatimInfoHeaderView.swift in Sources */,
 				CCE70CCA2C88E34900977248 /* UserLoginViewModel.swift in Sources */,
 				CC9B2B7F2C889A4C00192DCD /* GetGroupModel.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
 				CC898DDB2CEF9D80005CB7A5 /* GetNotificationModel.swift in Sources */,
-				CC16DDA22CBBEDB30029AF4E /* HatimMainViewController.swift in Sources */,
 				CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */,
-				CC16DDBA2CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
 				CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */,
 				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
 				CC7AD81F2CF0B86E00617DB3 /* NotificationTableViewCell.swift in Sources */,
 				CC16DD9F2CBBEDA20029AF4E /* MenuViewController.swift in Sources */,
 				CC9C5A9F2C624D1600D869C2 /* PersonalZikrViewController.swift in Sources */,
-				CC16DD942CBBED380029AF4E /* HatimGroupModel.swift in Sources */,
+				CCF933922D1AFAEE004ADE02 /* HatmPersonalInfoHeaderView.swift in Sources */,
+				CCF933932D1AFAEE004ADE02 /* PatchBookedPora.swift in Sources */,
+				CCF933942D1AFAEE004ADE02 /* HatimGroupModel.swift in Sources */,
+				CCF933952D1AFAEE004ADE02 /* HatmGroupProfile.swift in Sources */,
+				CCF933962D1AFAEE004ADE02 /* HatmPersonalInfoCollectionViewCell.swift in Sources */,
+				CCF933972D1AFAEE004ADE02 /* MenuCollectionViewCell.swift in Sources */,
+				CCF933982D1AFAEE004ADE02 /* BookedPoraRequest.swift in Sources */,
+				CCF933992D1AFAEE004ADE02 /* GetBookedPoraViewModel.swift in Sources */,
+				CCF9339A2D1AFAEE004ADE02 /* FinishedPoraResponse.swift in Sources */,
+				CCF9339B2D1AFAEE004ADE02 /* PatchBookedPoralarViewModel.swift in Sources */,
+				CCF9339C2D1AFAEE004ADE02 /* GetUserDetailFromID.swift in Sources */,
+				CCF9339D2D1AFAEE004ADE02 /* BookPoraViewModel.swift in Sources */,
+				CCF9339E2D1AFAEE004ADE02 /* UserProfileViewModel.swift in Sources */,
+				CCF9339F2D1AFAEE004ADE02 /* GetBookedPoraModel.swift in Sources */,
+				CCF933A02D1AFAEE004ADE02 /* GroupHatimInfoViewController.swift in Sources */,
+				CCF933A12D1AFAEE004ADE02 /* AddPersonalHatmViewController.swift in Sources */,
+				CCF933A22D1AFAEE004ADE02 /* DeleteHatmGroupViewModel.swift in Sources */,
+				CCF933A32D1AFAEE004ADE02 /* HatimGroupInfoCollectionViewCell.swift in Sources */,
+				CCF933A42D1AFAEE004ADE02 /* HatimMainViewController.swift in Sources */,
+				CCF933A52D1AFAEE004ADE02 /* PoralarViewModel.swift in Sources */,
+				CCF933A62D1AFAEE004ADE02 /* HatmGroupUserModel.swift in Sources */,
+				CCF933A72D1AFAEE004ADE02 /* GetHatimGroupData.swift in Sources */,
+				CCF933A82D1AFAEE004ADE02 /* FinishedPoraRequest.swift in Sources */,
+				CCF933A92D1AFAEE004ADE02 /* FinishedPoraPatchRequest.swift in Sources */,
+				CCF933AA2D1AFAEE004ADE02 /* GetUserDetailViewModel.swift in Sources */,
+				CCF933AB2D1AFAEE004ADE02 /* HatimGroupMembersListViewController.swift in Sources */,
+				CCF933AC2D1AFAEE004ADE02 /* PatchBookedPoraViewModel.swift in Sources */,
+				CCF933AD2D1AFAEE004ADE02 /* GetFinishedPoraViewModel.swift in Sources */,
+				CCF933AE2D1AFAEE004ADE02 /* FinishedPoraViewModel.swift in Sources */,
+				CCF933AF2D1AFAEE004ADE02 /* HatimInfoHeaderView.swift in Sources */,
+				CCF933B02D1AFAEE004ADE02 /* CreateHatimGroupViewModel.swift in Sources */,
+				CCF933B12D1AFAEE004ADE02 /* EditHatmGroupViewController.swift in Sources */,
+				CCF933B22D1AFAEE004ADE02 /* EditHatmGroup.swift in Sources */,
+				CCF933B32D1AFAEE004ADE02 /* EditHatmGroupViewModel.swift in Sources */,
+				CCF933B42D1AFAEE004ADE02 /* HatmGroupJuzCountDetail.swift in Sources */,
+				CCF933B52D1AFAEE004ADE02 /* HatmGroupDetailsViewModel.swift in Sources */,
+				CCF933B62D1AFAEE004ADE02 /* PoralarModel.swift in Sources */,
+				CCF933B72D1AFAEE004ADE02 /* HatimGetGroupViewModel.swift in Sources */,
+				CCF933B82D1AFAEE004ADE02 /* PersonalHatmInfoViewController.swift in Sources */,
+				CCF933B92D1AFAEE004ADE02 /* PersonalHatimCollectionViewCell.swift in Sources */,
+				CCF933BA2D1AFAEE004ADE02 /* GroupHatimCollectionViewCell.swift in Sources */,
+				CCF933BB2D1AFAEE004ADE02 /* HatmGroupMemberListCollectionViewCell.swift in Sources */,
+				CCF933BC2D1AFAEE004ADE02 /* AddHatimGroupViewController.swift in Sources */,
+				CCF933BD2D1AFAEE004ADE02 /* GetUserProfileFromID.swift in Sources */,
 				CCFED3A42C937AC000AE5A96 /* ProfileViewModel.swift in Sources */,
-				CC16DD9A2CBBED6A0029AF4E /* CreateHatimGroupViewModel.swift in Sources */,
 				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
-				CC16DD9C2CBBED700029AF4E /* HatimGetGroupViewModel.swift in Sources */,
 				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,
 				CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */,
 				CC42BE4F2CBADA4100014D06 /* CreateZikrModel.swift in Sources */,

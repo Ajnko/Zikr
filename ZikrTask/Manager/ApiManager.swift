@@ -389,7 +389,7 @@ class ApiManager {
             return
         }
         
-        let url = "\(APIConstants.baseURL)/groups"
+        let url = "https://dzikr.uz/api/v1/groups"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(token)",
@@ -411,19 +411,19 @@ class ApiManager {
     }
     
     //MARK: - Get Hatim Group
-    func fetchHatimGroups(completion: @escaping (Result<[HatimGroupData], Error>) -> Void) {
+    func getPublicHatmGroups(completion: @escaping (Result<[HatmGroupData], Error>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "token") else {
             completion(.failure(NSError(domain: "No token found", code: 401, userInfo: nil)))
             return
         }
         
-        let url = "http://35.188.2.212:7474/api/v1/groups/public/mine?groupType=QURAN"
+        let url = "https://dzikr.uz/api/v1/groups/public/mine?groupType=QURAN"
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(token)"
         ]
-        
-        AF.request(url, headers: headers).responseDecodable(of: [HatimGroupData].self) { response in
+        print(token)
+        AF.request(url, headers: headers).responseDecodable(of: [HatmGroupData].self) { response in
             switch response.result {
             case .success(let groups):
                 completion(.success(groups))
@@ -431,6 +431,112 @@ class ApiManager {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func getPrivateHatmGroups(completion: @escaping (Result<[HatmGroupData], Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            completion(.failure(NSError(domain: "No token found", code: 401, userInfo: nil)))
+            return
+        }
+        
+        let url = "https://dzikr.uz/api/v1/groups/private/mine?groupType=QURAN"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        print(token)
+        AF.request(url, headers: headers).responseDecodable(of: [HatmGroupData].self) { response in
+            switch response.result {
+            case .success(let groups):
+                completion(.success(groups))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - Get poralar
+    func fetchPoralar(completion: @escaping (Result<[PoralarModel], Error>) -> Void) {
+        let url = "https://dzikr.uz/api/v1/poralar"
+        
+        AF.request(url, method: .get).responseDecodable(of: [PoralarModel].self) { response in
+            switch response.result {
+            case .success(let groups):
+                completion(.success(groups))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - Get User Profile
+    
+    func fetchUserProfile(completion: @escaping (Result<HatmGroupUserModel, Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            print("Token not found in UserDefaults.")
+            return
+        }
+        
+        let url = "https://dzikr.uz/api/v1/users/me"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        AF.request(url, method: .get, headers: headers).responseDecodable(of: UserProfileResponse.self) { response in
+            switch response.result {
+            case .success(let userProfileResponse):
+                if userProfileResponse.status {
+                    completion(.success(userProfileResponse.data))
+                } else {
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user data"])))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //MARK: - Book Pora
+    
+    func bookPora(request: BookedPoraRequest, completion: @escaping (Result<String, Error>) -> Void) {
+        guard let url = URL(string: "https://dzikr.uz/api/v1/booked-poralar") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            completion(.failure(NSError(domain: "Token not found", code: 0, userInfo: nil)))
+            return
+        }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(url, method: .post, parameters: request, encoder: JSONParameterEncoder.default, headers: headers)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    if let data = response.data {
+                        do {
+                            let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                            if let id = responseJSON?["id"] as? String {
+                                print("Extracted ID: \(id)")
+                                completion(.success(id))
+                            } else {
+                                completion(.failure(NSError(domain: "ID not found in response", code: 0, userInfo: nil)))
+                            }
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    } else {
+                        completion(.failure(NSError(domain: "No data in response", code: 0, userInfo: nil)))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
     
 }
