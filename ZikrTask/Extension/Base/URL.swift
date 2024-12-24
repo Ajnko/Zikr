@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIConstants {
-    static let baseURL = "http://35.188.2.212:7474/api/v1" // No trailing slash
+    static let baseURL = "https://dzikr.uz/api/v1/" // No trailing slash
 }
 
 
