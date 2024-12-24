@@ -254,8 +254,22 @@ class AddGroupViewController: UIViewController {
         return button
     }()
     
-    var onDismiss: (() -> Void)?
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator = UIActivityIndicatorView(style: .large)
+        return indicator
+    }()
     
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 10
+        view.alpha = 0
+        
+        return view
+    }()
+        
     var containerBottomConstraint: Constraint?
     var activeTextField: UITextField?
     private var viewModel = CreateGroupViewModel()
@@ -280,11 +294,14 @@ class AddGroupViewController: UIViewController {
         zikrNameTextField.inputAccessoryView = toolbar
         zikrInfoTextField.inputAccessoryView = toolbar
         zikrCountTextField.inputAccessoryView = toolbar
+        zikrCountTextField.keyboardType = .numberPad
+        zikrBodyTextField.inputAccessoryView = toolbar
         
         groupNameTextField.delegate = self
         zikrNameTextField.delegate = self
         zikrInfoTextField.delegate = self
         zikrCountTextField.delegate = self
+        zikrBodyTextField.delegate = self
         
         setupKeyboardHandling()
         
@@ -299,6 +316,18 @@ class AddGroupViewController: UIViewController {
         blurView.effect = blurEffect
         blurView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+        }
+        
+        blurView.contentView.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
         
         //title image view container view
@@ -509,6 +538,11 @@ class AddGroupViewController: UIViewController {
             make.height.equalTo(view.snp.height).multipliedBy(0.07)
         }
         
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
     }
     
     //MARK: - Textfield padding views
@@ -529,6 +563,9 @@ class AddGroupViewController: UIViewController {
         //zikr count textfield
         let v: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
         zikrCountTextField.settinPaddingView(paddingView: v)
+        
+        let l: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
+        zikrBodyTextField.settinPaddingView(paddingView: l)
         
     }
     
@@ -564,38 +601,57 @@ class AddGroupViewController: UIViewController {
         groupNameTextField.resignFirstResponder()
         zikrNameTextField.resignFirstResponder()
         zikrInfoTextField.resignFirstResponder()
+        zikrBodyTextField.resignFirstResponder()
         zikrCountTextField.resignFirstResponder()
     }
     
+    //MARK: - Create and Post group from API
     
     func createGroup() {
-        guard let groupName = groupNameTextField.text, !groupName.isEmpty
-//              let zikrName = zikrNameTextField.text, !zikrName.isEmpty,
-//              let zikrDesc = zikrInfoTextField.text, !zikrDesc.isEmpty,
-//              let zikrBody = zikrBodyTextField.text, !zikrBody.isEmpty,
-//              let zikrCount = zikrCountTextField.text, let goal = Int(zikrCount)
+        guard let groupName = groupNameTextField.text, !groupName.isEmpty,
+              let zikrName = zikrNameTextField.text, !zikrName.isEmpty,
+              let zikrDesc = zikrInfoTextField.text, !zikrDesc.isEmpty,
+              let zikrBody = zikrBodyTextField.text, !zikrBody.isEmpty,
+              let zikrCount = zikrCountTextField.text, !zikrCount.isEmpty,
+        let goal = Int(zikrCount)
         else {
             showAlert(title: "Validation Error", message: "Please fill all necessary fields correctly.")
             return
         }
         
-        viewModel.createGroup(name: groupName) { [weak self] message in
+        self.showActivityIndicator()
+        viewModel.createGroupAndZikr(groupName: groupName, zikrName: zikrName, desc: zikrDesc, body: zikrBody, goal: goal) { [weak self] result in
             DispatchQueue.main.async {
-                if let message = message {
-//                    print("Group successfully created and group ID successfully saved: \(message)")
+                if let message = result {
+                    print("Result: \(message)")
                     self?.delegate?.groupCreated()
+                    self?.hideActivityIndicator()
                     self?.dismiss(animated: true)
                 }
             }
         }
+    }
+    
+    //MARK: - Show and Hide Activity indicator
+    
+    // Show activity indicator and blur
+    private func showActivityIndicator() {
+        activityIndicator.startAnimating()
         
-//        zikrViewModel.createZikr(name: zikrName, desc: zikrDesc, body: zikrBody, goal: goal) { [weak self] message in
-//            DispatchQueue.main.async {
-//                if let message = message {
-//                    self?.dismiss(animated: true)
-//                }
-//            }
-//        }
+        // Animate the blur effect in
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 1
+        }
+    }
+    
+    // Hide activity indicator and blur
+    private func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        
+        // Animate the blur effect out
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 0
+        }
     }
     
     //MARK: - Create a group and post it using API
@@ -603,6 +659,8 @@ class AddGroupViewController: UIViewController {
     @objc func addGroupButtonTapped() {
         createGroup()
     }
+    
+    //alert
     
     private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

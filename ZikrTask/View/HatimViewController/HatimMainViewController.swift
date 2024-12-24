@@ -79,14 +79,7 @@ class HatimMainViewController: UIViewController, AddHatimGroupDelegate {
         super.viewDidLoad()
         title = "Zikr"
         
-        self.navigationItem.hidesBackButton = true
-        
-        let leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .done, target: self, action: #selector(logoutButtonTapped))
-        leftBarButtonItem.tintColor = .darkMode
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(presentProfileVC))
-        rightBarButtonItem.tintColor = .darkMode
-        self.navigationItem.setLeftBarButtonItems([leftBarButtonItem], animated: true)
-        self.navigationItem.setRightBarButtonItems([rightBarButtonItem], animated: true)
+        self.navigationItem.hidesBackButton = false
         
         //call methods
         addItemsToView()
@@ -193,51 +186,13 @@ class HatimMainViewController: UIViewController, AddHatimGroupDelegate {
         activityIndicator.stopAnimating()
     }
     
-    @objc func logoutButtonTapped() {
-        showAler(title: "Wait", message: "Are you sure you want to logout?")
-    }
-    
     private func showAler(title: String, message: String) {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert
         )
-        
-        let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { _ in
-            self.performLogout()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(logoutAction)
-        alertController.addAction(cancelAction)
         present(alertController, animated: true)
         
-    }
-    
-    private func performLogout() {
-        
-        removeDataFromUserDefaults()
-        
-        // Navigate back to the login screen or perform other necessary actions
-        let loginVC = LogInViewController()
-        let navController = UINavigationController(rootViewController: loginVC)
-        
-        if let window = UIApplication.shared.windows.first{
-            window.rootViewController = navController
-            window.makeKeyAndVisible()
-        }
-    }
-    
-    private func removeDataFromUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: "userId")
-        UserDefaults.standard.removeObject(forKey: "name")
-        UserDefaults.standard.removeObject(forKey: "surname")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "phone")
-        UserDefaults.standard.removeObject(forKey: "image_url")
-        UserDefaults.standard.removeObject(forKey: "isLoggedIn")
-        UserDefaults.standard.removeObject(forKey: "groupId")
     }
     
     //MARK: - Present Profile VC

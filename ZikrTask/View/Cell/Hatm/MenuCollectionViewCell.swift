@@ -9,13 +9,21 @@ import UIKit
 import SnapKit
 
 class MenuCollectionViewCell: UICollectionViewCell {
-    
-    //MARK: - Proporties --
-    
     static let identifier = "MenuCollectionViewCell"
+    
+    //MARK: - Proporties
+    
+    let blurView: UIVisualEffectView = {
+       let blurview = UIVisualEffectView()
+        return blurview
+    }()
+    //blur effect
+    let blurEffect = UIBlurEffect(style: .light)
+    
     let textLabel: UILabel = {
         let label = UILabel()
-        //label for member list
+        label.textColor = .textColor
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -30,9 +38,20 @@ class MenuCollectionViewCell: UICollectionViewCell {
     
     //setupUI
     private func setupUI() {
-        self.addSubview(textLabel)
+        
+        self.addSubview(blurView)
+        blurView.effect = blurEffect
+        blurView.clipsToBounds = true
+        blurView.layer.cornerRadius = 10
+        blurView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        blurView.contentView.addSubview(textLabel)
         textLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
     }
+    
+
 }

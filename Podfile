@@ -12,5 +12,6 @@ target 'ZikrTask' do
   	pod'EMTNeumorphicView'	
 	pod'ScrollCounter'
 	pod'Alamofire'
+	pod 'CryptoSwift'
 
 end

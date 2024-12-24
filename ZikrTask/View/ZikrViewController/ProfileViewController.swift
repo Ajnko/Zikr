@@ -50,6 +50,8 @@ class ProfileViewController: UIViewController {
         header.surnameLabel.text = profileViewModel.surname
         header.userIdLabel.text = "Your ID: \(profileViewModel.userId)"
         profileTableView.tableHeaderView = header
+        
+        fetchUserDetails()
     }
     
     private func setupUI() {
@@ -68,6 +70,11 @@ class ProfileViewController: UIViewController {
         profileTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    private func fetchUserDetails() {
+        profileViewModel.getProfileData()
+        profileTableView.reloadData()
     }
     
     
