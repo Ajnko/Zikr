@@ -168,6 +168,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return indicator
     }()
     
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 10
+        view.alpha = 0
+        
+        return view
+    }()
+    
     let loginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
@@ -188,6 +197,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setupUI() {
+        
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+        }
         
         view.addSubview(backgroundImage)
         backgroundImage.snp.makeConstraints { make in
@@ -334,6 +350,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc func doneButtonTapped() {
         mailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+        phoneNumberTextField.resignFirstResponder()
     }
     
     @objc private func loginButtonTapped() {
@@ -343,9 +360,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             showAlert(title: "Error", message: "Please fill in all fields.")
             return
         }
-        
+        self.showActivityIndicator()
         loginViewModel.loginUser(email: email, phone: phone, password: password) { [weak self] message in
-            self?.showActivityIndicator()
+//            self?.showActivityIndicator()
             DispatchQueue.main.async {
                 if message == "Login successful" {
                     let menuVC = MenuViewController()
@@ -358,14 +375,25 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // Show activity indicator and blur
     private func showActivityIndicator() {
         activityIndicator.startAnimating()
+        
+        // Animate the blur effect in
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 1
+        }
     }
     
+    // Hide activity indicator and blur
     private func hideActivityIndicator() {
         activityIndicator.stopAnimating()
+        
+        // Animate the blur effect out
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 0
+        }
     }
-
 
     
     @objc func createButtonTapped() {
@@ -376,12 +404,34 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     func offAutoCompletion(isOff: Bool) {
         mailTextField.setAutoCompletion(enabled: isOff)
         passwordTextField.setAutoCompletion(enabled: isOff)
+        phoneNumberTextField.setAutoCompletion(enabled: isOff)
     }
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    func setupPhoneNumberTextField() {
+        phoneNumberTextField.keyboardType = .phonePad
+        
+        let plusMinusAccessoryView = UIToolbar()
+        plusMinusAccessoryView.sizeToFit()
+        
+        let plusButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(insertPlus))
+        let minusButton = UIBarButtonItem(title: "-", style: .plain, target: self, action: #selector(insertMinus))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        plusMinusAccessoryView.items = [flexibleSpace, plusButton, minusButton, flexibleSpace]
+    }
+    
+    @objc func insertPlus() {
+        phoneNumberTextField.insertText("+")
+    }
+    
+    @objc func insertMinus() {
+        phoneNumberTextField.insertText("-")
     }
 
 

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import EMTNeumorphicView
 
-class MainViewController: UIViewController, AddGroupDelegate {
+class MainViewController: UIViewController, AddGroupDelegate, ZikrCountUpdate {
     
     private let backgroundImage: UIImageView = {
         let image = UIImageView()
@@ -57,35 +57,41 @@ class MainViewController: UIViewController, AddGroupDelegate {
         let blurview = UIVisualEffectView()
         return blurview
     }()
-    //blur effect
+    
     let blurEffect = UIBlurEffect(style: .light)
     
     var activityIndicator: UIActivityIndicatorView = {
         var indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-        indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator = UIActivityIndicatorView(style: .medium)
         return indicator
     }()
     
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 10
+        view.alpha = 0
+        
+        return view
+    }()
+    
     let myZikrData = ["My Item 1", "My Item 2", "My Item 3", "My Item 1", "My Item 1", "My Item 1", "My Item 1", "My Item 1"]
+    var groups: [Group] = []
     
     
     private var selectedSegmentIndex = 0
     
-    var viewModel = GroupViewModel()
+    var viewModel = GetGroupAndZikrViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Zikr"
-        
-        self.navigationItem.hidesBackButton = true
-        
-        let leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .done, target: self, action: #selector(logoutButtonTapped))
-        leftBarButtonItem.tintColor = .darkMode
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(presentProfileVC))
+        self.navigationItem.hidesBackButton = false
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "message.fill"), style: .plain, target: self, action: #selector(showNotificationVC))
         rightBarButtonItem.tintColor = .darkMode
-        self.navigationItem.setLeftBarButtonItems([leftBarButtonItem], animated: true)
-        self.navigationItem.setRightBarButtonItems([rightBarButtonItem], animated: true)
+        self.navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
         
         //call methods
         addItemsToView()
@@ -94,16 +100,29 @@ class MainViewController: UIViewController, AddGroupDelegate {
         
         fetchGroups()
         groupCreated()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataCollectionView), name: NSNotification.Name("ZikrCountUpdated"), object: nil)
+
+    }
+    
+    @objc func reloadDataCollectionView() {
+        // Reload your DataCollectionView data here
+        self.dataCollectionView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dataCollectionView.reloadData()
         selectedSegmentIndex = 0
         segmentCollectionView.reloadData()
-        dataCollectionView.reloadData()
-        fetchGroups()
         groupCreated()
+        dataCollectionView.reloadData()
+        groupCreated()
+        
     }
     
     private func configureDelegates() {
@@ -113,12 +132,12 @@ class MainViewController: UIViewController, AddGroupDelegate {
         segmentCollectionView.dataSource = self
     }
     
-    
     private func addItemsToView() {
         
         view.addSubview(backgroundImage)
         view.addSubview(segmentCollectionView)
         view.addSubview(dataCollectionView)
+        view.addSubview(loadingView)
         backgroundImage.bringSubviewToFront(segmentCollectionView)
         backgroundImage.bringSubviewToFront(dataCollectionView)
     }
@@ -160,6 +179,11 @@ class MainViewController: UIViewController, AddGroupDelegate {
             make.edges.equalToSuperview()
         }
         
+        loadingView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+        }
         
         view.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints { make in
@@ -168,30 +192,76 @@ class MainViewController: UIViewController, AddGroupDelegate {
         
     }
     
+    //MARK: - Protocol Methods
+    
+    private func loadCountsFromUserDefaults() {
+        for index in 0..<groups.count {
+            var group = groups[index]
+            group.totalZikrCount = 0 // Reset count to avoid double counting
+            
+            // Loop through each ZikrProgress for this group
+            for i in 0..<group.zikrProgress.count {
+                let zikrProgress = group.zikrProgress[i]
+                let key = "\(group.groupId)_\(zikrProgress.zikrName)_count"
+                let count = UserDefaults.standard.integer(forKey: key)
+                
+                // Update ZikrProgress count
+                group.zikrProgress[i].zikrCount = count
+                
+                // Sum up to calculate totalZikrCount
+                group.totalZikrCount += count
+            }
+            
+            groups[index] = group // Update the group in the array
+        }
+        dataCollectionView.reloadData() // Reload the collection view to reflect updated counts
+    }
+
+
+    
     func groupCreated() {
         fetchGroups()
+
     }
+    
+    func updateZikrCount() {
+//        self.dataCollectionView.reloadData()
+    }
+    
+    //MARK: - Fetch Created Groups and Zikrs
     
     func fetchGroups() {
         showActivityIndicator()
-        viewModel.fetchGroups { [weak self] errorMessage in
+        viewModel.fetchGroupsAndZikrs { [weak self] errorMessage in
             DispatchQueue.main.async {
-                if let errorMessage = errorMessage {
-                    self?.showAlert(title: "Error", message: errorMessage)
+                self?.hideActivityIndicator()
+                
+                if let error = errorMessage {
                 } else {
-                    self?.hideActivityIndicator()
                     self?.dataCollectionView.reloadData()
                 }
             }
         }
     }
     
+    // Show activity indicator and blur
     private func showActivityIndicator() {
         activityIndicator.startAnimating()
+        
+
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 1
+        }
     }
     
+
     private func hideActivityIndicator() {
         activityIndicator.stopAnimating()
+        
+
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 0
+        }
     }
     
     
@@ -200,9 +270,6 @@ class MainViewController: UIViewController, AddGroupDelegate {
     @objc func addButtonTapped() {
         let vc = AddGroupViewController()
         vc.delegate = self
-        vc.onDismiss = { [weak self] in
-            self?.dismiss(animated: true)
-        }
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
@@ -221,51 +288,18 @@ class MainViewController: UIViewController, AddGroupDelegate {
         
     }
     
-    @objc func logoutButtonTapped() {
-        showAlert(title: "Wait", message: "Are you sure you want to logout?")
-    }
-    
     private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert
         )
-        
-        let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { _ in
-            self.performLogout()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(logoutAction)
-        alertController.addAction(cancelAction)
         present(alertController, animated: true)
         
     }
     
-    private func performLogout() {
-        
-        removeDataFromUserDefaults()
-        
-        let loginVC = LogInViewController()
-        let navController = UINavigationController(rootViewController: loginVC)
-        
-        if let window = UIApplication.shared.windows.first{
-            window.rootViewController = navController
-            window.makeKeyAndVisible()
-        }
-    }
-    
-    private func removeDataFromUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: "userId")
-        UserDefaults.standard.removeObject(forKey: "name")
-        UserDefaults.standard.removeObject(forKey: "surname")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "phone")
-        UserDefaults.standard.removeObject(forKey: "image_url")
-        UserDefaults.standard.removeObject(forKey: "isLoggedIn")
-        UserDefaults.standard.removeObject(forKey: "groupId")
-        UserDefaults.standard.removeObject(forKey: "token")
+    @objc func showNotificationVC() {
+        let notificationVC = NotificationsViewController()
+        self.navigationController?.pushViewController(notificationVC, animated: true)
     }
     
     //MARK: - Present Profile VC
@@ -283,25 +317,48 @@ class MainViewController: UIViewController, AddGroupDelegate {
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == segmentCollectionView {
             return 2
         } else if collectionView == dataCollectionView {
             switch selectedSegmentIndex {
             case 0:
-                return viewModel.groups.count
+                return viewModel.numberOfGroups()
             case 1:
                 return 10
             default:
                 break
             }
         }
-        
         return 10
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func incrementZikrCount(for groupId: String, zikrId: String) {
+        // Create the key for UserDefaults
+        let countKey = "\(groupId)_\(zikrId)_count"
         
+        // Retrieve the current zikr count from UserDefaults
+        var currentCount = UserDefaults.standard.integer(forKey: countKey)
+        
+        // Increment the count
+        currentCount += 1
+        
+        // Save the updated count back to UserDefaults
+        UserDefaults.standard.set(currentCount, forKey: countKey)
+        
+        // Optionally, print the current count to debug
+        print("Updated Zikr count for \(countKey): \(currentCount)")
+    }
+
+    // Call this function whenever you need to update the zikr count
+    func updateZikrCount(for groupId: String, zikrId: String) {
+        incrementZikrCount(for: groupId, zikrId: zikrId)
+        
+        // Optionally, you can refresh the UI or handle any additional logic after updating the count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == segmentCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentCollectionViewCell.identifier, for: indexPath) as! SegmentCollectionViewCell
             if indexPath.item == 0 {
@@ -310,7 +367,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.configureCell(with: "Personal", image: UIImage(systemName: "person")!)
             }
             cell.setSelected(indexPath.item == selectedSegmentIndex)
-            
             return cell
         } else if collectionView == dataCollectionView {
             if selectedSegmentIndex == 0 {
@@ -321,9 +377,33 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.layer.shadowOffset = CGSize(width: 0, height: 3)
                 cell.layer.shadowRadius = 5
                 cell.layer.cornerRadius = 15
-                let group = viewModel.groups[indexPath.row]
-                cell.configureCell(with: group)
-//                cell.groupMembersButton.addTarget(self, action: #selector(showMembersList), for: .touchUpInside)
+
+                // Fetch group data
+                let group = viewModel.group(at: indexPath.row)
+
+                // Fetch zikr data for the group
+                if let zikrs = viewModel.zikrsByGroupId[group.groupId], let zikr = zikrs.first {
+                    
+                    // Directly use groupId and zikrId assuming they are non-optional
+                    let groupId = group.groupId
+                    let zikrId = zikr.id
+
+                    // Ensure we have valid IDs to create the key
+                    if !groupId.isEmpty && !zikrId.isEmpty {
+                        let countKey = "\(groupId)_\(zikrId)_count"
+                        let userSpecificCount = UserDefaults.standard.integer(forKey: countKey)
+                        print("Retrieved user-specific count from UserDefaults for key \(countKey): \(userSpecificCount)")
+
+                        // Configure the cell with group, zikr, and user-specific count
+                        cell.configureCell(with: group, and: zikr, userSpecificCount: userSpecificCount)
+                    } else {
+                        print("Error: groupId or zikrId is empty")
+                        cell.configureCell(with: group, and: nil, userSpecificCount: 0)
+                    }
+                } else {
+                    cell.configureCell(with: group, and: nil, userSpecificCount: 0) // Configure without zikr if not found
+                }
+
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalCollectionViewCell.identifier, for: indexPath) as! PersonalCollectionViewCell
@@ -333,14 +413,72 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 cell.layer.shadowOffset = CGSize(width: 0, height: 3)
                 cell.layer.shadowRadius = 5
                 cell.layer.cornerRadius = 15
-                
                 return cell
             }
         }
-        
         return UICollectionViewCell()
     }
+
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if collectionView == dataCollectionView {
+            let group = viewModel.group(at: indexPath.row)
+            let zikrs = viewModel.zikrsForGroup(at: indexPath.row) // Get the zikrs for the selected group
+            
+            // Assuming you want to delete the first zikr in the list, if available
+            let zikrId = zikrs.first?.id // Replace with your zikr's identifier
+            
+            let deleteAction = UIAction(title: "Delete Group and Zikr", image: UIImage(systemName: "trash")) { [weak self] _ in
+                guard let self = self else { return }
+                self.confirmDelete(groupId: group.groupId, zikrId: zikrId)
+            }
+
+            let menu = UIMenu(title: "", children: [deleteAction])
+            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in menu })
+        }
+        return nil
+    }
     
+    // Confirmation alert for deleting both group and zikr
+    private func confirmDelete(groupId: String, zikrId: String?) {
+        let alert = UIAlertController(title: "Delete Group and Zikr", message: "Are you sure you want to delete this group and its zikr?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            // Delete Zikr first, then delete Group
+            if let zikrId = zikrId {
+                ApiManager.shared.deleteZikr(withId: zikrId) { result in
+                    switch result {
+                    case .success:
+                        print("Zikr deleted successfully")
+                        // Now delete the group
+                        ApiManager.shared.deleteGroup(withId: groupId) { result in
+                            switch result {
+                            case .success:
+                                print("Group deleted successfully")
+                                self?.fetchGroups() // Reload the data after deletion
+                            case .failure(let error):
+                                print("Failed to delete group: \(error.localizedDescription)")
+                            }
+                        }
+                    case .failure(let error):
+                        print("Failed to delete zikr: \(error.localizedDescription)")
+                    }
+                }
+            } else {
+                // If there is no zikrId, just delete the group
+                ApiManager.shared.deleteGroup(withId: groupId) { result in
+                    switch result {
+                    case .success:
+                        print("Group deleted successfully")
+                        self?.fetchGroups() // Reload the data after deletion
+                    case .failure(let error):
+                        print("Failed to delete group: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == segmentCollectionView {
             return CGSize(width: (view.frame.width / 2.07), height: (view.frame.height) / 14)
@@ -357,8 +495,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
         return UIEdgeInsets()
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == segmentCollectionView {
             selectedSegmentIndex = indexPath.item
@@ -366,11 +502,21 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             dataCollectionView.reloadData()
         } else {
             if selectedSegmentIndex == 0 {
-//                let selectedGroup = getGroupViewModel.groups[indexPath.item]
-                let vc = GroupZikrCountViewController()
-//                vc.groupName = selectedGroup.name
-//                vc.groupPurpose = selectedGroup.purpose
-                self.navigationController?.pushViewController(vc, animated: true)
+                let selectedGroup = viewModel.group(at: indexPath.row)
+                
+                // Retrieve the first zikr for the selected group
+                if let zikrs = viewModel.zikrsByGroupId[selectedGroup.groupId], let selectedZikr = zikrs.first {
+                    UserDefaults.standard.set(selectedGroup.groupId, forKey: "groupId")
+                    UserDefaults.standard.set(selectedZikr.id, forKey: "zikrId")
+                    
+                    let vc = GroupZikrCountViewController()
+                    vc.zikrUpdateCountDelegate = self
+                    vc.groupName = selectedGroup.groupName
+                    vc.groupPurpose = "\(selectedZikr.goal)"
+                    vc.groupId = selectedGroup.groupId
+                    vc.zikrId = selectedZikr.id
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             } else {
                 let vc = PersonalZikrViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -378,5 +524,3 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
         }
     }
 }
-
-

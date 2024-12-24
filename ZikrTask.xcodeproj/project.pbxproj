@@ -25,22 +25,26 @@
 		CC16DDB52CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB42CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift */; };
 		CC16DDB72CBBEE620029AF4E /* HatimInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB62CBBEE620029AF4E /* HatimInfoHeaderView.swift */; };
 		CC16DDBA2CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16DDB92CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift */; };
+		CC1D25A52CBD5B010062400F /* GetZikrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D25A42CBD5AFC0062400F /* GetZikrModel.swift */; };
+		CC1FEFEC2CEF8B4D008CD1DC /* SendNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FEFEB2CEF8B3F008CD1DC /* SendNotificationModel.swift */; };
 		CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2C2A212C79E2B20014F37D /* ApiManager.swift */; };
-		CC383D9A2C94C4280043FF5A /* SubscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC383D992C94C4280043FF5A /* SubscribeViewModel.swift */; };
 		CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3966182BFCD56200C861C9 /* AppDelegate.swift */; };
 		CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */; };
 		CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC39661C2BFCD56200C861C9 /* LogInViewController.swift */; };
 		CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC3966212BFCD56200C861C9 /* ZikrTask.xcdatamodeld */; };
 		CC3966252BFCD56300C861C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC3966242BFCD56300C861C9 /* Assets.xcassets */; };
 		CC3966282BFCD56300C861C9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CC3966272BFCD56300C861C9 /* Base */; };
-		CC42BE4F2CBADA4100014D06 /* CreateZikr.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42BE4E2CBADA3900014D06 /* CreateZikr.swift */; };
-		CC42BE512CBADAB700014D06 /* ZikrViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42BE502CBADAB100014D06 /* ZikrViewModel.swift */; };
+		CC42BE4F2CBADA4100014D06 /* CreateZikrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC42BE4E2CBADA3900014D06 /* CreateZikrModel.swift */; };
 		CC50C6672C2830EC00180E42 /* pianoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC50C6662C2830EC00180E42 /* pianoSound.mp3 */; };
-		CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */; };
+		CC5342062C3BF0EC00112114 /* UserRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342052C3BF0EC00112114 /* UserRegistrationViewController.swift */; };
 		CC5342082C3C459B00112114 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342072C3C459B00112114 /* UserModel.swift */; };
-		CC53420A2C3C460300112114 /* CreateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342092C3C460300112114 /* CreateUserViewModel.swift */; };
+		CC53420A2C3C460300112114 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5342092C3C460300112114 /* UserRegistrationViewModel.swift */; };
 		CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */; };
 		CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC614F3B2BFFAA010078FC43 /* GroupZikrCountViewController.swift */; };
+		CC7AD81B2CF0B28B00617DB3 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AD81A2CF0B28200617DB3 /* NotificationViewModel.swift */; };
+		CC7AD81D2CF0B4C200617DB3 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AD81C2CF0B4B400617DB3 /* NotificationsViewController.swift */; };
+		CC7AD81F2CF0B86E00617DB3 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AD81E2CF0B86400617DB3 /* NotificationTableViewCell.swift */; };
+		CC898DDB2CEF9D80005CB7A5 /* GetNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC898DDA2CEF9D76005CB7A5 /* GetNotificationModel.swift */; };
 		CC9B2B7F2C889A4C00192DCD /* GetGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */; };
 		CC9B2B812C889DCA00192DCD /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2B802C889DCA00192DCD /* URL.swift */; };
 		CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */; };
@@ -49,7 +53,12 @@
 		CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */; };
 		CC9F76172C3D6988009323C3 /* CreateGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F76162C3D6988009323C3 /* CreateGroupModel.swift */; };
 		CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */; };
+		CCA046152CC8CD710018B82E /* ZikrCountsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA046142CC8CD6C0018B82E /* ZikrCountsModel.swift */; };
+		CCA046172CC8D4680018B82E /* ZikrCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA046162CC8D4600018B82E /* ZikrCountViewModel.swift */; };
 		CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */; };
+		CCB4CF992CE68E1800ADE32B /* AddUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB4CF982CE68E0100ADE32B /* AddUserModel.swift */; };
+		CCB4CF9B2CE7954700ADE32B /* AddUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB4CF9A2CE7953D00ADE32B /* AddUserViewModel.swift */; };
+		CCB4CF9D2CE7996E00ADE32B /* AddUserCollectioViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB4CF9C2CE7995D00ADE32B /* AddUserCollectioViewCell.swift */; };
 		CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */; };
 		CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE70CC72C88E2FE00977248 /* UserLogin.swift */; };
 		CCE70CCA2C88E34900977248 /* UserLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */; };
@@ -85,8 +94,9 @@
 		CC16DDB42CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC16DDB62CBBEE620029AF4E /* HatimInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimInfoHeaderView.swift; sourceTree = "<group>"; };
 		CC16DDB92CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatimGroupMemberListTableViewCell.swift; sourceTree = "<group>"; };
+		CC1D25A42CBD5AFC0062400F /* GetZikrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZikrModel.swift; sourceTree = "<group>"; };
+		CC1FEFEB2CEF8B3F008CD1DC /* SendNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNotificationModel.swift; sourceTree = "<group>"; };
 		CC2C2A212C79E2B20014F37D /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
-		CC383D992C94C4280043FF5A /* SubscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewModel.swift; sourceTree = "<group>"; };
 		CC3966152BFCD56200C861C9 /* ZikrTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZikrTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC3966182BFCD56200C861C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC39661A2BFCD56200C861C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,14 +105,17 @@
 		CC3966242BFCD56300C861C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC3966272BFCD56300C861C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC3966292BFCD56300C861C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC42BE4E2CBADA3900014D06 /* CreateZikr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZikr.swift; sourceTree = "<group>"; };
-		CC42BE502CBADAB100014D06 /* ZikrViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrViewModel.swift; sourceTree = "<group>"; };
+		CC42BE4E2CBADA3900014D06 /* CreateZikrModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZikrModel.swift; sourceTree = "<group>"; };
 		CC50C6662C2830EC00180E42 /* pianoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pianoSound.mp3; sourceTree = "<group>"; };
-		CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		CC5342052C3BF0EC00112114 /* UserRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewController.swift; sourceTree = "<group>"; };
 		CC5342072C3C459B00112114 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		CC5342092C3C460300112114 /* CreateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewModel.swift; sourceTree = "<group>"; };
+		CC5342092C3C460300112114 /* UserRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModel.swift; sourceTree = "<group>"; };
 		CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC614F3B2BFFAA010078FC43 /* GroupZikrCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupZikrCountViewController.swift; sourceTree = "<group>"; };
+		CC7AD81A2CF0B28200617DB3 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		CC7AD81C2CF0B4B400617DB3 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		CC7AD81E2CF0B86400617DB3 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		CC898DDA2CEF9D76005CB7A5 /* GetNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationModel.swift; sourceTree = "<group>"; };
 		CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupModel.swift; sourceTree = "<group>"; };
 		CC9B2B802C889DCA00192DCD /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupViewModel.swift; sourceTree = "<group>"; };
@@ -111,7 +124,12 @@
 		CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListTableViewCell.swift; sourceTree = "<group>"; };
 		CC9F76162C3D6988009323C3 /* CreateGroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupModel.swift; sourceTree = "<group>"; };
 		CCA034D22BFE77C500FCFC2C /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
+		CCA046142CC8CD6C0018B82E /* ZikrCountsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountsModel.swift; sourceTree = "<group>"; };
+		CCA046162CC8D4600018B82E /* ZikrCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZikrCountViewModel.swift; sourceTree = "<group>"; };
 		CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
+		CCB4CF982CE68E0100ADE32B /* AddUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserModel.swift; sourceTree = "<group>"; };
+		CCB4CF9A2CE7953D00ADE32B /* AddUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewModel.swift; sourceTree = "<group>"; };
+		CCB4CF9C2CE7995D00ADE32B /* AddUserCollectioViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserCollectioViewCell.swift; sourceTree = "<group>"; };
 		CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CCE70CC72C88E2FE00977248 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +221,7 @@
 				CC9C5A9E2C624D1600D869C2 /* PersonalZikrViewController.swift */,
 				CCB245E62C32BE7E00D85ED6 /* AddUserViewController.swift */,
 				CCFED39D2C934BF000AE5A96 /* ProfileViewController.swift */,
+				CC7AD81C2CF0B4B400617DB3 /* NotificationsViewController.swift */,
 				CC9F76102C3D5C8D009323C3 /* MembersListViewController.swift */,
 				CCB90A542C0CA9B7002C2A37 /* InfoViewController.swift */,
 			);
@@ -213,7 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				CC39661C2BFCD56200C861C9 /* LogInViewController.swift */,
-				CC5342052C3BF0EC00112114 /* CreateAccountViewController.swift */,
+				CC5342052C3BF0EC00112114 /* UserRegistrationViewController.swift */,
 			);
 			path = AuthorizationViewController;
 			sourceTree = "<group>";
@@ -298,16 +317,57 @@
 			path = ZikrTask;
 			sourceTree = "<group>";
 		};
+		CC84AC132CBD43BB00F86D41 /* Zikr */ = {
+			isa = PBXGroup;
+			children = (
+				CC7AD81E2CF0B86400617DB3 /* NotificationTableViewCell.swift */,
+				CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */,
+				CCB4CF9C2CE7995D00ADE32B /* AddUserCollectioViewCell.swift */,
+				CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */,
+				CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */,
+				CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */,
+				CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */,
+				CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */,
+			);
+			path = Zikr;
+			sourceTree = "<group>";
+		};
+		CC84AC142CBD43D300F86D41 /* ZikrViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */,
+				CC5342092C3C460300112114 /* UserRegistrationViewModel.swift */,
+				CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */,
+				CC13512E2C492F3200649A78 /* CreateGroupViewModel.swift */,
+				CCA046162CC8D4600018B82E /* ZikrCountViewModel.swift */,
+				CCB4CF9A2CE7953D00ADE32B /* AddUserViewModel.swift */,
+				CC7AD81A2CF0B28200617DB3 /* NotificationViewModel.swift */,
+				CCFED3A32C937AC000AE5A96 /* ProfileViewModel.swift */,
+			);
+			path = ZikrViewModel;
+			sourceTree = "<group>";
+		};
+		CCA046132CC8CD5B0018B82E /* ZikrModel */ = {
+			isa = PBXGroup;
+			children = (
+				CC898DDA2CEF9D76005CB7A5 /* GetNotificationModel.swift */,
+				CC1FEFEB2CEF8B3F008CD1DC /* SendNotificationModel.swift */,
+				CCE70CC72C88E2FE00977248 /* UserLogin.swift */,
+				CC5342072C3C459B00112114 /* UserModel.swift */,
+				CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */,
+				CC1D25A42CBD5AFC0062400F /* GetZikrModel.swift */,
+				CC9F76162C3D6988009323C3 /* CreateGroupModel.swift */,
+				CC42BE4E2CBADA3900014D06 /* CreateZikrModel.swift */,
+				CCB4CF982CE68E0100ADE32B /* AddUserModel.swift */,
+				CCA046142CC8CD6C0018B82E /* ZikrCountsModel.swift */,
+			);
+			path = ZikrModel;
+			sourceTree = "<group>";
+		};
 		CCF6A5BF2BFD00F700921654 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CC42BE502CBADAB100014D06 /* ZikrViewModel.swift */,
-				CCE70CC92C88E34900977248 /* UserLoginViewModel.swift */,
-				CC5342092C3C460300112114 /* CreateUserViewModel.swift */,
-				CC13512E2C492F3200649A78 /* CreateGroupViewModel.swift */,
-				CC9B2B822C889FC500192DCD /* GetGroupViewModel.swift */,
-				CCFED3A32C937AC000AE5A96 /* ProfileViewModel.swift */,
-				CC383D992C94C4280043FF5A /* SubscribeViewModel.swift */,
+				CC84AC142CBD43D300F86D41 /* ZikrViewModel */,
 				CC16DD982CBBED5A0029AF4E /* HatmViewModel */,
 			);
 			path = ViewModel;
@@ -329,12 +389,8 @@
 		CCF6A5C12BFD010100921654 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCA046132CC8CD5B0018B82E /* ZikrModel */,
 				CC16DD952CBBED400029AF4E /* HatimModel */,
-				CC42BE4E2CBADA3900014D06 /* CreateZikr.swift */,
-				CCE70CC72C88E2FE00977248 /* UserLogin.swift */,
-				CC5342072C3C459B00112114 /* UserModel.swift */,
-				CC9F76162C3D6988009323C3 /* CreateGroupModel.swift */,
-				CC9B2B7E2C889A4C00192DCD /* GetGroupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -387,12 +443,7 @@
 		CCF6A5F42BFD444F00921654 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				CCFED3A12C9363DA00AE5A96 /* ProfileHeaderView.swift */,
-				CCFED39F2C9359FC00AE5A96 /* ProfileTableViewCell.swift */,
-				CC0B98032C7F39FB002D1C80 /* SegmentCollectionViewCell.swift */,
-				CCF6A5F52BFD446800921654 /* GroupCollectionViewCell.swift */,
-				CC614F392BFF919E0078FC43 /* PersonalCollectionViewCell.swift */,
-				CC9F76122C3D62CC009323C3 /* MembersListTableViewCell.swift */,
+				CC84AC132CBD43BB00F86D41 /* Zikr */,
 				CC16DDAB2CBBEE170029AF4E /* Hatm */,
 			);
 			path = Cell;
@@ -513,47 +564,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA046172CC8D4680018B82E /* ZikrCountViewModel.swift in Sources */,
+				CCA046152CC8CD710018B82E /* ZikrCountsModel.swift in Sources */,
 				CC16DDB22CBBEE4E0029AF4E /* PersonalHatimCollectionViewCell.swift in Sources */,
 				CCA034D32BFE77C500FCFC2C /* AddGroupViewController.swift in Sources */,
 				CC3966232BFCD56200C861C9 /* ZikrTask.xcdatamodeld in Sources */,
 				CCF6A5CE2BFD053C00921654 /* Shadows.swift in Sources */,
 				CCFED3A22C9363DA00AE5A96 /* ProfileHeaderView.swift in Sources */,
 				CC39661D2BFCD56200C861C9 /* LogInViewController.swift in Sources */,
-				CC5342062C3BF0EC00112114 /* CreateAccountViewController.swift in Sources */,
+				CC5342062C3BF0EC00112114 /* UserRegistrationViewController.swift in Sources */,
 				CCF6A5CC2BFD01CC00921654 /* UITextField.swift in Sources */,
+				CCB4CF9D2CE7996E00ADE32B /* AddUserCollectioViewCell.swift in Sources */,
 				CC16DDA62CBBEDBD0029AF4E /* AddHatimGroupViewController.swift in Sources */,
 				CC614F3C2BFFAA010078FC43 /* GroupZikrCountViewController.swift in Sources */,
 				CC9B2B832C889FC500192DCD /* GetGroupViewModel.swift in Sources */,
-				CC53420A2C3C460300112114 /* CreateUserViewModel.swift in Sources */,
+				CC53420A2C3C460300112114 /* UserRegistrationViewModel.swift in Sources */,
+				CC7AD81D2CF0B4C200617DB3 /* NotificationsViewController.swift in Sources */,
 				CCFED3A02C9359FC00AE5A96 /* ProfileTableViewCell.swift in Sources */,
 				CCE70CC82C88E2FE00977248 /* UserLogin.swift in Sources */,
 				CC9F76172C3D6988009323C3 /* CreateGroupModel.swift in Sources */,
-				CC383D9A2C94C4280043FF5A /* SubscribeViewModel.swift in Sources */,
 				CC3966192BFCD56200C861C9 /* AppDelegate.swift in Sources */,
+				CCB4CF9B2CE7954700ADE32B /* AddUserViewModel.swift in Sources */,
+				CC7AD81B2CF0B28B00617DB3 /* NotificationViewModel.swift in Sources */,
 				CCFED39E2C934BF000AE5A96 /* ProfileViewController.swift in Sources */,
 				CC16DDA42CBBEDB80029AF4E /* GroupHatimInfoViewController.swift in Sources */,
 				CC9F76112C3D5C8D009323C3 /* MembersListViewController.swift in Sources */,
 				CC9B2B812C889DCA00192DCD /* URL.swift in Sources */,
 				CC16DDB02CBBEE490029AF4E /* GroupHatimCollectionViewCell.swift in Sources */,
+				CC1D25A52CBD5B010062400F /* GetZikrModel.swift in Sources */,
 				CC5342082C3C459B00112114 /* UserModel.swift in Sources */,
+				CC1FEFEC2CEF8B4D008CD1DC /* SendNotificationModel.swift in Sources */,
 				CC13512F2C492F3200649A78 /* CreateGroupViewModel.swift in Sources */,
 				CC9F76132C3D62CC009323C3 /* MembersListTableViewCell.swift in Sources */,
 				CC16DDAD2CBBEE280029AF4E /* MenuCollectionViewCell.swift in Sources */,
 				CC16DD972CBBED4E0029AF4E /* GetHatimGroupData.swift in Sources */,
 				CC16DDA82CBBEDC20029AF4E /* HatimGroupMembersListViewController.swift in Sources */,
 				CC16DDB52CBBEE5D0029AF4E /* HatimGroupInfoCollectionViewCell.swift in Sources */,
+				CCB4CF992CE68E1800ADE32B /* AddUserModel.swift in Sources */,
 				CC39661B2BFCD56200C861C9 /* SceneDelegate.swift in Sources */,
 				CC0B98042C7F39FB002D1C80 /* SegmentCollectionViewCell.swift in Sources */,
 				CC16DDB72CBBEE620029AF4E /* HatimInfoHeaderView.swift in Sources */,
 				CCE70CCA2C88E34900977248 /* UserLoginViewModel.swift in Sources */,
 				CC9B2B7F2C889A4C00192DCD /* GetGroupModel.swift in Sources */,
 				CCF6A5F32BFD395200921654 /* MainViewController.swift in Sources */,
+				CC898DDB2CEF9D80005CB7A5 /* GetNotificationModel.swift in Sources */,
 				CC16DDA22CBBEDB30029AF4E /* HatimMainViewController.swift in Sources */,
 				CC2C2A222C79E2B20014F37D /* ApiManager.swift in Sources */,
 				CC16DDBA2CBBEE790029AF4E /* HatimGroupMemberListTableViewCell.swift in Sources */,
 				CC614F3A2BFF919E0078FC43 /* PersonalCollectionViewCell.swift in Sources */,
 				CCB245E72C32BE7E00D85ED6 /* AddUserViewController.swift in Sources */,
 				CCB90A552C0CA9B7002C2A37 /* InfoViewController.swift in Sources */,
+				CC7AD81F2CF0B86E00617DB3 /* NotificationTableViewCell.swift in Sources */,
 				CC16DD9F2CBBEDA20029AF4E /* MenuViewController.swift in Sources */,
 				CC9C5A9F2C624D1600D869C2 /* PersonalZikrViewController.swift in Sources */,
 				CC16DD942CBBED380029AF4E /* HatimGroupModel.swift in Sources */,
@@ -561,10 +622,9 @@
 				CC16DD9A2CBBED6A0029AF4E /* CreateHatimGroupViewModel.swift in Sources */,
 				CCF6A5F62BFD446800921654 /* GroupCollectionViewCell.swift in Sources */,
 				CC16DD9C2CBBED700029AF4E /* HatimGetGroupViewModel.swift in Sources */,
-				CC42BE512CBADAB700014D06 /* ZikrViewModel.swift in Sources */,
 				CCF6A5CB2BFD01CC00921654 /* UILabel.swift in Sources */,
 				CCF6A5CA2BFD01CC00921654 /* UIColor.swift in Sources */,
-				CC42BE4F2CBADA4100014D06 /* CreateZikr.swift in Sources */,
+				CC42BE4F2CBADA4100014D06 /* CreateZikrModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,7 +782,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = abdulbosijalilov.ZikrTask;
+				PRODUCT_BUNDLE_IDENTIFIER = abdulbosiddjalilov.ZikrTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -751,7 +811,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = abdulbosijalilov.ZikrTask;
+				PRODUCT_BUNDLE_IDENTIFIER = abdulbosiddjalilov.ZikrTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

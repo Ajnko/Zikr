@@ -17,14 +17,14 @@ class AddUserViewController: UIViewController {
     //blur effect
     let blurEffect = UIBlurEffect(style: .light)
     
-    let userIdLabel = CustomLabel(
-        text: "User ID",
+    let userPhoneNumber = CustomLabel(
+        text: "User Phone Number",
         textColor: .textColor,
         fontSize: .boldSystemFont(ofSize: 16),
         numberOfLines: 0
     )
     
-    let groupNameTextFieldcontainerView: UIView = {
+    let userImageViewContainer: UIView = {
         let view = UIView()
         view.tintColor = .white
         view.layer.cornerRadius = 25
@@ -41,12 +41,19 @@ class AddUserViewController: UIViewController {
         return view
     }()
     
-    let userIdTextField = CustomTextField(
-        placeholder: "Enter User ID ",
+    let userPhoneNumberTextfield = CustomTextField(
+        placeholder: "Enter phone number ",
         textColor: .textColor,
         font: .systemFont(ofSize: 15),
         backgroundColor: .clear,
         cornerRadius: 10
+    )
+    
+    let countryCodeLabel = CustomLabel(
+        text: "+998",
+        textColor: .textColor,
+        fontSize: .systemFont(ofSize: 12),
+        numberOfLines: 0
     )
     
     let infoButton: UIButton = {
@@ -70,8 +77,38 @@ class AddUserViewController: UIViewController {
         return button
     }()
     
-//    let subscribeViewModel = SubscribeViewModel()
+    let userDetailCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 15
+        
+        let collectionview = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionview.register(AddUserCollectioViewCell.self, forCellWithReuseIdentifier: AddUserCollectioViewCell.identifier)
+        collectionview.backgroundColor = .clear
+        return collectionview
+    }()
     
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.color = .black
+        indicator = UIActivityIndicatorView(style: .medium)
+        return indicator
+    }()
+    
+    let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 10
+        view.alpha = 0
+        
+        return view
+    }()
+    
+    let addUserViewModel = AddUserViewModel()
+    let notificationViewModel = NotificationViewModel()
+    
+    var addGroupId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,15 +119,18 @@ class AddUserViewController: UIViewController {
         setupUI()
         
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 15))
-        userIdTextField.settinPaddingView(paddingView: paddingView)
-        userIdTextField.addShadow()
+        userPhoneNumberTextfield.settinPaddingView(paddingView: paddingView)
+        userPhoneNumberTextfield.addShadow()
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton]
         
-        userIdTextField.inputAccessoryView = toolbar
+        userPhoneNumberTextfield.inputAccessoryView = toolbar
+        
+        userDetailCollectionView.delegate = self
+        userDetailCollectionView.dataSource = self
     }
     
     func setupUI() {
@@ -100,21 +140,33 @@ class AddUserViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        blurView.contentView.addSubview(userIdLabel)
-        userIdLabel.snp.makeConstraints { make in
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+        }
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        blurView.contentView.addSubview(userPhoneNumber)
+        userPhoneNumber.snp.makeConstraints { make in
             make.top.equalTo(blurView.snp.centerY).multipliedBy(0.15)
             make.left.equalTo(blurView.snp.left).offset(20)
         }
         
-        blurView.contentView.addSubview(groupNameTextFieldcontainerView)
-        groupNameTextFieldcontainerView.snp.makeConstraints { make in
+        blurView.contentView.addSubview(userImageViewContainer)
+        userImageViewContainer.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(userIdLabel.snp.bottom).offset(8)
+            make.top.equalTo(userPhoneNumber.snp.bottom).offset(8)
             make.width.equalTo(blurView.snp.width).multipliedBy(0.9)
             make.height.equalTo(blurView.snp.height).multipliedBy(0.07)
         }
         
-        groupNameTextFieldcontainerView.addSubview(userIdTextFieldBlurView)
+        userImageViewContainer.addSubview(userIdTextFieldBlurView)
         userIdTextFieldBlurView.effect = blurEffect
         userIdTextFieldBlurView.clipsToBounds = true
         userIdTextFieldBlurView.layer.cornerRadius = 10
@@ -122,8 +174,8 @@ class AddUserViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        userIdTextFieldBlurView.contentView.addSubview(userIdTextField)
-        userIdTextField.snp.makeConstraints { make in
+        userIdTextFieldBlurView.contentView.addSubview(userPhoneNumberTextfield)
+        userPhoneNumberTextfield.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -132,26 +184,132 @@ class AddUserViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        userIdTextField.rightView = infoButton
-        userIdTextField.rightViewMode = .always
+        userPhoneNumberTextfield.rightView = infoButton
+        userPhoneNumberTextfield.rightViewMode = .always
+        
+        blurView.contentView.addSubview(userDetailCollectionView)
+        userDetailCollectionView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(userImageViewContainer.snp.bottom).offset(10)
+            make.width.equalToSuperview()
+            make.height.equalTo(view.snp.height).dividedBy(0.3)
+        }
         
         blurView.contentView.addSubview(addUserButton)
         addUserButton.addTarget(self, action: #selector(addUserButtonTapped), for: .touchUpInside)
         addUserButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.snp.bottom).offset(-40)
+            make.bottom.equalTo(view.snp.bottom).offset(-35)
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.height.equalTo(view.snp.height).multipliedBy(0.07)
         }
         
     }
     
+    func searchUser() {
+        guard let phone = userPhoneNumberTextfield.text, !phone.isEmpty else {
+            showAlert(title: "Error", message: "Please enter a phone number")
+            return
+        }
+        
+        // Fetch user data
+        addUserViewModel.fetchUser(phone: phone) { [weak self] in
+            self?.showActivityIndicator()
+            DispatchQueue.main.async {
+                if let errorMessage = self?.addUserViewModel.errorMessage {
+                    self?.showAlert(title: "Error", message: "Failed to find user by phone")
+                    print(errorMessage) // Handle error (e.g., show alert)
+
+                } else {
+                    self?.userDetailCollectionView.reloadData()
+                    self?.hideActivityIndicator()
+                }
+            }
+        }
+    }
+    
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.hideActivityIndicator()
+            self.userDetailCollectionView.reloadData()
+            completion?()
+        })
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc func doneButtonTapped() {
-        userIdTextField.resignFirstResponder()
+        searchUser()
+        userPhoneNumberTextfield.resignFirstResponder()
     }
     
     @objc func addUserButtonTapped() {
+        guard let receiverId = UserDefaults.standard.string(forKey: "addedUserId") else {
+            showAlert(title: "Error", message: "No user to send notification.")
+            return
+        }
         
+        // Replace with the actual groupId you want to send
+        let groupId = addGroupId
+        
+        notificationViewModel.sendNotification(receiverId: receiverId, groupId: groupId!) { [weak self] result in
+            self?.showActivityIndicator()
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let notificationResponse):
+                    print("Notification sent successfully: \(notificationResponse)")
+                    self?.showAlert(title: "Success", message: "Notification sent successfully!")
+                    self?.hideActivityIndicator()
+                case .failure(let error):
+                    print("Failed to send notification: \(error.localizedDescription)")
+                    self?.showAlert(title: "Error", message: "Failed to send notification.")
+                }
+            }
+        }
     }
     
+    private func showActivityIndicator() {
+        activityIndicator.startAnimating()
+        
+
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 1
+        }
+    }
+    
+
+    private func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        
+
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 0
+        }
+    }
+    
+}
+
+extension AddUserViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return addUserViewModel.numberOfUsers()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddUserCollectioViewCell.identifier, for: indexPath) as! AddUserCollectioViewCell
+        cell.backgroundColor = .clear
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOpacity = 0.5
+        cell.layer.shadowOffset = CGSize(width: 0, height: 3)
+        cell.layer.shadowRadius = 5
+        cell.layer.cornerRadius = 25
+        
+        if let user = addUserViewModel.user {
+            cell.configureCell(with: user)
+        }
+        
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (view.frame.width) - 40, height: (view.frame.height) / 9)
+    }
 }

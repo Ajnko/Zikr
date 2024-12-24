@@ -11,6 +11,10 @@ import AVFoundation
 import AudioToolbox
 import AudioToolbox.AudioServices
 
+protocol ZikrCountUpdate: AnyObject {
+    func updateZikrCount()
+}
+
 class GroupZikrCountViewController: UIViewController {
     
     let blurEffect = UIBlurEffect(style: .extraLight)
@@ -163,7 +167,6 @@ class GroupZikrCountViewController: UIViewController {
     
     let zikrAduioContainerView: UIView = {
         let view = UIView()
-//        view.tintColor = .white
         view.layer.cornerRadius = 16
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.5
@@ -208,10 +211,17 @@ class GroupZikrCountViewController: UIViewController {
     var count: Int = 0
     var player = AVAudioPlayer()
     var isOn: Bool = true
+    private var didTapZikrButton = false
     
-    var maxCount: Int = 33
     var groupName: String?
     var groupPurpose: String?
+    
+    var groupId: String!
+    var zikrId: String!
+    
+    weak var zikrUpdateCountDelegate: ZikrCountUpdate?
+    
+    var zikrCountViewModel: ZikrCountViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,30 +229,60 @@ class GroupZikrCountViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .done, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .darkMode
         self.navigationItem.setLeftBarButtonItems([backButton], animated: true)
+        
+        setConstraints()
+        
+        loadCountFromUserDefaults()
+        updateUI()
 
+        
+        progressView.progress = 0.0
+        progressLabel.text = groupPurpose
+        let purpose = Int(groupPurpose!)
+        changeZikrCountButton.setTitle("\(purpose ?? 10)", for: .normal)
+        zikrCountLabel.text = "\(count)"
+        
+        print("Group ID: \(String(describing: groupId))")
+        print("Zikr ID: \(String(describing: zikrId))")
+        
+        guard let groupId = groupId, let zikrId = zikrId else {
+            print("groupId or zikrId is nil. Cannot initialize ZikrCountViewModel.")
+            return
+        }
+        
+        _ = ZikrCountViewModel(groupId: groupId, zikrId: zikrId)
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("ZikrCountUpdated"), object: nil)
+        saveCountToUserDefaults()
+        if didTapZikrButton {
+            postZikrCountIfNeeded()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadZikrCount()
+    }
+    
+    func loadZikrCount() {
+        let userKey = UserDefaults.standard.integer(forKey: "\(groupId ?? "")_\(zikrId ?? "")_count")
+        print(userKey)
+    }
+    
+    private func setConstraints() {
         setupUI()
         setZikrTextView()
         setZikrCounterView()
         setAudioBlurView()
-
-        
-        // Customize thumb image
-        let thumbImage = UIImage(systemName: "circle.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        audioSlider.setThumbImage(thumbImage, for: .normal)
-        audioSlider.setThumbImage(thumbImage, for: .highlighted)
-        
-        // Customize tint color
-        audioSlider.minimumTrackTintColor = .darkMode
-        audioSlider.maximumTrackTintColor = UIColor.white
-        
-//        progressView.progress = 0.0
-//        progressLabel.text = groupPurpose
-//        let purpose = Int(groupPurpose!)
-//        changeZikrCountButton.setTitle("\(purpose ?? 10)", for: .normal)
-//        zikrCountLabel.text = "\(count)"
-        
+        customizeSlider()
     }
-    
+       
     func setupUI() {
         
         view.addSubview(backgroundImage)
@@ -424,6 +464,16 @@ class GroupZikrCountViewController: UIViewController {
         
     }
     
+    func customizeSlider() {
+        let thumbImage = UIImage(systemName: "circle.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        audioSlider.setThumbImage(thumbImage, for: .normal)
+        audioSlider.setThumbImage(thumbImage, for: .highlighted)
+        
+
+        audioSlider.minimumTrackTintColor = .darkMode
+        audioSlider.maximumTrackTintColor = UIColor.white
+    }
+    
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -436,31 +486,84 @@ class GroupZikrCountViewController: UIViewController {
     //MARK: - Zikr Count Button Tapped
     
     @objc func zikrCountButtonTapped() {
+        
+        didTapZikrButton = true
+
         count += 1
         
+        saveCountToUserDefaults()
+        
+        updateUI()
+    }
+    
+    //MARK: - Save and Load Zikr Count from User Defaults
+    
+    // load from user defaults
+    private func loadCountFromUserDefaults() {
+        if let groupId = groupId, let zikrId = zikrId {
+            let countKey = "\(groupId)_\(zikrId)_count"
+            count = UserDefaults.standard.integer(forKey: countKey)
+            print("Loaded count from UserDefaults with key: \(countKey) and value: \(count)")
+        }
+    }
+    
+    //save to user defaults
+    private func saveCountToUserDefaults() {
+        if let groupId = groupId, let zikrId = zikrId {
+            let countKey = "\(groupId)_\(zikrId)_count"
+            UserDefaults.standard.set(count, forKey: countKey)
+            print("Saving count to UserDefaults with key: \(countKey) and value: \(count)")
+        } else {
+            print("Error: groupId or zikrId is nil")
+        }
+    }
+    
+    //MARK: - Update UI when button is tapped
+    
+    private func updateUI() {
         if count >= Int(groupPurpose!)! {
-            
             zikrProgressView.progress = 1.0
             progressView.progress = 1.0
             zikrCountLabel.text = "\(count)"
-            // Device vibrates
+            
+            // Vibrate the device
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
             
-            // Reset count and progress
-            count = 0
-            zikrProgressView.progress = 0.0
-            progressView.progress = 0.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.zikrProgressView.progress = 0.0
+                self.progressView.progress = 0.0
+            }
         } else {
-            // Update progress view and label
-            let progress = Float(count) / Float(groupPurpose!)!
+            let progress = Float(count) / Float(Int(groupPurpose!)!)
             zikrProgressView.progress = progress
             progressView.progress = progress
             zikrCountLabel.text = "\(count)"
         }
     }
-   
+    
+    //MARK: - Method to post Zikr Count to the server
+    
+    private func postZikrCountIfNeeded() {
+        if count > 0 {
+            let viewModel = ZikrCountViewModel(groupId: groupId, zikrId: zikrId)
+            viewModel.count = count
+            
+            viewModel.postZikrCount { result in
+                switch result {
+                case .success(let response):
+                    self.zikrUpdateCountDelegate?.updateZikrCount()
+                    print("Zikr count posted successfully: \(response)")
+                case .failure(let error):
+                    print("Failed to post zikr count: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    //MARK: - Animate Label
+
     func animateLabel() {
-        // Scale and fade-in effect
+
         zikrCountLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         zikrCountLabel.alpha = 0.0
         zikrCountLabel.text = "\(count)"
@@ -474,58 +577,58 @@ class GroupZikrCountViewController: UIViewController {
     //MARK: - Change Zikr count Button Tapped
     
     @objc func changeZikrCountButtonTapped() {
-        // Show alert with text field
-        let alertController = UIAlertController(title: "Set Maximum Count", message: nil, preferredStyle: .alert)
-        alertController.addTextField { textField in
-            textField.placeholder = "Enter maximum count"
-            textField.keyboardType = .numberPad
-        }
-        let confirmAction = UIAlertAction(title: "OK", style: .default) { [self] _ in
-            if let textField = alertController.textFields?.first,
-               let text = textField.text,
-               let newMaxCount = Int(text) {
-                let purpose = Int(maxCount)
+//        // Show alert with text field
+//        let alertController = UIAlertController(title: "Set Maximum Count", message: nil, preferredStyle: .alert)
+//        alertController.addTextField { textField in
+//            textField.placeholder = "Enter maximum count"
+//            textField.keyboardType = .numberPad
+//        }
+//        let confirmAction = UIAlertAction(title: "OK", style: .default) { [self] _ in
+//            if let textField = alertController.textFields?.first,
+//               let text = textField.text,
+//               let newMaxCount = Int(text) {
+//                let purpose = Int(maxCount)
 //                self.purpose = newMaxCount
-                self.changeZikrCountButton.setTitle("\(purpose)", for: .normal)
-                self.zikrProgressView.progress = 0.0
-                self.progressView.progress = 0.0
-                self.count = 0
-                self.zikrCountLabel.text = "\(self.count)"
-            }
-        }
-        alertController.addAction(confirmAction)
-        present(alertController, animated: true, completion: nil)
+//                self.changeZikrCountButton.setTitle("\(purpose)", for: .normal)
+//                self.zikrProgressView.progress = 0.0
+//                self.progressView.progress = 0.0
+//                self.count = 0
+//                self.zikrCountLabel.text = "\(self.count)"
+//            }
+//        }
+//        alertController.addAction(confirmAction)
+//        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Alert Button Tapped
     
     @objc func showAlert() {
-        // Create an alert controller
+
         let alertController = UIAlertController(title: "Choose", message: nil, preferredStyle: .alert)
         
-        // Add the "Add Person" action
+
         let addPersonAction = UIAlertAction(title: "Add Person", style: .default) { [self] _ in
             showAddUserView()
             print("Add Person selected")
         }
         alertController.addAction(addPersonAction)
         
-        // Add the "Kunlik zikr miqdor" action
+
         let dailyZikrAction = UIAlertAction(title: "Kunlik zikr miqdor", style: .default) { [self] _ in
-            // Handle the "Kunlik zikr miqdor" action
+
             changeZikrCountButtonTapped()
             print("Kunlik zikr miqdor selected")
         }
         alertController.addAction(dailyZikrAction)
         
-        // Add a cancel action
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            // Handle the cancel action
+
             print("Cancel selected")
         }
         alertController.addAction(cancelAction)
         
-        // Present the alert controller
+
         present(alertController, animated: true, completion: nil)
     }
     
@@ -534,6 +637,8 @@ class GroupZikrCountViewController: UIViewController {
             self.zikrAduioContainerView.alpha = 1
         }
     }
+    
+    //MARK: - Speed Controller button
     
     @objc func showPlayBackSpeedOptions() {
         let alertController = UIAlertController(title: "Playback speed", message: nil, preferredStyle: .actionSheet)
@@ -558,8 +663,11 @@ class GroupZikrCountViewController: UIViewController {
         print("Selected playback speed: \(speed)")
     }
     
+    //MARK: - Show Add user method
+    
     func showAddUserView() {
         let vc = AddUserViewController()
+        vc.addGroupId = groupId
         let navVC = UINavigationController(rootViewController: vc)
         
         if let sheet = navVC.sheetPresentationController {
