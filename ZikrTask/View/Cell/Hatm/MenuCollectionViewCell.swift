@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class MenuCollectionViewCell: UICollectionViewCell {
+    
     static let identifier = "MenuCollectionViewCell"
     
     //MARK: - Proporties
